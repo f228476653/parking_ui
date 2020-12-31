@@ -1,0 +1,6 @@
+<button *ngIf="status==0" mat-icon-button (click)="onDeleteClick()"><mat-icon class="btn-delete">delete</mat-icon></button>
+
+<div *ngIf="status==1">
+    <button mat-raised-button color="warn" (click)="onConfirmClick()"><span i18n>刪除</span></button>
+    <button mat-raised-button (click)="onCancelClick()"><span i18n>取消</span></button>
+</div>

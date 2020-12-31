@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <h6>有錢卡</h6>
+    <div class="col" [formGroup]="garageForm">
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionHappyCash.happycash_garage_code" matInput i18n-placeholder="@@happycash_garage_code"
+                    formControlName="happycash_garage_code" placeholder="有錢卡場站代碼" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="happycash_garage_code.invalid && happycash_garage_code.dirty" class="alert alert-danger fill">
+                        <div *ngIf="happycash_garage_code.errors.required" >必填欄位</div>
+                        <div *ngIf="happycash_garage_code.errors.pattern" >只能輸入數字，且最多為15個字元長度</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <label i18n="@@status">有錢卡啟用狀態 &nbsp;</label>
+                <mat-radio-group [(ngModel)]="garageTicketTransactionHappyCash.status" 
+                    formControlName="status" class="row">
+                    <mat-radio-button [value]="0">停用</mat-radio-button>
+                    <mat-radio-button [value]="1">啟用</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>          
+    </div>
+    <hr>
+</div>

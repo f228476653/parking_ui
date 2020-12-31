@@ -1,0 +1,31 @@
+<div>
+  <h4>營收趨勢</h4>
+
+    <mat-form-field>
+    <mat-select placeholder="時間">
+        <mat-option>時間分析</mat-option>
+        <mat-option *ngFor="let rt_data of revenuerange_data" [value]="range">{{rt_data}}</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+    <div class="card card-height">
+        <div class="card-body">
+            <div class="row">
+                <ngx-charts-bar-horizontal
+                  [view]="view"
+                  [scheme]="colorScheme"
+                  [results]="single"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  (select)="onSelect($event)">
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+      </div>
+</div>

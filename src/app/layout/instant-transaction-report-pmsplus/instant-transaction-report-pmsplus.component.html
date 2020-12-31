@@ -1,0 +1,302 @@
+<div class="mat-container">
+    <div class="row">
+        <div class="col col-md-2">
+            <app-shared-search-field [(query)]="query"></app-shared-search-field>
+        </div>
+        <div class="col col-md-10">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="1 === 1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            搜尋&nbsp;&nbsp;<label class = "error">{{time_error}}</label>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col col-md-12">
+                    <label>進場時間: </label>&nbsp;&nbsp;
+                        <mat-form-field class="datebox">
+                            <input matInput [(ngModel)]="enter_datetime_begin.date" [matDatepicker]="picker2" placeholder="起始日期">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="enter_datetime_begin.hour"  placeholder="時">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        :
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="enter_datetime_begin.min"  placeholder="分">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        ：
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="enter_datetime_begin.sec"  placeholder="秒">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        &nbsp;&nbsp;~
+                        <mat-form-field class="datebox">
+                            <input matInput [(ngModel)]="enter_datetime_end.date" [matDatepicker]="picker4" placeholder="結束日期">
+                            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                            <mat-datepicker #picker4></mat-datepicker>
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="enter_datetime_end.hour" placeholder="時">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        :
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="enter_datetime_end.min" placeholder="分">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        ：
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="enter_datetime_end.sec" placeholder="秒">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                    <br>
+                    <label>出場時間: </label>&nbsp;&nbsp;
+                        <mat-form-field class="datebox">
+                            <input matInput [(ngModel)]="exit_datetime_begin.date" [matDatepicker]="picker1" placeholder="起始日期">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="exit_datetime_begin.hour" placeholder="時">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        ：
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="exit_datetime_begin.min" placeholder="分">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        ：
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="exit_datetime_begin.sec" placeholder="秒">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        &nbsp;&nbsp;~
+                        &nbsp;&nbsp;
+                        <mat-form-field class="datebox">
+                            <input matInput [(ngModel)]="exit_datetime_end.date" [matDatepicker]="picker3" placeholder="結束日期">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="exit_datetime_end.hour"  placeholder="時">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        :
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="exit_datetime_end.min"  placeholder="分">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                        ：
+                        <mat-form-field class="timebox">
+                            <input matInput [(ngModel)]="exit_datetime_end.sec"  placeholder="秒">
+                            <span matPrefix></span>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="isKeepExpended === 1">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                進階搜尋
+                            </mat-panel-title>
+                            <mat-panel-description>
+                            </mat-panel-description>
+                            </mat-expansion-panel-header>
+                        <div class="row">
+                            <div class="col col-md-12">
+                        <mat-form-field class="pvbox2">
+                            <mat-select [(ngModel)]="query.vehicle_type" placeholder="車種">
+                                <mat-option value="1">汽車</mat-option>
+                                <mat-option value="2">機車</mat-option>
+                                <mat-option value="3">大客車</mat-option>
+                                <mat-option value="4">公車</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="invoicebox2">
+                            <mat-select [(ngModel)]="query.paid_type" placeholder="交易票種">
+                                <mat-option value="01">悠遊卡</mat-option>
+                                <mat-option value="02">愛金卡</mat-option>
+                                <mat-option value="03">一卡通</mat-option>
+                                <mat-option value="05">有錢卡</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <!-- <mat-form-field class="invoicebox2">
+                        <mat-select [(ngModel)]="query.transfer_discount" placeholder="轉乘優惠">
+                            <mat-option value="true">有</mat-option>
+                            <mat-option value="false">無</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+          
+                        <mat-form-field class="pricebox">
+                            <input matInput [(ngModel)]="query.real_fee" placeholder="實付費用" min="0" class="example-right-align">
+                            <span matPrefix>NTD&nbsp;</span>
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="vehicle_identification_number">
+                            <input matInput [(ngModel)]="query.vehicle_identification_number" placeholder="車牌號碼">
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="card_no">
+                            <input matInput [(ngModel)]="query.card_id" placeholder="卡片外碼">
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field class="invoicebox">
+                            <input matInput [(ngModel)]="query.invoice_number" placeholder="發票號碼">
+                        </mat-form-field>
+        
+                        <!-- <mat-form-field class="invoicebox">
+                            <mat-select [(ngModel)]="query.invoice_check" placeholder="發票開立狀態">
+                                <mat-option value="0">全部</mat-option>
+                                <mat-option value="1">已開出</mat-option>
+                            </mat-select>
+                        </mat-form-field> -->
+        
+                        <!-- <mat-form-field class="invoicebox2">
+                        <mat-select [(ngModel)]="query.special_charge" placeholder="身障計費">
+                            <mat-option value="true">有</mat-option>
+                            <mat-option value="false">無</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="row" style="margin-top:5px;">
+            <div class="col col-md-7"></div>
+            <div class="col col-md-5">
+                <div class="button-row">
+                    <button mat-raised-button (click)="csvExport()">匯出 Excel</button>
+                    <button mat-raised-button color="primary" (click)="onSearch()">搜尋</button>
+                    <button mat-raised-button color="warn" (click)="clearTableFilter()">清除搜尋條件</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="parking_id">
+            <mat-header-cell *matHeaderCellDef> 流水號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.parking_id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_name">
+            <mat-header-cell *matHeaderCellDef> 場站名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="card_type">
+            <mat-header-cell *matHeaderCellDef> 交易票種 </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span [ngSwitch]="element.paid_type">
+                <span *ngSwitchCase="'01'">悠遊卡</span>
+                <span *ngSwitchCase="'02'">愛金卡</span>
+                <span *ngSwitchCase="'03'">一卡通</span>
+                <span *ngSwitchCase="'05'">有錢卡</span>
+                </span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="card_number">
+            <mat-header-cell *matHeaderCellDef> 卡號 </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.card_id16}} [{{element.card_id}}] </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicle_type">
+            <mat-header-cell *matHeaderCellDef> 車種 </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span [ngSwitch]="element.vehicle_type">
+            <span *ngSwitchCase="'0'">未知車種</span>
+                <span *ngSwitchCase="'1'">汽車</span>
+                <span *ngSwitchCase="'2'">機車</span>
+                <span *ngSwitchCase="'3'">大客車</span>
+                <span *ngSwitchCase="'4'">公車</span>
+                </span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pv">
+            <mat-header-cell *matHeaderCellDef> 進場PV </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.pv}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pv_out">
+            <mat-header-cell *matHeaderCellDef> 出場PV </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.pv_out}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicle_identification_number">
+            <mat-header-cell *matHeaderCellDef> 車號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.vehicle_identification_number}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="enter_time">
+            <mat-header-cell *matHeaderCellDef> 進場時間 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.enter_time}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="exit_time">
+            <mat-header-cell *matHeaderCellDef> 出場時間 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.exit_time}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pay_datetime">
+            <mat-header-cell *matHeaderCellDef> 付費時間 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.paid_time}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="duration_time">
+            <mat-header-cell *matHeaderCellDef> 停留時間 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.duration}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="real_fee">
+            <mat-header-cell *matHeaderCellDef> 實付費用 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.real_fee}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="disability_mode">
+            <mat-header-cell *matHeaderCellDef> 身障計費模式 </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span [ngSwitch]="element.disability_mode">
+              <span *ngSwitchCase="'0'">正常</span>
+                <span *ngSwitchCase="'1'">身障模式</span>
+                </span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="einvoice">
+            <mat-header-cell *matHeaderCellDef> 發票號碼 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.einvoice}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div *ngIf="loading" class="margin spinner">
+        <mat-spinner class="margin"></mat-spinner>
+    </div>
+    <mat-paginator #paginator [(length)]="length" [(pageSize)]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="pageEvent = $event">
+    </mat-paginator>
+
+</div>

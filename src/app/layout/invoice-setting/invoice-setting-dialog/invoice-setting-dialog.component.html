@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>電子發票設定</h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+  <div class="row">
+    <div class="col col-sm-6">
+        <mat-form-field>
+            <input matInput placeholder="*EIDC場站編號">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+            <input matInput placeholder="*場站編號">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+            <input matInput placeholder="*產生QR Code的ASE Key">
+        </mat-form-field>
+    </div>
+    <div class="col col-sm-6">
+        <mat-form-field>
+            <input matInput placeholder="*收銀機編號">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+            <input matInput placeholder="*賣方統編">
+        </mat-form-field>
+        <br/>
+    </div>
+  </div>
+
+  <hr>
+
+    <div class="row">
+        <div class="col col-sm-6">          
+            <mat-form-field>
+                <input matInput placeholder="上傳交易檔案路徑">
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+                <input matInput placeholder="交易品項名稱">
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+                <input matInput placeholder="交易名稱上方資訊">
+            </mat-form-field>   
+            <br/>
+            <mat-form-field>
+                <input matInput placeholder="交易明細下方資訊">
+            </mat-form-field>
+        </div>
+
+        <div class="col col-sm-6">
+            <mat-form-field>
+                <input matInput placeholder="場站地址">
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+                <input matInput placeholder="場站電話">
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+                <input matInput placeholder="名車場名稱(簡寫)">
+            </mat-form-field>
+        </div>
+    </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col col-sm-10">
+            
+    </div>  
+    <div class="col col-sm-2">
+        <label i18n="@@working_hour"> *電子發票廠商提供 </label> 
+        <br/>
+        <button mat-icon-button><mat-icon class='btn_save'>save</mat-icon>Save</button>
+    </div>
+</div>
+</mat-dialog-content>

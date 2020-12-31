@@ -1,0 +1,6 @@
+<h2 mat-dialog-title><span i18n="@@edit">編輯</span> <span i18n="@@garage_group">場站區域</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+    <app-garage-group-form [(data)]="data" [(savedResponse)]="savedResponse" [(checkedList)]="checkedList" [(mapGarageGarageGroupResponse)]="mapGarageGarageGroupResponse" [(garageGroupResponse)]="garageGroupResponse" [(garageGroupId)]="garageGroupId" (onClose)="onCloseDailog()"></app-garage-group-form>
+
+</mat-dialog-content>

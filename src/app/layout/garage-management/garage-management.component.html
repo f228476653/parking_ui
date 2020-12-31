@@ -1,0 +1,74 @@
+<div [@routerTransition]>
+    <div class="row">
+        <div class="col col-md-1">
+            <button mat-icon-button (click)="add()"><mat-icon class="btn-add">add</mat-icon></button>
+        </div>
+        <div class="col col-md-7"></div>
+        <div class="col col-md-4 pull-right">
+            <mat-form-field>
+                <input matInput [(ngModel)]="txtTableFilter" (keyup)="applyFilter($event.target.value)" placeholder="輸入">
+            </mat-form-field>
+            <button mat-icon-button (click)="clearTableFilter()"><mat-icon class="btn-clear">clear</mat-icon></button>
+            <button mat-icon-button (click)="refreshTable()"><mat-icon class="btn-refresh">refresh</mat-icon></button>
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <!-- <button mat-icon-button (click)=fee(element.garage_id)><mat-icon>attach_money</mat-icon></button> -->
+                <button mat-icon-button (click)=device(element)><mat-icon class="btn-build">build</mat-icon></button>
+                <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+                <app-confirm-button (deleteEvent)="delete(element.garage_id)"></app-confirm-button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 序號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="company_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 業者名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@garage_name"> 場站名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_code">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@garage_code"> 場站代號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_code}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="city_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@city_name"> 城市 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.city_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address1">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@address1"> 地址1 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.address1}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address2">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@address2"> 地址2 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.address2}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="create_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 創建日期 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.create_date}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="30" [pageSizeOptions]="[30, 50, 100]">
+    </mat-paginator>
+</div>
+<div>

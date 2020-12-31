@@ -1,0 +1,27 @@
+example-card {
+     width: 100%;
+  }
+  .mid-card {
+    width: 100%;
+    height: 400px;
+  }
+  .example-header-image {
+    background-image: url('../../../assets/images/up.png');
+    background-size: cover;
+  }
+  .money-analysis {
+    background-image: url('../../../assets/images/money.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+  }
+  .time-analysis {
+    background-image: url('../../../assets/images/time1.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .row{
+    font-size: 16px;
+  }

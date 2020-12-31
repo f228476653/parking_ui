@@ -1,0 +1,65 @@
+<div [@routerTransition]>
+    <div class="row">
+        <div class="col col-md-1">
+            <button mat-icon-button (click)="add()"><mat-icon class="btn-add">add</mat-icon></button>
+        </div>
+        <div class="col col-md-7"></div>
+        <div class="col col-md-4 pull-right">
+            <mat-form-field>
+                <input matInput [(ngModel)]="txtTableFilter" (keyup)="applyFilter($event.target.value)" placeholder="輸入">
+            </mat-form-field>
+            <button mat-icon-button (click)="clearTableFilter()"><mat-icon class="btn-clear">clear</mat-icon></button>
+            <button mat-icon-button (click)="refreshTable()"><mat-icon class="btn-refresh">refresh</mat-icon></button>
+
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+                <button mat-icon-button (click)=delete(element.entry_gate_id)><mat-icon class="btn-delete">delete</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="entry_gate_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 序號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.entry_gate_id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@garage_name"> 場站 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="entry_gate_sn">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@entry_gate_sn"> 車道SN </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.entry_gate_sn}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="direction">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@direction"> 車道方向 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.direction}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="has_e_envoicing">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@has_e_envoicing"> 電子發票 </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <mat-icon *ngIf="element.has_e_envoicing==1" style='color:green'>check</mat-icon>
+                <mat-icon *ngIf="element.has_e_envoicing!=1">sync_disabled</mat-icon>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="create_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@create_date"> 創建日期 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.create_date}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+</div>

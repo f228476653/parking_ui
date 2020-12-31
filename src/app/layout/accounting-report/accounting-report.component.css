@@ -1,0 +1,20 @@
+.button {
+  justify-content: space-around;
+  color: #000;
+  background-color: #D4FFFF;
+  width: 30px;
+}
+.ng_select  {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 0px;
+  top: 0px;
+  height: 40;
+}
+.test {
+  margin-top: 15px;
+}
+
+.ng-select {
+  width: 150px; 
+} 

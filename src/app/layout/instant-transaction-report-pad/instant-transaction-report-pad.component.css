@@ -1,0 +1,53 @@
+.datebox,
+.invoicebox,
+.pricebox,
+.pvbox {
+    width: 100px;
+}
+
+.timebox {
+    width: 100px;
+}
+
+.mat-form-field-suffix {
+    max-height: 10px;
+}
+
+.mat-cell {
+    font-size: 11px;
+}
+
+.stationbox {
+    width: 140px;
+}
+
+.pvbox2 {
+    width: 50px;
+}
+
+.invoicebox2 {
+    width: 80px;
+}
+
+.validation-error {
+    background-color: red;
+}
+
+.validation-normal {
+    background-color: #fafafa;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.margin {
+    margin:0px auto;
+    padding-top: 50px;
+  }
+
+.spinner {
+    width: 550px;
+    height: 550px;
+}

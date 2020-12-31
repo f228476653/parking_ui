@@ -1,0 +1,89 @@
+<div class="row">
+
+    <div class="col col-sm-4">
+        <br />
+        <mat-form-field *ngIf="isSuperUser">
+            <mat-select placeholder="Customer" (ngModelChange)="onCustomerChanges($event)" [(ngModel)]="data.customer_id" name="customer">
+                <mat-option *ngFor="let customer of customerResponse.data" [value]="customer.customer_id">
+                    {{customer.company_name}}({{customer.customer_code}})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="data.account" [disabled]="accountEditable" matInput i18n-placeholder placeholder="帳號" required #account="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="password.new_password" (keyup)="checkPassword()" type="password" matInput i18n-placeholder="@@new_password" placeholder="密碼" required #p="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="password.new_password1" (keyup)="checkPassword()" type="password" matInput i18n-placeholder="@@new_password" placeholder="再次確認密碼" required #p1="ngModel">
+        </mat-form-field>
+        <div *ngIf="!isPasswordPass" class="alert alert-danger">密碼前後不一致</div>
+        <br />
+        <mat-form-field>
+            <mat-select placeholder="帳號所屬權限角色" [(ngModel)]="data.role_id" name="role">
+                <mat-option *ngFor="let role of roleResponse.data" [value]="role.role_id">
+                    {{role.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col col-sm-4">
+        <mat-form-field>
+            <input [(ngModel)]="data.user_first_name" matInput i18n-placeholder="@@user_first_name" placeholder="姓" required #user_first_name="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="data.user_middle_name" matInput i18n-placeholder="@@user_middle_name" placeholder="中間名" required #user_middle_name="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="data.user_last_name" matInput i18n-placeholder="user_last_name" placeholder="名" required>
+        </mat-form-field>
+
+    </div>
+    <div class="col col-sm-4">
+        <mat-form-field>
+            <input [(ngModel)]="data.mobile" matInput i18n-placeholder="@@mobile" placeholder="手機號碼">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="data.email" matInput i18n-placeholder="@@email" placeholder="電子郵件" required>
+        </mat-form-field>
+        <br />
+        <mat-checkbox *ngIf="isSuperUser" [(ngModel)]="data.is_superuser">PMS+系統管理員</mat-checkbox>
+        <br />
+        <mat-checkbox *ngIf="isCustomerRoot || isSuperUser" [(ngModel)]="data.is_customer_root">業者系統管理員</mat-checkbox>
+    </div>
+</div>
+<hr>
+<span *ngIf="isCustomerRoot">
+<h5>場站權限</h5>
+<div class="row">
+    <!-- <div class="col col-sm-6">
+        <ul>
+            <li *ngFor="let item of garageResponse.data;">
+                <mat-checkbox [(ngModel)]="item.checked">{{item.garage_name}}({{item.garage_code}})</mat-checkbox>
+            </li>
+        </ul>
+    </div> -->
+    <div class="col col-sm-6">
+        <ul>
+            <li *ngFor="let item of garageGroupResponse.data;">
+                <mat-checkbox [(ngModel)]="item.checked">{{item.garage_group_name}}</mat-checkbox>
+            </li>
+        </ul>
+    </div>
+</div>
+<hr>
+</span>
+<div class="row">
+    <div class="col col-sm-10">
+        <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+            {{savedResponse.message}}
+        </div>
+        <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+            {{savedResponse.message}}
+        </div>
+    </div>
+    <div class="col col-sm-2">
+        <button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>存檔</button>
+    </div>
+</div>

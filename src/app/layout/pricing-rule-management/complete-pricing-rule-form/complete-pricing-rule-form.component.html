@@ -1,0 +1,386 @@
+<!-- <mat-horizontal-stepper linear="true" #stepper>
+    <mat-step [stepControl]="check1">
+        <form [formGroup]="check1">
+          <ng-template matStepLabel>選擇模式</ng-template>
+          <div class="row">
+            <div class="col">
+                <mat-form-field class="row">
+                    <input matInput [(ngModel)]="feeRule.fee_args_name" placeholder="費率名稱" formControlName="fee_name" required>
+                </mat-form-field>
+                <div class="row">
+                  <div *ngIf="fee_name.invalid && fee_name.dirty" class="alert alert-danger"> 
+                    <div *ngIf="fee_name.errors.required">請輸入名稱</div>
+                    <div *ngIf="fee_name.errors.pattern">請勿輸入特殊字元</div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-sm-6">
+              <mat-radio-group required [(ngModel)]="feeRadioButtonGroup.mode" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button [value]="1">計費模式</mat-radio-button>
+                <mat-radio-button [value]="2">計時模式</mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field>
+                <mat-select [(ngModel)]="feeRule.fee_mode" formControlName="fee_mode" #aaa>
+                  <mat-option *ngIf="feeRadioButtonGroup.mode == 1" [value]="0">每日計次</mat-option>
+                  <mat-option *ngIf="feeRadioButtonGroup.mode == 1" [value]="1">24小時循環計次</mat-option>
+                  <mat-option *ngIf="feeRadioButtonGroup.mode == 1" [value]="2">12小時循環計次</mat-option>
+                  <mat-option *ngIf="feeRadioButtonGroup.mode == 2" [value]="3">計次</mat-option>
+                  <mat-option *ngIf="feeRadioButtonGroup.mode == 2" [value]="4">當日最高計費計費</mat-option>
+                  <mat-option *ngIf="feeRadioButtonGroup.mode == 2" [value]="5">24小時最高計費循環</mat-option>
+                  <mat-option *ngIf="feeRadioButtonGroup.mode == 2" [value]="6">12小時最高計費循環</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+            <div class="col col-sm-6">
+                <label>免費分鐘數</label>
+                <mat-radio-group required [(ngModel)]="feeRadioButtonGroup.free_mode" [ngModelOptions]="{standalone: true}">
+                  <mat-radio-button [value]="0">無</mat-radio-button>
+                  <mat-radio-button [value]="1">前XX分鐘免費</mat-radio-button>
+                  <mat-radio-button [value]="2">超過XX分鐘後開始計費</mat-radio-button>
+                </mat-radio-group>
+                <div *ngIf=" feeRadioButtonGroup.free_mode == 1 || feeRadioButtonGroup.free_mode == 2">
+                  <div class="row">
+                    <mat-form-field>
+                      <input matInput [(ngModel)]="feeRule.free_time" formControlName="free_time" placeholder="免費分鐘數" required>
+                    </mat-form-field>
+                  </div>
+                  <div class="row">
+                      <div *ngIf="free_time.invalid && free_time.dirty" class="alert alert-danger"> 
+                        <div *ngIf="free_time.errors.required">請輸入免費分鐘數</div>
+                        <div *ngIf="free_time.errors.pattern">請物輸入特殊字元</div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col col-sm-6">
+                <label>時段設定</label>
+                <div>
+                  <mat-radio-group required [(ngModel)]="feeRadioButtonGroup.hourMode" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="0">全時段以小時計費</mat-radio-button>
+                    <mat-radio-button [value]="1">全時段以半小時計費</mat-radio-button>
+                    <mat-radio-button [value]="2">客製化設定</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.hourMode == 2" class="col col-sm-6">
+                <div class="col col-sm-6">
+                  <mat-form-field  class="row">
+                    <input [(ngModel)]="feeRule.new_car_hour" matInput formControlName="new_car_hour" placeholder="初始以小時計費" required>
+                  </mat-form-field>
+                  <div class="row">
+                    <div *ngIf="new_car_hour.invalid && new_car_hour.dirty" class="alert alert-danger"> 
+                      <div *ngIf="new_car_hour.errors.required">請輸入小時數</div>
+                      <div *ngIf="new_car_hour.errors.pattern">請輸入數字</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col col-sm-6">
+                  <mat-form-field class="row">
+                    <input [(ngModel)]="feeRule.period" matInput formControlName="period" placeholder="分鐘/次" required>
+                  </mat-form-field>
+                  <div class="row">
+                    <div *ngIf="period.invalid && period.dirty" class="alert alert-danger"> 
+                      <div *ngIf="period.errors.required">請輸入分鐘數</div>
+                      <div *ngIf="period.errors.pattern">請輸入數字</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div>
+            <button mat-button matStepperNext>下一步</button>
+          </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="check2">
+      <form [formGroup]="check2">
+        <ng-template matStepLabel>平日費率設定</ng-template>
+          <mat-card>
+            <mat-card-content>
+              <div class="row">
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input [(ngModel)]="feePara1.max_hour" matInput [ngModelOptions]="{standalone: true}" placeholder="最大計時" required>
+                  </mat-form-field>
+                  
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input [(ngModel)]="feePara1.max_fee" matInput [ngModelOptions]="{standalone: true}" placeholder="收費金額上限" required>
+                  </mat-form-field>
+                  
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.mode != 2" class="row">
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input [(ngModel)]="feePara1.hour_period_fee1" matInput placeholder="區間一費率" formControlName="normal_day_interval_1_fee">
+                  </mat-form-field>
+                  <div class="row">
+                    <div *ngIf="normal_day_interval_1_fee.invalid && normal_day_interval_1_fee.dirty" class="alert alert-danger"> 
+                      <div *ngIf="normal_day_interval_1_fee.errors.required">請輸入費率</div>
+                      <div *ngIf="normal_day_interval_1_fee.errors.pattern">請輸入數字</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara1.hour_period_fee1_start" placeholder="區間一 起" formControlName="normal_day_interval_1_fee_start" >
+                  </mat-form-field>
+                </div>  
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara1.hour_period_fee1_end" placeholder="區間一 迄" formControlName="normal_day_interval_1_fee_end">
+                  </mat-form-field>
+                  <div *ngIf="check2.controls.normal_day_interval_1_fee_end.invalid && check2.controls.normal_day_interval_1_fee_end.dirty" class="row alert alert-danger fill">
+                      <div *ngIf="check2.errors.startError" >起始時間不能於大結束時間</div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.mode != 2" class="row">
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara1.hour_period_fee2" placeholder="區間二費率" formControlName="normal_day_interval_2_fee">
+                  </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara1.hour_period_fee2_start" placeholder="區間二 起" formControlName="normal_day_interval_2_fee_start">
+                  </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara1.hour_period_fee2_end" placeholder="區間二 迄" formControlName="normal_day_interval_2_fee_end">
+                  </mat-form-field>
+                  <div class="row">
+                    
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.mode != 2" class="row">
+                <div class="col col-sm-6">
+                  <label>額外費率模式</label>
+                  <mat-radio-group required [(ngModel)]="feeRadioButtonGroup.special_mode" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="'disable'">不啟用</mat-radio-button>
+                    <mat-radio-button [value]="'special_rule'">特殊費率模式</mat-radio-button>
+                    <mat-radio-button [value]="'monthly_pass'">月票模式</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div *ngIf="feeRadioButtonGroup.special_mode !== 'disable'">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="feeRadioButtonGroup.special_mode_value" [ngModelOptions]="{standalone: true}">
+                      <mat-option [value]="1">截尾模式</mat-option>
+                      <mat-option [value]="2">推遲模式</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.special_mode != 'disable'">
+                <div class="row">
+                  <div class="col col-sm-6">
+                    <label class="row">特殊費率最高收費模式</label>
+                    <mat-radio-group class="" required [(ngModel)]="special_max_mode" [ngModelOptions]="{standalone: true}">
+                      <mat-radio-button value="0">不啟用</mat-radio-button>
+                      <mat-radio-button value="1">最大計時</mat-radio-button>
+                      <mat-radio-button value="2">最大金額</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="col col-sm-6">
+                    <div *ngIf="special_max_mode == 1">
+                      <mat-form-field>
+                        <input [(ngModel)]="feePara1.special_fee_hour" matInput [ngModelOptions]="{standalone: true}" placeholder="最大計時" required>
+                      </mat-form-field>
+                    </div>
+                    <div *ngIf="special_max_mode == 2">
+                      <mat-form-field>
+                        <input [(ngModel)]="feePara1.special_fee_max" matInput [ngModelOptions]="{standalone: true}" placeholder="收費金額上限" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <mat-form-field  class="col col-sm-4">
+                    <input matInput [(ngModel)]="feePara1.special_fee_start" placeholder="特殊費率起" [ngModelOptions]="{standalone: true}" >
+                  </mat-form-field>
+                  <mat-form-field class="col col-sm-4">
+                    <input matInput [(ngModel)]="feePara1.special_fee_end" placeholder="特殊費率迄" [ngModelOptions]="{standalone: true}" >
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="check3">
+      <form [formGroup]="check3">
+        <ng-template matStepLabel>假日費率設定</ng-template>
+          <mat-card>
+            <mat-card-content>
+              <div class="row">
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input [(ngModel)]="feePara2.max_hour" matInput [ngModelOptions]="{standalone: true}" placeholder="最大計時" required>
+                  </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input [(ngModel)]="feePara2.max_fee" matInput [ngModelOptions]="{standalone: true}" placeholder="收費金額上限" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.mode != 2" class="row">
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input [(ngModel)]="feePara2.hour_period_fee1" matInput placeholder="區間一費率" formControlName="holiday_day_interval_1_fee">
+                  </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara2.hour_period_fee1_start" placeholder="區間一 起" formControlName="holiday_day_interval_1_fee_start">
+                  </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara2.hour_period_fee1_end" placeholder="區間一 迄" formControlName="holiday_day_interval_1_fee_end">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.mode != 2" class="row">
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara2.hour_period_fee2" placeholder="區間二費率" formControlName="holiday_day_interval_2_fee">
+                  </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara2.hour_period_fee2_start" placeholder="區間二 起" formControlName="holiday_day_interval_2_fee_start">
+                  </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="feePara2.hour_period_fee2_end" placeholder="區間二 迄" formControlName="holiday_day_interval_2_fee_end">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.mode != 2" class="row">
+                <div class="col col-sm-6">
+                  <label>額外費率模式</label>
+                  <mat-radio-group required [(ngModel)]="feeRadioButtonGroup.special_mode2" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="'disable'">不啟用</mat-radio-button>
+                    <mat-radio-button [value]="'special_rule'">特殊費率模式</mat-radio-button>
+                    <mat-radio-button [value]="'monthly_pass'">月票模式</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div *ngIf="feeRadioButtonGroup.special_mode2 !== 'disable'">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="feeRadioButtonGroup.special_mode_value2" [ngModelOptions]="{standalone: true}">
+                      <mat-option [value]="1">截尾模式</mat-option>
+                      <mat-option [value]="2">推遲模式</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 
+                </div>
+              </div>
+              <div *ngIf="feeRadioButtonGroup.special_mode2 != 'disable'">
+                <div class="row">
+                  <div class="col col-sm-6">
+                    <label class="row">特殊費率最高收費模式</label>
+                    <div class="row">
+                      <mat-radio-group required [(ngModel)]="special_max_mode2" [ngModelOptions]="{standalone: true}">
+                        <mat-radio-button value="0">不啟用</mat-radio-button>
+                        <mat-radio-button value="1">最大計時</mat-radio-button>
+                        <mat-radio-button value="2">最大金額</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                  <div class="col col-sm-6">
+                    <div *ngIf="special_max_mode2 == 1">
+                      <mat-form-field>
+                        <input [(ngModel)]="feePara2.special_fee_hour" matInput [ngModelOptions]="{standalone: true}" placeholder="最大計時" required>
+                      </mat-form-field>
+                      
+                    </div>
+                    <div *ngIf="special_max_mode2 == 2">
+                      <mat-form-field>
+                        <input [(ngModel)]="feePara2.special_fee_max" matInput [ngModelOptions]="{standalone: true}" placeholder="收費金額上限" required>
+                      </mat-form-field>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <mat-form-field  class="col col-sm-4">
+                    <input matInput [(ngModel)]="feePara2.special_fee_start" placeholder="特殊費率起" [ngModelOptions]="{standalone: true}" >
+                  </mat-form-field>
+                  <mat-form-field class="col col-sm-4">
+                    <input matInput [(ngModel)]="feePara2.special_fee_end" placeholder="特殊費率迄" [ngModelOptions]="{standalone: true}" >
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="check4">
+        <form [formGroup]="check4">
+          <ng-template matStepLabel>調整日期</ng-template>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="demo-chip-list row">
+                <mat-chip-list #sefNormalDay>
+                  <mat-chip *ngFor="let day of addDay.normalDay"selectable="true" removable="true" (removed)="remove_ip(day, 'normalDay')">
+                    {{day}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="設定平日"
+                    [matChipInputFor]="sefNormalDay"
+                    [matChipInputSeparatorKeyCodes]="separator"
+                    [matChipInputAddOnBlur]="true"
+                    (matChipInputTokenEnd)="check_ip($event, 'normalDay')"/>
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="demo-chip-list row">
+                <mat-chip-list #setHoliday>
+                  <mat-chip *ngFor="let day of addDay.holiday"selectable="true" removable="true" (removed)="remove_ip(day, 'holiday')">
+                      {{day}}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  <input placeholder="設定為假日"
+                    [matChipInputFor]="setHoliday"
+                    [matChipInputSeparatorKeyCodes]="separator"
+                    [matChipInputAddOnBlur]="true"
+                    (matChipInputTokenEnd)="check_ip($event, 'holiday')"/>
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <button mat-button matStepperPrevious>上一頁</button>
+            <button mat-button (click)="onCommit()">送出</button>
+            <div *ngIf="!validatorStatus" class="col col-sm-8">
+              <div class="alert alert-danger" role="alert">
+                參數有誤 請檢查
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+  </mat-horizontal-stepper> -->

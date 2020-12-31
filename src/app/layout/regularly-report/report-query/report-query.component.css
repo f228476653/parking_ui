@@ -1,0 +1,19 @@
+.timebox {
+  width: 100px;
+}
+
+.mat-form-field-suffix {
+  max-height: 10px;
+}
+
+.mat-cell {
+  font-size: 11px;
+}
+
+.stationbox {
+  width: 140px;
+}
+
+.pvbox2 {
+  width: 50px;
+}

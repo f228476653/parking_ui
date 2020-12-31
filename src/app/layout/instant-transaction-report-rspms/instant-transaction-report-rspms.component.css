@@ -1,0 +1,47 @@
+.row{
+    margin: 0 auto;
+  }
+  
+  .datebox, .invoicebox, .pricebox, .pvbox{
+    width: 100px;
+  }
+  
+  .timebox{
+    width: 30px;
+  }
+
+  .parking_type {
+    width: 90px;
+  }
+
+  .fee {
+    width: 110px;
+  }
+  
+  .mat-cell{
+    font-size: 11px;
+  }
+  
+  .stationbox{
+    width: 140px;
+  }
+  
+  .pvbox2{
+    width: 50px;
+  }
+  
+  .invoicebox2{
+    width: 80px;
+  }
+  .error {
+    color: red;
+  }
+  .validation-normal {
+    background-color:#fafafa;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: space-around;
+  }
+  

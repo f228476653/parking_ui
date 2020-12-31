@@ -1,0 +1,7 @@
+<nav class="breadcrumb">
+  
+    <span *ngFor="let bc of breadcrumbs; index as i; first as isFirst; last as isLast">
+      <a  *ngIf="isLast" routerLink="{{bc}}" routerLinkActive="isLast"> {{bc}} </a>
+    </span>
+
+</nav>

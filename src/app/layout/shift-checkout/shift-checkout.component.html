@@ -1,0 +1,89 @@
+
+
+    <div class="row">
+      <div class="col col-md-12">
+          <mat-form-field class="stationbox">
+           <mat-select placeholder="場站群組" [(ngModel)]="query.garage_group_id" (selectionChange)=onGarageGroupChanged($event)>
+                <mat-option value="all">全部</mat-option>
+                <mat-option [value]="gp.garage_group_id" *ngFor="let gp of garageGroupResponse.data">
+                    {{ gp.garage_group_name }}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+          &nbsp;&nbsp;&nbsp;
+          <mat-form-field class="stationbox">
+              <mat-select [(ngModel)]="query.garage_id" placeholder="場站">
+                  <mat-option [value]="garage.garage_id" *ngFor="let garage of garageResponse.data">
+                      {{ garage.garage_name }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          &nbsp;&nbsp;&nbsp;
+          <mat-form-field class="datebox">
+              <input matInput [(ngModel)]="query_date_start" [matDatepicker]="picker1" placeholder="結班起日">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <span matPrefix></span>
+          </mat-form-field>
+          &nbsp;&nbsp;&nbsp;
+          <mat-form-field class="datebox">
+            <input matInput [(ngModel)]="query_date_end" [matDatepicker]="picker2" placeholder="結班迄日">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <span matPrefix></span>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+          <mat-form-field class="checkout_no">
+              <input [(ngModel)]="query.checkout_no" matInput i18n-placeholder="@@checkout_no" placeholder="結班序號">
+          </mat-form-field>
+          <button mat-icon-button (click)="search()"><mat-icon class='btn_query'>search</mat-icon></button>
+          <button mat-icon-button (click)="clearTableFilter()"><mat-icon class="btn-clear">clear</mat-icon></button>
+            <!--<button mat-raised-button class="button" (click)="csvExport()">匯出 Excel</button>-->
+        </div>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="view">
+            <mat-header-cell *matHeaderCellDef style="min-width:100px"></mat-header-cell>
+            <mat-cell *matCellDef="let e" style="min-width:150px">
+                <button mat-icon-button (click)=view(e)><mat-icon>remove_red_eye</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="checkout_no">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 結班序號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.checkout_no}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 場站名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="clock_in_time">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 班別起始時間 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.clock_in_time}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="clock_out_time">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 班別結束時間 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.clock_out_time}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="checkout_amount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 結班金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.checkout_amount}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="number_of_vehicles">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 出場車輛數 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.number_of_vehicles}} </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>

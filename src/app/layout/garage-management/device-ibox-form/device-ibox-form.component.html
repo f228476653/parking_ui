@@ -1,0 +1,164 @@
+<div class="row" [formGroup]="deviceForm">
+    <div class="col">
+        <div class="row context">
+            <div class="col col-sm-4" formGroupName="check1">
+                <div class="row">
+                    <mat-form-field>
+                        <input [(ngModel)]="device_ibox.device_name" matInput i18n-placeholder="@@device_name" placeholder="設備名稱"
+                        formControlName="device_name" required>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <ul *ngIf="check1.get('device_name').invalid && (check1.get('device_name').dirty)" class="alert alert-danger">
+                        <li *ngIf="check1.get('device_name').errors.required" >請輸入設備名稱</li>
+                        <li *ngIf="check1.get('device_name').errors.maxlength">請勿超過20字</li>
+                        <li *ngIf="check1.get('device_name').errors.pattern">請勿輸入特殊字元</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <label>車道類型:</label>
+                <mat-radio-group [(ngModel)]="device_ibox.type" class="col col-sm-3" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="'c'">汽車</mat-radio-button>
+                    <mat-radio-button [value]="'m'">機車</mat-radio-button>
+                </mat-radio-group>   
+            </div>
+            <!-- <div class="col col-sm-4"  formGroupName="check1">
+                <mat-form-field>
+                    <input formControlName="external_ip" [(ngModel)]="device_ibox.external_ip" matInput i18n-placeholder="@@external_ip"
+                    placeholder="pv external ip bind for iPass 一卡通Only" >
+                </mat-form-field>
+                <div class="row">
+                    <ul *ngIf="check1.get('external_ip').invalid && (check1.get('external_ip').dirty || check1.get('external_ip').touched)" class="alert alert-danger">
+                        <li *ngIf="check1.get('external_ip').errors.required" >請輸入IP</li>
+                        <li *ngIf="check1.get('external_ip').errors.pattern">請輸入正確IP</li>
+                    </ul>
+                </div>    
+            </div> -->
+        </div>
+        <div class="row context">
+            <div class="col col-sm-4">
+                <div formGroupName="check2">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="device_ibox.ip" matInput i18n-placeholder="@@ip" [pattern]="regPattern.IPV4"
+                        placeholder="設備 IP" formControlName="ip" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <ul *ngIf="check2.get('ip').invalid && (check2.get('ip').dirty || check2.get('ip').touched)" class="alert alert-danger">
+                            <li *ngIf="check2.get('ip').errors.required" >請輸入IP</li>
+                            <li *ngIf="check2.get('ip').errors.pattern">請輸入正確IP</li>  
+                        </ul>
+                        <ul *ngIf="check2.invalid && check2.get('ip').valid && 
+                            (check2.get('ip').dirty || check2.get('ip').touched) && initIP !== check2.get('ip').value" class="alert alert-danger">
+                            <li *ngIf="check2.errors">已有相同IP 請更換</li>
+                        </ul>
+                    </div>
+                    <div style="display: none">
+                    <mat-form-field class="row">
+                            <input [(ngModel)]="garage_id" matInput placeholder="場站id 之後會隱藏" formControlName="garage_id">
+                    </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4"  formGroupName="check1">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="device_ibox.gateway" matInput i18n-placeholder="@@gateway" [pattern]="regPattern.IPV4"
+                    placeholder="Gateway" formControlName="gateway" required>
+                </mat-form-field>  
+                <div class="row">
+                    <ul *ngIf="check1.get('gateway').invalid && (check1.get('gateway').dirty || check1.get('gateway').touched)" class="alert alert-danger">
+                        <li *ngIf="check1.get('gateway').errors.required" >請輸入IP</li>
+                        <li *ngIf="check1.get('gateway').errors.pattern">請輸入正確IP</li>
+                    </ul>   
+                </div>
+            </div>
+            <!-- <div class="col col-sm-4"  formGroupName="check1">
+                <div class="row">
+                    <mat-form-field>
+                        <input [(ngModel)]="device_ibox.eid_pos_no" matInput i18n-placeholder="@@eid_pos_no"
+                        placeholder="立柱代碼(for 發票)" formControlName="eid_pos_no">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <ul *ngIf="check1.get('eid_pos_no').invalid && (check1.get('eid_pos_no').dirty || check1.get('eid_pos_no').touched)" class="alert alert-danger">
+                        <li *ngIf="check1.get('eid_pos_no').errors.required" >請輸入立柱代碼</li>
+                        <li *ngIf="check1.get('eid_pos_no').errors.pattern">請勿輸入特殊字元</li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+        <div class="row context">
+            <div class="col col-sm-4">
+                
+            </div>
+            <div class="col col-sm-4">
+                
+            </div>
+             <!-- <div class="col col-sm-4"  formGroupName="check1">
+                <label>設備進出場</label>
+                <mat-radio-group [(ngModel)]="device_ibox.station_inout" class="col col-sm-3" formControlName="station_inout">
+                    <mat-radio-button [value]="1">In</mat-radio-button>
+                    <mat-radio-button [value]="2">Out</mat-radio-button>
+                </mat-radio-group>
+            </div>  -->
+        </div>
+        <div class="row context" formGroupName="check1">
+            <div class="col col-sm-4">
+                <div class="row">
+                </div>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="slotData.slot1" [ngModelOptions]="{standalone: true}" placeholder="卡槽一" required=true>
+                        <mat-option *ngFor="let i of slot_select_bar" [value]="i.value">{{i.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-radio-group [(ngModel)]="device_ibox.slot1"  class="col col-sm-3" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="1">開</mat-radio-button>
+                    <mat-radio-button [value]="0">關</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="slotData.slot3" [ngModelOptions]="{standalone: true}"  placeholder="卡槽三" required=true>
+                        <mat-option *ngFor="let i of slot_select_bar" [value]="i.value">{{i.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-radio-group [(ngModel)]="device_ibox.slot3"  class="col col-sm-3"[ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="1">開</mat-radio-button>
+                    <mat-radio-button [value]="0">關</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field>
+                    <mat-select [(ngModel)]="slotData.slot2" [ngModelOptions]="{standalone: true}"  placeholder="卡槽二" required=true>
+                        <mat-option *ngFor="let i of slot_select_bar" [value]="i.value">{{i.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-radio-group [(ngModel)]="device_ibox.slot2"  class="col col-sm-3" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="1">開</mat-radio-button>
+                    <mat-radio-button [value]="0">關</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="slotData.slot4" [ngModelOptions]="{standalone: true}"  placeholder="卡槽四" required=true>
+                        <mat-option *ngFor="let i of slot_select_bar" [value]="i.value">{{i.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-radio-group [(ngModel)]="device_ibox.slot4"  class="col col-sm-3" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button [value]="1">開</mat-radio-button>
+                    <mat-radio-button [value]="0">關</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <!-- <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="device_ibox.pos_no" matInput i18n-placeholder="@@pos_no"
+                    formControlName="pos_no" placeholder="POS機代碼" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="check1.get('pos_no').invalid && check1.get('pos_no').dirty" class="alert alert-danger fill">
+                        <div *ngIf="check1.get('pos_no').errors.required" >必填欄位</div>
+                        <div *ngIf="check1.get('pos_no').errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

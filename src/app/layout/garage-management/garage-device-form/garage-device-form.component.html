@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col" [formGroup]="garageForm">
+        <div class="row title">
+            <!-- <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageDevice.pos_no" matInput i18n-placeholder="@@pos_no"
+                    formControlName="pos_no" placeholder="POS機代碼" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="pos_no.invalid && pos_no.dirty" class="alert alert-danger fill">
+                        <div *ngIf="pos_no.errors.required" >必填欄位</div>
+                        <div *ngIf="pos_no.errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col col-sm-4">
+                <mat-form-field class="row" *ngIf="ibox_enable">
+                    <input [(ngModel)]="garageDevice.plid" matInput i18n-placeholder="@@plid"
+                    formControlName="plid" placeholder="一卡通停車場代碼" [readonly]="readOnly" required>
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="plid.invalid && plid.dirty" class="alert alert-danger fill">
+                        <div *ngIf="plid.errors.required" >必填欄位</div>
+                        <div *ngIf="plid.errors.pattern" >請勿輸入特殊字元</div>
+                        <div *ngIf="plid.errors.maxlength || plid.errors.minlength">長度限制4碼</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4" *ngIf="display">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageDevice.store_no" matInput i18n-placeholder="@@store_no"
+                    formControlName="store_no" placeholder="業者場站ID" [readonly]="readOnly" required>
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="store_no.invalid && store_no.dirty" class="alert alert-danger fill">
+                        <div *ngIf="store_no.errors.required" >必填欄位</div>
+                        <div *ngIf="store_no.errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageDevice.eid_store_no" matInput i18n-placeholder="@@eid_store_no"
+                    formControlName="eid_store_no" placeholder="發票場站代碼" [readonly]="readOnly" required>
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="eid_store_no.invalid && eid_store_no.dirty" class="alert alert-danger fill">
+                        <div *ngIf="eid_store_no.errors.required" >必填欄位</div>
+                        <div *ngIf="eid_store_no.errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageDevice.tax_id_num" matInput i18n-placeholder="@@tax_id_num"
+                    formControlName="tax_id_num" placeholder="統一編號" [readonly]="readOnly" required>
+                </mat-form-field>
+                <div class="row" >
+                    <div *ngIf="tax_id_num.invalid && tax_id_num.dirty" class="alert alert-danger fill"> 
+                        <div *ngIf="tax_id_num.errors.required">必填欄位</div>
+                        <div *ngIf="tax_id_num.errors.taxNumber">統編格式錯誤</div>
+                    </div>
+                </div>
+            </div> -->
+        </div>          
+        <div class="row title">
+            <!-- <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageDevice.ntp_server" matInput i18n-placeholder="@@ntp_server"
+                    formControlName="ntp_server" placeholder="校時" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="ntp_server.invalid && ntp_server.dirty" class="alert alert-danger fill">
+                        <div *ngIf="ntp_server.errors.required" >必填欄位</div>
+                        <div *ngIf="ntp_server.errors.pattern">IP格式錯誤</div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="row title">
+            <div class="col col-sm-4">
+                <label i18n="@@printer">發票 &nbsp;</label>
+                <mat-radio-group [(ngModel)]="garageDevice.printer" 
+                    formControlName="printer" class="row">
+                    <mat-radio-button [value]="1">列印</mat-radio-button>
+                    <mat-radio-button [value]="0">不列印</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>      -->
+    </div>
+</div>

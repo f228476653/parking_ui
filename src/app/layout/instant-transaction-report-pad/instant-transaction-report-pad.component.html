@@ -1,0 +1,261 @@
+<div class="mat-container">
+
+    <div class="row">
+        <div class="col col-md-2">
+            <app-shared-search-field [(query)]="query"></app-shared-search-field>
+        </div>
+        <div class="col col-md-10">
+
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="isKeepExpended === 1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            搜尋
+                        </mat-panel-title>
+                        <mat-panel-description>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <label>出場日期: </label>&nbsp;&nbsp;
+
+                            <mat-form-field class="datebox">
+                                <input matInput [(ngModel)]="exit_date_begin.date" [matDatepicker]="picker1" placeholder="起始日期">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                                <span matPrefix></span>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <mat-form-field class="timebox">
+                                <input matInput placeholder="起始時間" required [(ngModel)]="exit_date_begin.time">
+                            </mat-form-field>
+                            &nbsp;&nbsp;~&nbsp;&nbsp;
+                            <mat-form-field class="datebox">
+                                <input matInput [(ngModel)]="exit_date_end.date" [matDatepicker]="picker3" placeholder="結束日期">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                                <span matPrefix></span>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <mat-form-field class="timebox">
+                                <input matInput placeholder="結束時間" required [(ngModel)]="exit_date_end.time">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="keepExpended()">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            進階搜尋
+                        </mat-panel-title>
+                        <mat-panel-description>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <label>出場日期: </label>&nbsp;&nbsp;
+
+                            <mat-form-field class="datebox">
+                                <input matInput [(ngModel)]="exit_date_begin.date" [matDatepicker]="picker11" placeholder="起始日期(2018/01/05)">
+                                <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                                <mat-datepicker #picker11></mat-datepicker>
+                                <span matPrefix></span>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <mat-form-field class="timebox">
+                                <input matInput placeholder="起始時間" required [(ngModel)]="exit_date_begin.time">
+
+                            </mat-form-field>
+                            &nbsp;&nbsp;~&nbsp;&nbsp;
+                            <mat-form-field class="datebox">
+                                <input matInput [(ngModel)]="exit_date_end.date" [matDatepicker]="picker33" placeholder="結束日期(2018/01/05)">
+                                <mat-datepicker-toggle matSuffix [for]="picker33"></mat-datepicker-toggle>
+                                <mat-datepicker #picker33></mat-datepicker>
+                                <span matPrefix></span>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <mat-form-field class="timebox">
+                                <input matInput placeholder="結束時間" required [(ngModel)]="exit_date_end.time">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <label>進場時間: </label>&nbsp;&nbsp;
+
+                            <mat-form-field class="datebox">
+                                <input matInput [(ngModel)]="enter_date_begin.date" [matDatepicker]="picker2" placeholder="起始日期">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                                <span matPrefix></span>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <mat-form-field class="timebox">
+                                <input matInput placeholder="起始時間" required [(ngModel)]="enter_date_begin.time">
+                            </mat-form-field>
+                            &nbsp;&nbsp;~&nbsp;&nbsp;
+                            <mat-form-field class="datebox">
+                                <input matInput [(ngModel)]="enter_date_end.date" [matDatepicker]="picker4" placeholder="結束日期">
+                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                <mat-datepicker #picker4></mat-datepicker>
+                                <span matPrefix></span>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <mat-form-field class="timebox">
+                                <input matInput placeholder="結束時間" required [(ngModel)]="enter_date_end.time">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-10">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="query.vehicle_identification_number" placeholder="車號">
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="query.create_user_name" placeholder="管理員姓名">
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>異常紀錄: </label>&nbsp;&nbsp;
+                            <mat-checkbox [(ngModel)]="query.abnormal" [ngModelOptions]='{standalone: true}'>是</mat-checkbox>
+                        </div>
+
+
+                        <!-- <mat-form-field>
+                                <mat-select [(ngModel)]="query.vehicle_type" placeholder="車種">
+                                    <mat-option value="all">全部</mat-option>
+                                    <mat-option [value]="type.value" *ngFor="let type of vehicleType">
+                                        {{ type.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="invoicebox">
+                                <input matInput [(ngModel)]="query.einvoice_number" placeholder="發票號碼">
+                            </mat-form-field>
+
+                            <mat-form-field class="invoicebox">
+                                <mat-select [(ngModel)]="query.invoice_check" placeholder="發票開立狀態">
+                                    <mat-option value="0">全部</mat-option>
+                                    <mat-option value="1">已開出</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="query.real_fee" placeholder="實付費用" min="0" class="example-right-align">
+                                <span matPrefix>NTD&nbsp;</span>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="query.exit_type_config_detail_name" placeholder="出場理由">
+                            </mat-form-field> -->
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <div class="row" style="margin-top:5px;">
+                <div class="col col-md-7">
+                    <div *ngIf="page_query_has_error" class="alert alert-danger" role="alert">
+                        {{page_query_error_message}}
+                    </div>
+                </div>
+
+                <div class="col col-md-5">
+                    <div class="button-row">
+
+                        <button mat-raised-button (click)="csvExport()">匯出 Excel</button>
+                        <button mat-raised-button color="primary" (click)="onSearch()">搜尋</button>
+                        <button mat-raised-button color="warn" (click)="clearTableFilter()">清除搜尋條件</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="parking_id">
+                <mat-header-cell *matHeaderCellDef> 流水號 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.parking_id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="garage_name">
+                <mat-header-cell *matHeaderCellDef> 場站名稱 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="vehicle_identification_number">
+                <mat-header-cell *matHeaderCellDef> 車號 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.vehicle_identification_number}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="vehicle_type">
+                <mat-header-cell *matHeaderCellDef> 車種 </mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.vehicle_type}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="enter_time">
+                <mat-header-cell *matHeaderCellDef> 進場時間 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.enter_time}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="exit_time">
+                <mat-header-cell *matHeaderCellDef> 出場時間 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.exit_time}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="diff_hours">
+                <mat-header-cell *matHeaderCellDef> 停車時間(時:分:秒) </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.diff_hours}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="receivable">
+                <mat-header-cell *matHeaderCellDef> 應收金額 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.receivable}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="real_fee">
+                <mat-header-cell *matHeaderCellDef> 實付金額 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.real_fee}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="exit_type_name">
+                <mat-header-cell *matHeaderCellDef> 出場理由 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.exit_type_name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="exit_type_config_detail_remarks">
+                <mat-header-cell *matHeaderCellDef> 出場理由備註 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.exit_type_config_detail_remarks}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="user_name">
+                <mat-header-cell *matHeaderCellDef> 管理員 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.user_name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="invoice_number">
+                <mat-header-cell *matHeaderCellDef> 發票號碼 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.invoice_number}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="tax_id_number_buyer">
+                <mat-header-cell *matHeaderCellDef> 業者統編 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.tax_id_number_buyer}} </mat-cell>
+            </ng-container>
+
+            <!--<div class="row" *ngIf="query.abnormal" > -->
+            <ng-container matColumnDef="record_status">
+                <mat-header-cell *matHeaderCellDef> 異常紀錄 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.record_status}} </mat-cell>
+            </ng-container>
+            <!--</div>-->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <div *ngIf="loading" class="margin spinner">
+            <mat-spinner class="margin"></mat-spinner>
+        </div>
+        <mat-paginator #paginator [pageSize]="100" [hidePageSize]="true" [pageSizeOptions]="[30, 50, 100]">
+        </mat-paginator>
+    </div>
+</div>&nbsp;&nbsp;

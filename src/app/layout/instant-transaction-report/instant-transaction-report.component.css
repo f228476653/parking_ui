@@ -1,0 +1,33 @@
+.row{
+    margin: 0 auto;
+}
+
+.datebox, .invoicebox, .pricebox, .pvbox{
+    width: 100px;
+}
+
+.timebox{
+    width: 40px;
+}
+
+.mat-cell{
+    font-size: 11px;
+}
+
+.stationbox{
+    width: 140px;
+}
+
+.pvbox2{
+    width: 50px;
+}
+
+.invoicebox2{
+    width: 80px;
+}
+.validation-error {
+    background-color: red;
+}
+.validation-normal {
+    background-color:#fafafa;
+}

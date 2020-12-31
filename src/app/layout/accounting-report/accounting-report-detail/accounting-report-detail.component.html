@@ -1,0 +1,157 @@
+<h5>PMS Divergence Trade Records</h5>
+<mat-table #table [dataSource]="pmsDiffRecordsDataSource" matSort>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="card_no">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Card No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.card_no}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paid_time">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid_time}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="trx_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Trx Amt </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.trx_amt}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+<br>
+<h5>Manual checkout Records</h5>
+<mat-table #table2 [dataSource]="recordsAfterHumenCloseDataSource" matSort>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="card_no">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Card No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.card_no}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paid_time">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid_time}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="trx_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Trx Amt </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.humen_close_amt}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="humen_close_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Humen Close Amt </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.humen_close_amt}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="paid_type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid_type}} </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+
+</mat-table>
+
+<br>
+<h5>CPS Divergence Trade Records</h5>
+<mat-table #table3 [dataSource]="cpsDiffRecordsDataSource" matSort>
+    <ng-container matColumnDef="cps_trx_file">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CPS Trx File</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.file_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="card_no">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Card No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.card_no}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paid_time">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid_time}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cps_trx_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CPS Trx Amt</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.trx_amt}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns4;"></mat-row>
+
+</mat-table>
+
+<br>
+<h5>Amount Divergence Trade Records</h5>
+<mat-table #table4 [dataSource]="amtDiffRecordsDataSource" matSort>
+    <ng-container matColumnDef="card_no">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Card No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.card_id16}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paid_time">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid_time}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PMS ID</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pms_trx_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PMS Trx Amt</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.real_fee}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cps_trx_file">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CPS Trx File</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.file_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cps_trx_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CPS Trx Amt</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.trx_amt}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="div_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Divergence Amt </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.trx_amt - element.real_fee}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
+
+</mat-table>
+
+<br>
+<h5>Parking Settlement Records</h5>
+<mat-table #table5 [dataSource]="parkingSettlementRecordsDataSource" matSort>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PMS ID</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="card_no">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Card No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.card_id16}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="paid_type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid_type}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="settlement_type">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Settlement Type </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.settlement_type}} </mat-cell>
+        </ng-container>
+    <ng-container matColumnDef="paid_time">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid_time}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pms_trx_amt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PMS Trx Amt</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.real_fee}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns5;"></mat-row>
+
+</mat-table>

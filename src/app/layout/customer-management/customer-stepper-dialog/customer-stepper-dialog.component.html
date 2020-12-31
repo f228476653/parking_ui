@@ -1,0 +1,30 @@
+<mat-horizontal-stepper [linear]="isLinear" (selectionChange)="stepClick($event)"  #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>創建客戶</ng-template> 
+      <app-customer-edit-dialog  (afterSave)='getCustomerId($event)'></app-customer-edit-dialog>
+       <!-- <button mat-button (click)='nextStep()'>Next</button> -->
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>設定最大權限</ng-template>
+        <app-role-form (onSave)="roleSave($event)"  [(role)]="role" [(savedResponse)]="savedRoleResponse" [(permissionResponse)]="permissionRoleResponse" [(mode)]="RoleMode"></app-role-form>
+        <!-- <app-role-form (onSave)='roleSave($event)'  [(role)]='role' [(savedResponse)]='savedRoleResponse' [(permissionResponse)]='permissionRoleResponse' [(mode)]='RoleMode' ></app-role-form> -->
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>預設帳號</ng-template>
+            <app-account-form [(garageResponse)]="garageResponse" [(garageGroupResponse)]="garageGroupResponse" [(password)]="password" [(data)]="account_data" [(savedResponse)]="savedAccountResponse" [(accountEditable)]="accountDisabled" (onSave)="accountSave()"></app-account-form>
+        </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <!-- <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div> -->
+    </mat-step>
+  </mat-horizontal-stepper>
+
+  

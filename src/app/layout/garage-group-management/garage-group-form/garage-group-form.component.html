@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col col-sm-4">
+        <mat-form-field>
+            <input [(ngModel)]="data.garage_group_name" (keyup)="getGarageGroupNameExistOrNot()" matInput i18n-placeholder placeholder="停車場群組名稱" required #garageGroup="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <textarea [(ngModel)]="data.description" matInput i18n-placeholder="@@description" placeholder="說明"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="col col-sm-4">
+        <div class="col col-9">
+            <div class="rounded rounded-border" style='min-width:300px;padding:5px;min-height:300px;max-height:300px;;overflow-y: scroll;'>
+                <ul>
+                    <li *ngFor="let item of checkedList;">
+                        <mat-checkbox [(ngModel)]="item.checked">{{item.display_name}}</mat-checkbox>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col col-sm-10">
+        <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+            {{savedResponse.message}}
+        </div>
+        <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+            {{savedResponse.message}}
+        </div>
+    </div>
+    <div class="col col-sm-2">
+        <button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>存檔</button>
+    </div>
+</div>

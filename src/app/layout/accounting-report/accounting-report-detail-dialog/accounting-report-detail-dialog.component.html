@@ -1,0 +1,8 @@
+<h2 mat-dialog-title><span i18n="@@view">View</span> <span i18n="@@report">Report</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+    <app-accounting-report-detail [(pmsDiffRecordsDataSource)]="pmsDiffRecordsDataSource" [(recordsAfterHumenCloseDataSource)]="recordsAfterHumenCloseDataSource" [(amtDiffRecordsDataSource)]="amtDiffRecordsDataSource" [(cpsDiffRecordsDataSource)]="cpsDiffRecordsDataSource"
+        [(parkingSettlementRecordsDataSource)]="parkingSettlementRecordsDataSource">
+    </app-accounting-report-detail>
+
+</mat-dialog-content>

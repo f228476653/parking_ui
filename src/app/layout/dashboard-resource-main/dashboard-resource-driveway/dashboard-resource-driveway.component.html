@@ -1,0 +1,122 @@
+<mat-tab-group>
+    <mat-tab label="北區">
+        <div class="row">
+
+            <div class="col col-sm-4">
+                <ngx-charts-pie-onlyone class="chart-container" [view]="bar_view " [scheme]="colorScheme_2 " (legendLabelClick)="onLegendLabelClick($event) " [results]="bar " [animations]="animations " [tooltipDisabled]="tooltipDisabled
+                    " [tooltipText]="pieTooltipText " (select)="onSelect($event) ">
+                </ngx-charts-pie-onlyone>
+            </div>
+            <div class="col col-sm-6">
+                <ngx-charts-bar-horizontal [view]="top_bar_view" [scheme]="colorScheme " [results]="in_out" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="bar_showLegend " [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onSelect($event) ">
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+        <div class="row" *ngFor="let c of w; let i = index">
+            <div class="col col-xs-4" *ngFor="let x of c; let ii =index">
+                <div>{{x.name}}</div>
+                <div *ngIf="i==0 && ii==0" class="row">
+                    <div class="col col-sm-6">
+                        <ngx-charts-pie-onlyone class="chart-container" [view]="small_ball" [scheme]="colorScheme_2" (legendLabelClick)="onLegendLabelClick($event) " [results]="bar_75" [animations]="animations " [tooltipDisabled]="tooltipDisabled" [tooltipText]="pieTooltipText "
+                            (select)="onDeviceClick(i,$event) ">
+                        </ngx-charts-pie-onlyone>
+                    </div>
+                    <div class="col col-sm-6">
+                        <ngx-charts-bar-horizontal [view]="small_view" [scheme]="colorScheme " [results]="in_out_small" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="small_showLegen" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="small_showYAxisLabel"
+                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onDrivewayClick($event) ">
+                        </ngx-charts-bar-horizontal>
+                    </div>
+                </div>
+                <div *ngIf="i ==0 && ii!=0" class="row">
+                    <div class="col col-sm-6">
+                        <ngx-charts-pie-onlyone class="chart-container" [view]="small_ball" [scheme]="colorScheme_2" (legendLabelClick)="onLegendLabelClick($event) " [results]="bar_100" [animations]="animations " [tooltipDisabled]="tooltipDisabled" [tooltipText]="pieTooltipText "
+                            (select)="onDeviceClick($event) ">
+                        </ngx-charts-pie-onlyone>
+                    </div>
+                    <div class="col col-sm-6">
+                        <ngx-charts-bar-horizontal [view]="small_view" [scheme]="colorScheme " [results]="in_out_small" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="small_showLegen" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="small_showYAxisLabel"
+                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onDrivewayClick($event) ">
+                        </ngx-charts-bar-horizontal>
+                    </div>
+                </div>
+                <div *ngIf="i >0" class="row">
+                    <div class="col col-sm-6">
+                        <ngx-charts-pie-onlyone class="chart-container" [view]="small_ball" [scheme]="colorScheme_2" (legendLabelClick)="onLegendLabelClick($event) " [results]="bar_100" [animations]="animations " [tooltipDisabled]="tooltipDisabled" [tooltipText]="pieTooltipText "
+                            (select)="onDeviceClick($event) ">
+                        </ngx-charts-pie-onlyone>
+                    </div>
+                    <div class="col col-sm-6">
+                        <ngx-charts-bar-horizontal [view]="small_view" [scheme]="colorScheme " [results]="in_out_small" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="small_showLegen" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="small_showYAxisLabel"
+                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onDrivewayClick($event) ">
+                        </ngx-charts-bar-horizontal>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="中區">
+        <div class="row">
+
+            <div class="col col-sm-4">
+                <ngx-charts-pie-onlyone class="chart-container" [view]="bar_view " [scheme]="colorScheme_2 " (legendLabelClick)="onLegendLabelClick($event) " [results]="bar " [animations]="animations " [tooltipDisabled]="tooltipDisabled
+                            " [tooltipText]="pieTooltipText " (select)="onSelect($event) ">
+                </ngx-charts-pie-onlyone>
+            </div>
+            <div class="col col-sm-6">
+                <ngx-charts-bar-horizontal [view]="top_bar_view" [scheme]="colorScheme " [results]="in_out" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="bar_showLegend " [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onSelect($event) ">
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+        <div class="row" *ngFor="let c of y">
+            <div class="col col-xs-4" *ngFor="let x of c">
+                <div>{{x.name}}</div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <ngx-charts-pie-onlyone class="chart-container" [view]="small_ball" [scheme]="colorScheme_2" (legendLabelClick)="onLegendLabelClick($event) " [results]="bar_100" [animations]="animations " [tooltipDisabled]="tooltipDisabled" [tooltipText]="pieTooltipText "
+                            (select)="onDeviceClick($event) ">
+                        </ngx-charts-pie-onlyone>
+                    </div>
+                    <div class="col col-sm-6">
+                        <ngx-charts-bar-horizontal [view]="small_view" [scheme]="colorScheme " [results]="in_out_small" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="small_showLegen" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="small_showYAxisLabel"
+                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onDrivewayClick($event) ">
+                        </ngx-charts-bar-horizontal>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="南區">
+        <div class="row">
+
+            <div class="col col-sm-4">
+                <ngx-charts-pie-onlyone class="chart-container" [view]="bar_view " [scheme]="colorScheme_2 " (legendLabelClick)="onLegendLabelClick($event) " [results]="bar " [animations]="animations " [tooltipDisabled]="tooltipDisabled
+                            " [tooltipText]="pieTooltipText " (select)="onSelect($event) ">
+                </ngx-charts-pie-onlyone>
+            </div>
+            <div class="col col-sm-6">
+                <ngx-charts-bar-horizontal [view]="top_bar_view" [scheme]="colorScheme " [results]="in_out" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="bar_showLegend " [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onSelect($event) ">
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+        <div class="row" *ngFor="let c of z">
+            <div class="col col-xs-4" *ngFor="let x of c">
+                <div>{{x.name}}</div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <ngx-charts-pie-onlyone class="chart-container" [view]="small_ball" [scheme]="colorScheme_2" (legendLabelClick)="onLegendLabelClick($event) " [results]="bar_100" [animations]="animations " [tooltipDisabled]="tooltipDisabled" [tooltipText]="pieTooltipText "
+                            (select)="onDeviceClick($event) ">
+                        </ngx-charts-pie-onlyone>
+                    </div>
+                    <div class="col col-sm-6">
+                        <ngx-charts-bar-horizontal [view]="small_view" [scheme]="colorScheme " [results]="in_out_small" [gradient]="gradient" [xAxis]="showXAxis " [yAxis]="showYAxis " [legend]="small_showLegen" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="small_showYAxisLabel"
+                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel " (select)="onDrivewayClick($event) ">
+                        </ngx-charts-bar-horizontal>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

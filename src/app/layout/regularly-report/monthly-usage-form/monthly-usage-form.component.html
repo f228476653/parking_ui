@@ -1,0 +1,188 @@
+<app-report-query (onSearch)="onSerch($event)" [hiddenCardType]="true"></app-report-query>
+<!-- <button (click)="temp_search()">暫時測試紐</button> -->
+<div class="container" *ngIf="!flag">
+    <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
+</div>
+<div class="container" *ngIf="display">
+        <div class="col col-md-8"></div>
+        <div class="row">
+            <h2 class="col col-sm-8">PMS營運統計報表系統 【{{query.company_name}} {{query.garage_name}}】</h2>
+            <div class="col col-sm-4">
+                <div class="button-row">
+                    <button mat-raised-button color="primary" (click)="csvExport()">匯出 Excel</button>
+                </div>
+            </div>
+            <h2 class="col col-sm-12" style="margin-left: 251px;">使用率月報表</h2>
+            <h5 class="col col-sm-9"></h5><h5 class="col col-sm-3">報表編號： PMS-004</h5>
+            <h5 class="col col-sm-3">資料日期: {{query_format_month}}</h5>
+            <h5 class="col col-sm-6"></h5><h5 class="col col-sm-3">製作人: [{{query.company_name}}]</h5>
+            <h5 class="col col-sm-9"></h5><h5 class="col col-sm-3">製表日期: {{dateNow}} </h5>
+        </div>
+    
+        <div class="row" style="margin-top: 20px;">
+            <table mat-table [dataSource]="result" class="mat-elevation-z8">
+                
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef> 日期 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.date }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_00">
+                        <th mat-header-cell *matHeaderCellDef> 00:00 00:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_00 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_01">
+                        <th mat-header-cell *matHeaderCellDef> 01:00 01:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_01 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_02">
+                        <th mat-header-cell *matHeaderCellDef> 02:00 02:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_02 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_03">
+                        <th mat-header-cell *matHeaderCellDef> 03:00 03:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_03 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_04">
+                        <th mat-header-cell *matHeaderCellDef> 04:00 04:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_04 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_05">
+                        <th mat-header-cell *matHeaderCellDef> 05:00 05:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_05 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_06">
+                        <th mat-header-cell *matHeaderCellDef> 06:00 06:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_06 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_07">
+                        <th mat-header-cell *matHeaderCellDef> 07:00 07:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_07 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_08">
+                        <th mat-header-cell *matHeaderCellDef> 08:00 08:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_08 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_09">
+                        <th mat-header-cell *matHeaderCellDef> 09:00 09:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_09 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_10">
+                        <th mat-header-cell *matHeaderCellDef> 10:00 10:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_10 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_11">
+                        <th mat-header-cell *matHeaderCellDef> 11:00 11:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_11 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_12">
+                        <th mat-header-cell *matHeaderCellDef> 12:00 12:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_12 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_13">
+                        <th mat-header-cell *matHeaderCellDef> 13:00 13:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_13 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_14">
+                        <th mat-header-cell *matHeaderCellDef> 14:00 14:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_14 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_15">
+                        <th mat-header-cell *matHeaderCellDef> 15:00 15:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_15 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_16">
+                        <th mat-header-cell *matHeaderCellDef> 16:00 16:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_16 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_17">
+                        <th mat-header-cell *matHeaderCellDef> 17:00 17:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_17 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_18">
+                        <th mat-header-cell *matHeaderCellDef> 18:00 18:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_18 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_19">
+                        <th mat-header-cell *matHeaderCellDef> 19:00 19:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_19 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_20">
+                        <th mat-header-cell *matHeaderCellDef> 20:00 20:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_20 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_21">
+                        <th mat-header-cell *matHeaderCellDef> 21:00 21:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_21 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_22">
+                        <th mat-header-cell *matHeaderCellDef> 22:00 22:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_22 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hour_23">
+                        <th mat-header-cell *matHeaderCellDef> 23:00 23:59 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.hour_23 }}</div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef> 總計 </th>
+                        <td mat-cell *matCellDef="let i"> 
+                            <div>{{ i.total }}</div>
+                        </td>
+                    </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="report_column"></tr>
+                <tr mat-row *matRowDef="let row; columns: report_column;"></tr>
+            </table> 
+        </div>
+        <h2 style="margin-top: 20px;">場長:</h2>
+    </div>
+    

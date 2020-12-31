@@ -1,0 +1,14 @@
+.example-card {
+    width: 100%;
+}
+
+.mid-card {
+    width: 100%;
+    height: 400px;
+    margin: auto;
+}
+
+.example-header-image {
+    background-image: url('../../../assets/images/up.png');
+    background-size: cover;
+}

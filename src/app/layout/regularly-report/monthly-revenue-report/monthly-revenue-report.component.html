@@ -1,0 +1,199 @@
+<app-report-query (onSearch)="onSerch($event)" [hiddenCardType]="false"></app-report-query>
+<hr>
+<div class="container" *ngIf="display">
+    <div class="col col-md-8"></div>
+    <div class="row">
+        <h2 class="col col-sm-8">PMS營運統計報表系統 【{{query.company_name}} {{query.garage_name}}】</h2>
+        <div class="col col-sm-4">
+            <div class="button-row">
+                <button mat-raised-button color="primary" (click)="csvExport()">匯出 Excel</button>
+                <!-- <button mat-raised-button color="primary" (click)="pdfExport()" style="padding-left: 15px;">匯出 PDF</button> -->
+            </div>
+        </div>
+        <h2 class="col col-sm-12" style="margin-left: 251px;">營運收入月報表【{{query.paid_type_name}}】</h2>
+        <h5 class="col col-sm-9"></h5><h5 class="col col-sm-3">報表編號： PMS-002</h5>
+        <h5 class="col col-sm-3">資料日期: {{query_format_month}}</h5>
+        <h5 class="col col-sm-6"></h5><h5 class="col col-sm-3">製作人: [{{query.company_name}}]</h5>
+        <h5 class="col col-sm-9"></h5><h5 class="col col-sm-3">製表日期: {{dateNow}} </h5>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        <table mat-table [dataSource]="superData" class="mat-elevation-z8">
+            <div *ngIf="mode === 'solo'">
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> 日期 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.date }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="cnt_c">
+                    <th mat-header-cell *matHeaderCellDef> 汽車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.cnt_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="total_c">
+                    <th mat-header-cell *matHeaderCellDef> 汽車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.total_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="cnt_m">
+                    <th mat-header-cell *matHeaderCellDef> 機車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.cnt_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="total_m">
+                    <th mat-header-cell *matHeaderCellDef> 機車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.total_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef> 金額小計 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div> {{ i.total }}</div>
+                    </td>
+                </ng-container>
+            </div>
+            <div *ngIf="mode === 'all'">
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> 日期 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.date }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="icash_cnt_c">
+                    <th mat-header-cell *matHeaderCellDef> 愛金卡 汽車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.icash_cnt_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="icash_total_c">
+                    <th mat-header-cell *matHeaderCellDef> 愛金卡 汽車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.icash_total_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="icash_cnt_m">
+                    <th mat-header-cell *matHeaderCellDef> 愛金卡 機車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.icash_cnt_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="icash_total_m">
+                    <th mat-header-cell *matHeaderCellDef> 愛金卡 機車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.icash_total_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="icash_total">
+                    <th mat-header-cell *matHeaderCellDef> 愛金卡 金額小計 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div> {{ i.icash_total }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ipass_cnt_c">
+                    <th mat-header-cell *matHeaderCellDef> 一卡通 汽車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.ipass_cnt_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ipass_total_c">
+                    <th mat-header-cell *matHeaderCellDef> 一卡通 汽車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.ipass_total_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ipass_cnt_m">
+                    <th mat-header-cell *matHeaderCellDef> 一卡通 機車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.ipass_cnt_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ipass_total_m">
+                    <th mat-header-cell *matHeaderCellDef> 一卡通 機車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.ipass_total_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ipass_total">
+                    <th mat-header-cell *matHeaderCellDef> 一卡通 金額小計 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.ipass_total }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="yhdp_cnt_c">
+                    <th mat-header-cell *matHeaderCellDef> 有錢卡 汽車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div> {{ i.yhdp_cnt_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="yhdp_total_c">
+                    <th mat-header-cell *matHeaderCellDef> 有錢卡 汽車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.yhdp_total_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="yhdp_cnt_m">
+                    <th mat-header-cell *matHeaderCellDef> 有錢卡 機車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.yhdp_cnt_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="yhdp_total_m">
+                    <th mat-header-cell *matHeaderCellDef> 有錢卡 機車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.yhdp_total_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="yhdp_total">
+                    <th mat-header-cell *matHeaderCellDef> 有錢卡 金額小計 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.yhdp_total }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="cash_cnt_c">
+                    <th mat-header-cell *matHeaderCellDef> 人工結帳 汽車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.cash_cnt_c }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="cash_total_c">
+                    <th mat-header-cell *matHeaderCellDef> 人工結帳 汽車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div> {{ i.cash_total_c }}</div>
+                    </td>
+                </ng-container> 
+                <ng-container matColumnDef="cash_cnt_m">
+                    <th mat-header-cell *matHeaderCellDef> 人工結帳 機車筆數 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.cash_cnt_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="cash_total_m">
+                    <th mat-header-cell *matHeaderCellDef> 人工結帳 機車金額 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.cash_total_m }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="cash_total">
+                    <th mat-header-cell *matHeaderCellDef> 人工結帳 金額小計 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div>{{ i.cash_total }}</div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef> 金額合計 </th>
+                    <td mat-cell *matCellDef="let i"> 
+                        <div> {{ i.total }}</div>
+                    </td>
+                </ng-container>   
+            </div>
+            <tr mat-header-row *matHeaderRowDef="report_column"></tr>
+            <tr mat-row *matRowDef="let row; columns: report_column;"></tr>
+        </table> 
+    </div>
+    <h2 style="margin-top: 20px;">場長:</h2>
+</div>

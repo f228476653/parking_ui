@@ -1,0 +1,33 @@
+<div class="main login-page" [@routerTransition]>
+    <div class="row justify-content-md-center rounded">
+        <div class="col-md-4">
+            <div class="panel">
+                <img src="assets/images/itslog-en.png" class="logo-img" />
+                <form role="form">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <input [(ngModel)]="account" name="account" type="text" class="form-control input-underline input-lg" placeholder="帳號">
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="password" name="password" type="password" class="form-control input-underline input-lg" placeholder="密碼">
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="form-check-label">
+                                    <input class="form-check-input" [(ngModel)]="isRememberMe" type="checkbox" value="" name="isRememberMe">remember me 
+                                  </label>
+                        </div> -->
+                    </div>
+                    <a #btn_login class="btn btn-white" mat-button (click)="onLoggedin()">登入</a> &nbsp;
+                    <a (click)="forgetPwd()">忘記密碼</a> &nbsp;
+                    <div *ngIf="loginResponse && loginResponse.has_error" class="alert alert-danger" role="alert">
+                        {{loginResponse.message}}
+                    </div>
+                    <div *ngIf="loginResponse && loginResponse.message && !loginResponse.has_error" class="alert alert-info" role="alert">
+                        {{loginResponse.message}}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="version">版本號:尚未設定</div>

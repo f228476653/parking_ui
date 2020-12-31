@@ -1,0 +1,79 @@
+<h2 mat-dialog-title><span i18n="@@generate">Generate</span> <span i18n="@@request_key">Request Key</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+    <div class="row">
+        <div class="col col-sm-4">
+            <mat-form-field>
+                <input [(ngModel)]="data.customer_id" [disabled]="customerIdEditDisabled" matInput i18n-placeholder placeholder="Customer Id" #customer_id="ngModel" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.key_version" matInput i18n-placeholder="@@key_version" placeholder="Key Version" #key_version="ngModel" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.start_date" matInput i18n-placeholder="@@start_date" placeholder="Start Date" #start_date="ngModel" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.end_date" matInput i18n-placeholder="@@end_date" placeholder="End Date" #end_date="ngModel" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input [(ngModel)]="data.key_manager_email" matInput i18n-placeholder="@@key_manager_email" placeholder="Manager Email" required>
+            </mat-form-field>
+
+            <br />
+            <label i18n="@@key_type">Key Type: </label>
+            <br />
+            <mat-radio-group [(ngModel)]="data.key_type" required>
+                <mat-radio-button value="1" i18n="@@prodcution">Production</mat-radio-button>
+                <mat-radio-button value="2" i18n="@@test">Test</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="col col-sm-4">
+            <mat-form-field>
+                <input [(ngModel)]="data.fixed_account_total" matInput i18n-placeholder="fixed_account_total" placeholder="Fixed Account Quatity" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.dynamic_account_total" matInput i18n-placeholder="@@dynamic_account_total" placeholder="Dynamic Account Quantity" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select laceholder="Service Type" [(value)]="data.service_type">
+                    <mat-option>None</mat-option>
+                    <mat-option value="Service one">Service 1</mat-option>
+                    <mat-option value="Service two">Service 2</mat-option>
+                    <mat-option value="Service three">Service 3</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Key status" [disabled]="isKeystoreStatusDisabled" [(ngModel)]="selectKeystoreStatus" name="role">
+                    <mat-option *ngFor="let item of keystoreStatusResponse.data" [value]="item.name">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col col-sm-4">
+
+            <mat-form-field>
+                <textarea [(ngModel)]="data.note" matInput i18n-placeholder="@@note" rows="5" placeholder="備註"></textarea>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <textarea [(ngModel)]="data.key_value" rows="15" cols="30" [disabled]="true" matInput i18n-placeholder="@@key_value" placeholder="金鑰"></textarea>
+            </mat-form-field>
+        </div>
+    </div>`
+    <hr>
+    <div class="row">
+        <div class="col col-sm-10">
+            <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+                {{savedResponse.message}}
+            </div>
+            <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+                {{savedResponse.message}}
+            </div>
+        </div>
+        <div class="col col-sm-2">
+            <button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>存檔</button>
+        </div>
+    </div>
+</mat-dialog-content>

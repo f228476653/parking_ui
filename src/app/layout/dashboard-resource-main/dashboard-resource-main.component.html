@@ -1,0 +1,92 @@
+<div>
+    <h4><img src="assets/images/Parking-Lot-icon-1L.png">&nbsp;&nbsp;&nbsp;資源分析</h4>
+    <div class="row card-row">
+        <div class="col col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title garage-title ">場站</h5>
+                    <h2 class="card-text pointer" (click)="onGarageClick()">53</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-3">
+
+        </div>
+        <div class="col col-sm-6">
+        </div>
+    </div>
+    <div class="row card-row">
+        <div class="col col-sm-3">
+            <div class="card card-custom">
+                <div class="card-body pointer" (click)="onDrivewayClick()">
+                    <h5 class="card-title driveway-title ">車道</h5>
+                    <h1 class="card-text">131</h1>
+                    <div class="row ">
+                        <div class="col col-sm-6 ">進場-68</div>
+                        <div class="col col-sm-6 ">出場-63</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title driveway-title ">設備可用率</h5>
+                    <p class="card-text ">
+                        <ngx-charts-pie-onlyone class="chart-container " [view]="view " [scheme]="colorScheme_2 " (legendLabelClick)="onLegendLabelClick($event) " [results]="single " [animations]="animations " [tooltipDisabled]="tooltipDisabled" [tooltipText]="pieTooltipText "
+                            (select)="onSelect($event)">
+                        </ngx-charts-pie-onlyone>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6 ">
+            <div class="card card-custom">
+                <div class="card-body ">
+                    <h5 class="card-title driveway-title ">進場/出場(最近2小時車次)</h5>
+                    <p class="card-text ">
+                        <ngx-charts-bar-vertical [view]="bar_view" [scheme]="colorScheme" [results]="bar" [gradient]="gradient " [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="bar_showLegend" [showXAxisLabel]="showXAxisLabel
+                        " [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                        </ngx-charts-bar-vertical>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row card-row">
+        <div class="col col-sm-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title stall-title">車位</h5>
+                    <h1 class="card-text ">3882</h1>
+                    <p class="card-text ">臨停 - 2028 身障 - 426</p>
+                    <p class="card-text ">月租 - 1181 機車 - 237</p>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title stall-title">車位使用率</h5>
+                    <p class="card-text ">
+                        <ngx-charts-pie-onlyone class="chart-container " [view]="view " [scheme]="colorScheme_3 " (legendLabelClick)="onLegendLabelClick($event) " [results]="occupancy " [animations]="animations " [tooltipDisabled]="tooltipDisabled" [tooltipText]="pieTooltipText "
+                            (select)="onSelect($event) ">
+                        </ngx-charts-pie-onlyone>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6">
+            <div class="card card-custom">
+                <div class="card-body ">
+                    <h5 class="card-title stall-title">車位週轉率</h5>
+                    <p class="card-text ">
+                        <ngx-charts-pie-onlyone class="chart-container " [view]="view " [scheme]="colorScheme_3 " (legendLabelClick)="onLegendLabelClick($event) " [results]="turnover " [animations]="animations " [tooltipDisabled]="tooltipDisabled
+                        " [tooltipText]="pieTooltipText " (select)="onSelect($event) ">
+                        </ngx-charts-pie-onlyone>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

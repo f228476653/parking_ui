@@ -1,0 +1,50 @@
+<h4>電子發票設定</h4>
+<div>
+    <div class="row">
+        <div class="col col-md-8">
+            <button mat-icon-button (click)="add()"><mat-icon class="btn-add">add</mat-icon></button>
+        </div>
+        <div class="col col-md-4 pull-right">
+            <mat-form-field>
+                <input matInput placeholder="輸入">
+            </mat-form-field>
+            <button mat-icon-button ><mat-icon class="btn-clear">clear</mat-icon></button>
+            <button mat-icon-button ><mat-icon class="btn-refresh">refresh</mat-icon></button>
+
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+                <button mat-icon-button (click)=delete(element.garage_id)><mat-icon class="btn-delete">delete</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_code">
+            <mat-header-cell *matHeaderCellDef> 場站編號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_code}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_name">
+            <mat-header-cell *matHeaderCellDef> 場站名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef> 設定敘述 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="exit_type">
+            <mat-header-cell *matHeaderCellDef> 電子發票設定 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.exit_type}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

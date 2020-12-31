@@ -1,0 +1,42 @@
+
+<div>
+  <h4>交易類型</h4>
+
+    <mat-table #table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+        <!-- name Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+  
+        <!-- total-amount Column -->
+        <ng-container matColumnDef="total_amount">
+            <mat-header-cell *matHeaderCellDef> 累積總金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.total_amount}} </mat-cell>
+        </ng-container>
+  
+        <!-- mounth average Column -->
+        <ng-container matColumnDef="amount_lastyear">
+            <mat-header-cell *matHeaderCellDef> 去年間期金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.amount_lastyear}} </mat-cell>
+        </ng-container>
+  
+        <!-- day_average Column -->
+        <ng-container matColumnDef="diff">
+            <mat-header-cell *matHeaderCellDef> 差異 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.diff}} </mat-cell>
+        </ng-container>
+         <!-- day_average Column -->
+         <ng-container matColumnDef="diff_percent">
+            <mat-header-cell *matHeaderCellDef> 差異% </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.diff_percent}} </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

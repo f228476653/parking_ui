@@ -1,0 +1,81 @@
+<mat-tab-group>
+    <mat-tab label="個別車道比較">
+        <div class="row">
+            <div class="col col-sm-1">
+                車道1<br>(入口)
+            </div>
+            <div class="col col-sm-11">
+                <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-1">
+                車道2<br>(出口)
+            </div>
+            <div class="col col-sm-11">
+                <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme_2" [results]="single2" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-1">
+                車道3<br>(入口)
+            </div>
+            <div class="col col-sm-11">
+                <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single3" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-1">
+                車道4<br>(出口)
+            </div>
+            <div class="col col-sm-11">
+                <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme_2" [results]="single4" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="進出量 - 駐車數比較">
+        <ngx-charts-bar-vertical-2d [view]="inout_view" [scheme]="inout_colorScheme" [results]="inout_multi" [gradient]="inout_gradient" [xAxis]="inout_showXAxis" [yAxis]="inout_showYAxis" [legend]="inout_showLegend" [showXAxisLabel]="inout_showXAxisLabel" [showYAxisLabel]="inout_showYAxisLabel"
+            [xAxisLabel]="inout_xAxisLabel" [yAxisLabel]="inout_yAxisLabel" (select)="onSelect($event)">
+        </ngx-charts-bar-vertical-2d>
+    </mat-tab>
+    <mat-tab label="交易類型比較">
+        <div class="row">
+            <div class="col col-sm-1">
+                <h2>臨停</h2>
+            </div>
+            <div class="col col-sm-11">
+                <ngx-charts-bar-vertical-2d [view]="inout_view" [scheme]="inout_colorScheme" [results]="inout_multi" [gradient]="inout_gradient" [xAxis]="inout_showXAxis" [yAxis]="inout_showYAxis" [legend]="inout_showLegend" [showXAxisLabel]="inout_showXAxisLabel" [showYAxisLabel]="inout_showYAxisLabel"
+                    [xAxisLabel]="inout_xAxisLabel" [yAxisLabel]="inout_yAxisLabel" (select)="onSelect($event)">
+                </ngx-charts-bar-vertical-2d>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-1" style="vertical-align: center">
+                <h2>月租</h2>
+            </div>
+            <div class="col col-sm-11">
+                <ngx-charts-bar-vertical-2d [view]="inout_view" [scheme]="inout_colorScheme" [results]="inout_multi" [gradient]="inout_gradient" [xAxis]="inout_showXAxis" [yAxis]="inout_showYAxis" [legend]="inout_showLegend" [showXAxisLabel]="inout_showXAxisLabel" [showYAxisLabel]="inout_showYAxisLabel"
+                    [xAxisLabel]="inout_xAxisLabel" [yAxisLabel]="inout_yAxisLabel" (select)="onSelect($event)">
+                </ngx-charts-bar-vertical-2d>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-1">
+                <h2>身障</h2>
+            </div>
+            <div class="col col-sm-11">
+                <ngx-charts-bar-vertical-2d [view]="inout_view" [scheme]="inout_colorScheme" [results]="inout_multi" [gradient]="inout_gradient" [xAxis]="inout_showXAxis" [yAxis]="inout_showYAxis" [legend]="inout_showLegend" [showXAxisLabel]="inout_showXAxisLabel" [showYAxisLabel]="inout_showYAxisLabel"
+                    [xAxisLabel]="inout_xAxisLabel" [yAxisLabel]="inout_yAxisLabel" (select)="onSelect($event)">
+                </ngx-charts-bar-vertical-2d>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

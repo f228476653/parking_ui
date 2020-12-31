@@ -1,0 +1,270 @@
+<ng-container>
+    <mat-toolbar color="primary" class="main-toolbar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col col-xl-10">
+                    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+                    <a class="navbar-brand" href="#"><img src="assets/images/logo-3.png" class="user-avatar" /></a>
+                </div>
+
+                <div class="col col-xl-2">
+                    <div class="toolbar-info">
+                        <mat-menu #rootMenu="matMenu" xPosition="after" yPosition="below" [overlapTrigger]="false">
+                            <!-- <button mat-menu-item (click)="onLoggedout()">
+                                    <mat-icon> account_circle </mat-icon>
+                                    <span > 個人資訊 </span>
+                                </button>
+                                <button mat-menu-item (click)="onLoggedout()">
+                                    <mat-icon> settings </mat-icon>
+                                    <span > 設定 </span>
+                                </button>
+                                <button mat-menu-item (click)="onLoggedout()">
+                                    <mat-icon> help_outline </mat-icon>
+                                    <span > 幫助 </span>
+                                </button> -->
+                            <button mat-menu-item (click)="onLoggedout()">
+                                    <mat-icon> exit_to_app </mat-icon>
+                                    <span > 登出 </span>
+                                </button>
+                        </mat-menu>
+
+                        <!-- <mat-menu #subMenu="matMenu">
+                                <button mat-menu-item>
+                                        <mat-icon> exit_to_app </mat-icon>
+                                        <span> logout </span>
+                                      </button>
+                            </mat-menu> -->
+
+                        <!-- <button mat-icon-button style='min-width:150px;max-width:150px;' [matMenuTriggerFor]="rootMenu">
+                                {{login_user_name}}<i class="material-icons">arrow_drop_down</i>
+                            </button> -->
+
+                        <span>{{login_user_name}}</span>
+                        <button mat-icon-button (click)="onLoggedout()"><mat-icon class='btn_query'>登出</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [(opened)]="opened" [fixedBottomGap]="0">
+            <section>
+                <ul class="list-group">
+                    <span class="list-group-item" style="font-size:1.1em">
+                                <a href="javascript:void(0)" routerLink="/device-event" [routerLinkActive]="['router-link-active']">
+                                    <mat-icon> domain </mat-icon>&nbsp; PMS+ <span style='font-size:6px;'>{{version}}</span>
+                    </a>
+
+                    </span>
+
+                    <mat-accordion *ngIf="checkPermission('dashboard')">
+                        <mat-expansion-panel [expanded]="step" hideToggle="true" class="sidebarcolor">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <i class="fa fa-fw fa-dashboard"></i>&nbsp;&nbsp; 儀表板
+                                </mat-panel-title>
+                                <mat-icon> expand_more </mat-icon>
+                            </mat-expansion-panel-header>
+
+                            <mat-list>
+                                <mat-list-item *ngIf="checkPermission('dashboard-resource-main')" role="listitem">
+                                    <a href="javascript:void(0)" routerLink="/dashboard-resource-main" [routerLinkActive]="['router-link-active']">
+                                        <mat-icon> domain </mat-icon>&nbsp; 資源分析
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('revenue-analysis')" role="listitem">
+                                    <a item herf="javascript:void(0)" routerLink="/revenue-analysis" [routerLinkActive]="['router-link-active']">
+                                        <mat-icon> attach_money </mat-icon>&nbsp; 營收分析
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('transaction-main')" role="listitem">
+                                    <a href="javascript:void(0)" routerLink="/transaction-main" [routerLinkActive]="['router-link-active']">
+                                        <mat-icon> credit_card </mat-icon>&nbsp; 交易分析
+                                    </a>
+                                </mat-list-item>
+
+                            </mat-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <mat-accordion *ngIf="checkPermission('accounting-management')">
+                        <mat-expansion-panel [expanded]="step" hideToggle="true" class="sidebarcolor">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon> description </mat-icon>&nbsp; 帳務管理
+                                </mat-panel-title>
+                                <mat-icon> expand_more </mat-icon>
+                            </mat-expansion-panel-header>
+
+                            <mat-list role="list">
+                                <mat-list-item *ngIf="checkPermission('accounting-report')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/accounting-report" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-file-o"></i>&nbsp;帳務查詢
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('instant-transaction-report')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/instant-transaction-report" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-file-o"></i>&nbsp;PV即時交易查詢
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('instant-transaction-report-pmsplus')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/instant-transaction-report-pmsplus" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-file-o"></i>&nbsp;PV3即時交易查詢
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('instant-transaction-report-ibox')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/instant-transaction-report-ibox" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-file-o"></i>&nbsp;IBOX即時交易查詢
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('instant-transaction-report-pad')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/instant-transaction-report-pad" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-file-o"></i>&nbsp;平板即時交易查詢
+                                    </a>
+                                </mat-list-item>
+                                <!-- <mat-list-item *ngIf="checkPermission('instant-transaction-report-pad')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/instant-transaction-report-rspms" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-file-o"></i>&nbsp;RSPMS即時交易資料
+                                    </a>
+                                </mat-list-item> -->
+
+
+                            </mat-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <mat-accordion *ngIf="checkPermission('garage-management')">
+                        <mat-expansion-panel [expanded]="step" hideToggle="true" class="sidebarcolor">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <i class="fa fa-fw fa-car"></i>&nbsp;&nbsp; 場站管理
+                                </mat-panel-title>
+                                <mat-icon> expand_more </mat-icon>
+                            </mat-expansion-panel-header>
+
+                            <mat-list role="list">
+                                <mat-list-item *ngIf="checkPermission('invoice-setting')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/invoice-setting" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-drivers-license"></i>&nbsp; 電子發票設定
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('garage-exit-setting')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/garage-exit-setting" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-cog"></i>&nbsp; 出場設定
+                                    </a>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <mat-accordion *ngIf="checkPermission('operation-management')">
+                        <mat-expansion-panel [expanded]="step" hideToggle="true" class="sidebarcolor">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon> equalizer </mat-icon>&nbsp; 維運管理
+                                </mat-panel-title>
+                                <mat-icon> expand_more </mat-icon>
+                            </mat-expansion-panel-header>
+
+                            <mat-list role="list">
+
+                                <mat-list-item *ngIf="checkPermission('customer')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/customer" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-address-book"></i>&nbsp; 業者
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('garage')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/garage" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-car"></i>&nbsp; 場站
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('garage-group')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/garage-group" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-object-group"></i>&nbsp; 場站區域
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('role')" role="listitem">
+                                    <a item herf="javascript:void(0)" routerLink="/role" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-address-book"></i>&nbsp; 角色
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('account')" role="listitem">
+                                    <a item routerLink="/account" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-user"></i>&nbsp; 帳號
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('key')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/key" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-key"></i>&nbsp; 授權金鑰
+                                    </a>
+                                </mat-list-item>
+                                <!-- TODO 權限之後要加 -->
+                                <!-- <mat-list-item *ngIf="checkPermission('garage')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/pricing_rule" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-usd"></i>&nbsp; 費率設定
+                                    </a>
+                                </mat-list-item> -->
+                                <mat-list-item *ngIf="checkPermission('driveway')" role="listitem">
+                                    <a item href="javascript:void(0)" routerLink="/driveway" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-road"></i>&nbsp; 車道
+                                    </a>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <mat-accordion *ngIf="checkPermission('operation-management')">
+                        <mat-expansion-panel [expanded]="step" hideToggle="true" class="sidebarcolor">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon> equalizer </mat-icon>&nbsp; 報表管理
+                                </mat-panel-title>
+                                <mat-icon> expand_more </mat-icon>
+                            </mat-expansion-panel-header>
+
+                            <mat-list role="list">
+                                <!-- <mat-list-item *ngIf="checkPermission('regularly-report')" role="listitem">
+                                        <a item routerLink="/regularly-report" [routerLinkActive]="['router-link-active']">
+                                            <i class="fa fa-fw fa-user"></i>&nbsp; 停車流量、使用率、周轉率日報表
+                                        </a>
+                                    </mat-list-item> -->
+                                <mat-list-item *ngIf="checkPermission('regularly-report')" role="listitem">
+                                    <a item routerLink="/monthly-usage-report" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-user"></i>&nbsp; 使用率月報表
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('regularly-report')" role="listitem">
+                                    <a item routerLink="/daily-revenue-report" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-user"></i>&nbsp; 營運收入日報表
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('regularly-report')" role="listitem">
+                                    <a item routerLink="/monthly-revenue-report" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-user"></i>&nbsp; 營運收入月報表
+                                    </a>
+                                </mat-list-item>
+                                <mat-list-item *ngIf="checkPermission('shift-checkout-report')" role="listitem">
+                                    <a item routerLink="/shift-checkout" [routerLinkActive]="['router-link-active']">
+                                        <i class="fa fa-fw fa-user"></i>&nbsp; 結班報表
+                                    </a>
+                                </mat-list-item>
+
+                            </mat-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </ul>
+            </section>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div class="container-fluid">
+                <section class="main-container form-textsize ">
+
+                    <app-breadcrumb></app-breadcrumb>
+                    <router-outlet></router-outlet>
+                </section>
+            </div>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</ng-container>

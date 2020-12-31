@@ -1,0 +1,5 @@
+<h2 mat-dialog-title><span i18n="@@edit">編輯</span> <span i18n="@@device">設備參數</span></h2>
+<button mat-icon-button (click)=onCloseDailog() class="close"><mat-icon class="btn-delete">close</mat-icon></button>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+    <app-device-form [garageID]="garage_id" [customerID]="customer_id" [garageCode]='garage_code'></app-device-form>
+</mat-dialog-content>

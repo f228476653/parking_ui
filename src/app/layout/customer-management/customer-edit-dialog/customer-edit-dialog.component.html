@@ -1,0 +1,110 @@
+<h2 mat-dialog-title><span i18n="@@edit">編輯</span> <span i18n="@@customer">業者資料</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+    <div class="row">
+        <div class="col col-sm-4">
+            <mat-form-field>
+                <input [(ngModel)]="data.customer_code" matInput i18n-placeholder placeholder="業者代碼" required #customer_code="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.contact_username" matInput i18n-placeholder="@@contact_username" placeholder="聯絡人" required #contact_username="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.phone_number1" matInput i18n-placeholder="phone_number" placeholder="市話 1">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.mobile" matInput i18n-placeholder="@@mobile" placeholder="手機號碼">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.email" matInput i18n-placeholder="@@email" placeholder="電子郵件">
+            </mat-form-field>
+            <br />
+        </div>
+        <div class="col col-sm-4">
+            <mat-form-field>
+                <input [(ngModel)]="data.company_name" matInput i18n-placeholder="@@company_name" placeholder="公司名稱">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.company_address" matInput i18n-placeholder="@@company_address" placeholder="公司地址">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.phone_number2" matInput i18n-placeholder="@@phone_number" placeholder="電話 2">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.fax" matInput i18n-placeholder="@@fax" placeholder="傳真號碼">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="data.company_union_number" matInput i18n-placeholder="@@company_union_number" placeholder="統一編號">
+            </mat-form-field>
+            <br />
+        </div>
+        <div class="col col-sm-4">
+            <label i18n="@@contact_datetime">營業時間: </label>
+            <br />
+            <mat-radio-group [(ngModel)]="data.contact_datetime">
+                <mat-radio-button [value]="'1'" i18n="@@am">AM</mat-radio-button>
+                <mat-radio-button [value]="'2'" i18n="@@pm">PM</mat-radio-button>
+                <mat-radio-button [value]="'3'" i18n="@@pm">全天</mat-radio-button>
+            </mat-radio-group>
+            <br />
+            <label i18n="@@customer_status">業者啟用狀態:{{data.customer_status}} </label>
+            <br />
+            <mat-radio-group [(ngModel)]="data.customer_status">
+                <mat-radio-button [value]="1" i18n="@@enable">啟用</mat-radio-button>
+                <mat-radio-button [value]="0" i18n="@@disable">停用</mat-radio-button>
+            </mat-radio-group>
+            <br />
+            <mat-form-field>
+                <textarea [(ngModel)]="data.note" matInput i18n-placeholder="@@note" placeholder="備註"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <hr>
+
+    <div class="panel panel-default">
+        <div class="col col-sm-12">
+            <h5 class="row" i18n="@@card_type">票證交易檔參數設定 &nbsp;</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-sm-12">
+            <section class="checkbox-section">
+                    <mat-checkbox class="checkbox-margin" [(ngModel)]="cardType.iCash">愛金卡</mat-checkbox>
+                    <mat-checkbox class="checkbox-margin" [(ngModel)]="cardType.iPass">一卡通</mat-checkbox>
+                    <mat-checkbox class="checkbox-margin" [(ngModel)]="cardType.YHDP">有錢卡</mat-checkbox>
+            </section>
+        </div>
+    </div>
+    <hr>
+
+    <div>
+        <app-customer-ticket-transaction-icash-form *ngIf="cardType.iCash" (passCustomerTicketTransactionICash)="getChildValueICash($event)" [customerTicketTransactionICash]='customer_ticket_transaction_icash' style="width:100%;"></app-customer-ticket-transaction-icash-form>
+    </div>
+
+    <div>
+        <app-customer-ticket-transaction-ipass-form *ngIf="cardType.iPass" (passCustomerTicketTransactionIPass)="getChildValueIPass($event)" [customerTicketTransactionIPass]='customer_ticket_transaction_ipass' style="width:100%;"></app-customer-ticket-transaction-ipass-form>
+    </div>
+
+    <div>
+        <app-customer-ticket-transaction-happycash-form *ngIf="cardType.YHDP" (passCustomerTicketTransactionHappyCash)="getChildValueHappyCash($event)" [customerTicketTransactionHappyCash]='customer_ticket_transaction_happycash' style="width:100%;"></app-customer-ticket-transaction-happycash-form>
+    </div>
+
+    <div class="row">
+        <div class="col col-sm-10">
+            <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+                {{savedResponse.message}}
+            </div>
+            <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+                {{savedResponse.message}}
+            </div>
+        </div>
+        <div class="col col-sm-2"><button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>下一步</button></div>
+    </div>
+    <div *ngIf="data.customer_id && false">
+        <hr class="my-4">
+        <h4>Keys</h4>
+        <div class="panel panel-default">
+            <app-key-management [customerId]="data.customer_id" dataMode="param"></app-key-management>
+        </div>
+    </div>
+</mat-dialog-content>

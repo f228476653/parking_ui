@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+    <h6>愛金卡</h6>
+    <div class="col" [formGroup]="customerForm">
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="customerTicketTransactionICash.ip_address" matInput i18n-placeholder="@@ip_address"
+                    formControlName="ip_address" placeholder="愛金卡主機位址" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="ip_address.invalid && ip_address.dirty" class="alert alert-danger fill">
+                        <div *ngIf="ip_address.errors.required" >必填欄位</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="customerTicketTransactionICash.ip_port" matInput i18n-placeholder="@@ip_port"
+                    formControlName="ip_port" placeholder="愛金卡主機port號" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="ip_port.invalid && ip_port.dirty" class="alert alert-danger fill">
+                        <div *ngIf="ip_port.errors.required" >必填欄位</div>
+                        <div *ngIf="ip_port.errors.min" >不可小於 0</div>
+                        <div *ngIf="ip_port.errors.max" >不可大於 65535</div>
+                        <div *ngIf="ip_port.errors.pattern" >只能輸入數字</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="customerTicketTransactionICash.account" matInput i18n-placeholder="@@account"
+                    formControlName="account" placeholder="愛金卡FTP帳號" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="account.invalid && account.dirty" class="alert alert-danger fill">
+                        <div *ngIf="account.errors.required" >必填欄位</div>
+                    </div>
+                </div>
+            </div>
+        </div>          
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="customerTicketTransactionICash.password" matInput i18n-placeholder="@@password"
+                    formControlName="password" placeholder="愛金卡FTP密碼" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row" >
+                    <div *ngIf="password.invalid && password.dirty" class="alert alert-danger fill"> 
+                        <div *ngIf="password.errors.required">必填欄位</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="customerTicketTransactionICash.upload_path" matInput i18n-placeholder="@@upload_path"
+                    formControlName="upload_path" placeholder="愛金卡票證交易檔上傳位址" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="upload_path.invalid && upload_path.dirty" class="alert alert-danger fill">
+                        <div *ngIf="upload_path.errors.required" >必填欄位</div>
+                        <div *ngIf="upload_path.errors.pattern" >頭尾必須是 / 符號</div>
+                        <div *ngIf="upload_path.errors.pattern" >或是單獨一個 / 符號值</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="customerTicketTransactionICash.download_path" matInput i18n-placeholder="@@download_path"
+                    formControlName="download_path" placeholder="愛金卡票證回饋檔下載位址" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="download_path.invalid && download_path.dirty" class="alert alert-danger fill">
+                        <div *ngIf="download_path.errors.required" >必填欄位</div>
+                        <div *ngIf="download_path.errors.pattern" >頭尾必須是 / 符號</div>
+                        <div *ngIf="download_path.errors.pattern" >或是單獨一個 / 符號值</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="customerTicketTransactionICash.icash_customer_tax_id" matInput i18n-placeholder="@@icash_customer_tax_id"
+                    formControlName="icash_customer_tax_id" placeholder="愛金卡特約商家統編" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="icash_customer_tax_id.invalid && icash_customer_tax_id.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_customer_tax_id.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_customer_tax_id.errors.taxNumber">統編格式錯誤</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <label i18n="@@status">愛金卡啟用狀態 &nbsp;</label>
+                <mat-radio-group [(ngModel)]="customerTicketTransactionICash.status" 
+                    formControlName="status" class="row">
+                    <mat-radio-button [value]="0">停用</mat-radio-button>
+                    <mat-radio-button [value]="1">啟用</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>     
+    </div>
+    <hr>
+</div>

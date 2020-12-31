@@ -1,0 +1,50 @@
+<h2 mat-dialog-title><span i18n="@@edit">iBox</span> <span i18n="@@garage_group">參數設定</span></h2>
+
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+    <mat-accordion multi="true">
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    業者層級參數
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngIf="customerDeviceFormCheck === false" class="alert alert-danger">廠商參數有誤請補上</div>
+            <app-customer-device-ibox-form [data]="data" [cardType]="cardType" [readOnly]="true"
+            (customerDeviceFormValidator)="customerDeviceCheck($event)"></app-customer-device-ibox-form>
+        </mat-expansion-panel>
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    場站層級參數
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngIf="garageDeviceFormCheck === false" class="alert alert-danger">場站參數有誤請補上</div>
+            <app-garage-device-form  [readOnly]="true" (garageDeviceFormCheck)="garageDeviceCheck($event)"
+            [garageDevice]="garage_device" [display]="display"></app-garage-device-form>
+        </mat-expansion-panel>
+        <mat-expansion-panel expanded="true" >
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    設備層級參數
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-device-ibox-form [device_ibox]="device_ibox" [customer_id]="customer_id" [garage_id]="garage_id" [slotData]="slotData"
+                [device_id]="device_id" [chipMapList]="chipMapList" [initIP]="initIP" (deviceFormCheck)="deivceCheck($event)" [lastCheck]="lastCheck"></app-device-ibox-form>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <div class="row" style="margin-top: 20px">
+        <div class="col col-sm-4">
+            <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+                {{savedResponse.message}}
+            </div>
+            <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+                {{savedResponse.message}}
+            </div>
+        </div>
+        <div class="col col-sm-8">
+            <div class="pull-right interval" *ngIf="device_ibox.device_ibox_args_id === undefined"><button mat-raised-button color="primary" (click)="save()"><mat-icon class="btn_save">save</mat-icon>儲存並建立副本</button></div>
+            <div class="pull-right interval"><button mat-raised-button color="primary" (click)="once_save()"><mat-icon class="btn_save">save</mat-icon>儲存</button></div>
+            <div class="pull-right interval" style="padding-left:80px;"><button mat-raised-button color="warn" (click)="cancel()">取消</button></div>
+        </div>
+    </div>
+</mat-dialog-content>

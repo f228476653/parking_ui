@@ -1,0 +1,44 @@
+<h2 mat-dialog-title><span i18n="@@keystore">Key Infomation</span></h2>
+<div class="row">
+    <div class="col col-sm-4">
+        <div class="form-group">
+            <label class="view-label" for="customer_id">業者ID</label>
+            <p id="customer_id">{{data.customer_id}}</p>
+        </div>
+        <div class="form-group">
+            <label class="view-label" for="start_date"> 起始日期 </label>
+            <p id="start_date">{{data.start_date}}</p>
+        </div>
+        <div class="form-group">
+            <label class="view-label" for="start_date">結束日期</label>
+            <p id="start_date">{{data.end_date}}</p>
+        </div>
+        <div class="form-group">
+            <label class="view-label" for="start_date">創建日期</label>
+            <p id="start_date">{{data.create_date}}</p>
+        </div>
+
+    </div>
+    <div class="col col-sm-4">
+        <div class="form-group">
+            <label class="view-label" for="key_version">版本</label>
+            <p id="key_version">{{data.key_version}}</p>
+        </div>
+        <div class="form-group">
+            <label class="view-label" for="account">創建人</label>
+            <p id="account">{{user.account}}</p>
+        </div>
+        <div class="form-group">
+            <label class="view-label" for="key_type">型態</label>
+            <p id="key_type">{{data.key_type}}</p>
+        </div>
+
+    </div>
+    <div class="col col-sm-4">
+
+        <div class="form-group">
+            <label class="view-label" for="key_type">Key</label><br />
+            <textarea rows="15" cols="25" id="key_type">{{data.key_value}}</textarea>
+        </div>
+    </div>
+</div>

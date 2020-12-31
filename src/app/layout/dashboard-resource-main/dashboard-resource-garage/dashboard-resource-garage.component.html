@@ -1,0 +1,297 @@
+<mat-tab-group>
+    <mat-tab label="北區">
+        <div class="row">
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title garage-title">場站</h4>
+                        <h1 class="card-text" (click)="onGarageClick()">20</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title driveway-title">車道</h4>
+                        <div class="row">
+                            <div class="col col-sm-6">
+                                <h3 class="card-text" (click)="onGarageClick()">進 33</h3>
+                            </div>
+                            <div class="col col-sm-6">
+                                <h3 class="card-text" (click)="onGarageClick()">出 25</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title stall-title">車位</h4>
+                        <h5>2203</h5>
+                        <div class="row">
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">1402</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">290</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">511</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">102</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="example-container mat-elevation-z8">
+            <mat-table #table [dataSource]="dataSource">
+
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> 車道 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="driveway_in">
+                    <mat-header-cell *matHeaderCellDef> 車道入口 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.driveway_in}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="driveway_out">
+                    <mat-header-cell *matHeaderCellDef> 車道出口 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.driveway_out}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="temp">
+                    <mat-header-cell *matHeaderCellDef> 臨停 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.temp}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="disability">
+                    <mat-header-cell *matHeaderCellDef> 身障 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.disability}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="permanent">
+                    <mat-header-cell *matHeaderCellDef> 月租 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.permanent}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-tab>
+    <mat-tab label="中區">
+        <div class="row">
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title garage-title">場站</h4>
+                        <h1 class="card-text" (click)="onGarageClick()">26</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title driveway-title">車道</h4>
+                        <div class="row">
+                            <div class="col col-sm-6">
+                                <h3 class="card-text" (click)="onGarageClick()">進 30</h3>
+                            </div>
+                            <div class="col col-sm-6">
+                                <h3 class="card-text" (click)="onGarageClick()">出 33</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title stall-title">車位</h4>
+                        <h5>2203</h5>
+                        <div class="row">
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">1402</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">290</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">511</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">102</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="example-container mat-elevation-z8">
+            <mat-table #table [dataSource]="dataSource_2">
+
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> 車道 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="driveway_in">
+                    <mat-header-cell *matHeaderCellDef> 車道入口 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.driveway_in}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="driveway_out">
+                    <mat-header-cell *matHeaderCellDef> 車道出口 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.driveway_out}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="temp">
+                    <mat-header-cell *matHeaderCellDef> 臨停 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.temp}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="disability">
+                    <mat-header-cell *matHeaderCellDef> 身障 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.disability}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="permanent">
+                    <mat-header-cell *matHeaderCellDef> 月租 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.permanent}} </mat-cell>
+                </ng-container>
+
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="南區">
+        <div class="row">
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title garage-title">場站</h4>
+                        <h1 class="card-text" (click)="onGarageClick()">26</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title driveway-title">車道</h4>
+                        <div class="row">
+                            <div class="col col-sm-6">
+                                <h3 class="card-text" (click)="onGarageClick()">進 30</h3>
+                            </div>
+                            <div class="col col-sm-6">
+                                <h3 class="card-text" (click)="onGarageClick()">出 33</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card card-height">
+                    <div class="card-body">
+                        <h4 class="card-title stall-title">車位</h4>
+                        <h5>2203</h5>
+                        <div class="row">
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">1402</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">290</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">511</p>
+                            </div>
+                            <div class="col col-3">
+                                <p class="card-text" (click)="onGarageClick()">102</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="example-container mat-elevation-z8">
+            <mat-table #table [dataSource]="dataSource_3">
+
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> 車道 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="driveway_in">
+                    <mat-header-cell *matHeaderCellDef> 車道入口 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.driveway_in}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="driveway_out">
+                    <mat-header-cell *matHeaderCellDef> 車道出口 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.driveway_out}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="temp">
+                    <mat-header-cell *matHeaderCellDef> 臨停 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.temp}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="disability">
+                    <mat-header-cell *matHeaderCellDef> 身障 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.disability}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="permanent">
+                    <mat-header-cell *matHeaderCellDef> 月租 </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.permanent}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,125 @@
+<div class="mat-container" [@routerTransition]>
+
+    <div class="row">
+        <div class="col col-md-12">
+            <div class="form-row">
+                <div class = "ng_select form-group col-md-2">
+                    <ng-select [items]="garageResponse.data" bindLabel="garage_name" bindValue="garage_code" [(ngModel)]="query.garage_code"></ng-select>
+                </div>
+                <div class = "test form-group col-md-10">
+                    <mat-form-field>
+                        <input [(ngModel)]="query.start_date" matInput i18n-placeholder="@@start_date" placeholder="起始日期, 格式:20171205" #start_date="ngModel">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input [(ngModel)]="query.end_date" matInput i18n-placeholder="end_date" placeholder="結束日期, 格式:20171231" #end_date="ngModel">
+                    </mat-form-field>
+                    <mat-radio-group [(ngModel)]="query.paid_type">
+                        <mat-radio-button value="01" i18n="@@yoyo">悠遊卡</mat-radio-button>
+                        <mat-radio-button value="03" i18n="@@dtpi">一卡通</mat-radio-button>
+                        <mat-radio-button value="02" i18n="@@dtpi">愛金卡</mat-radio-button>
+                        <mat-radio-button value="05" i18n="@@dtpi">有錢卡</mat-radio-button>
+                    </mat-radio-group>
+
+                    <button mat-icon-button (click)="search()"><mat-icon class='btn_query'>search</mat-icon></button>
+                    <button mat-icon-button (click)="clearTableFilter()"><mat-icon class="btn-clear">clear</mat-icon></button>
+                    <button mat-raised-button class="button" (click)="csvExport()">匯出Excel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef style="min-width:150px"></mat-header-cell>
+            <mat-cell *matCellDef="let e" style="min-width:150px">
+                <button mat-icon-button (click)=view(e.format_date,e.garage_code,e.paid_type)><mat-icon>remove_red_eye</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_code">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 場站代號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_code}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 場站名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="format_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 交易日期 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.format_date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pms_cnt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 交易筆數 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.pms_cnt}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pms_fee">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 交易金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.pms_fee}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cps_cnt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 上傳筆數 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cps_cnt}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cps_fee">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 上傳金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cps_fee}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cps_cleared_fee">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 清分金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cal_f_totalfee===null ? 0:element.cal_f_totalfee}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cps_abnomal_cleared_fee">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 清分異常金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cal_e_totalfee===null ? 0:element.cal_e_totalfee}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cps_updated_fee">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 上傳未清分金額 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cal_c_totalfee===null ? 0:element.cal_c_totalfee}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pms_cps_data_diff">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 交易/上傳筆數差異 </mat-header-cell>
+            <mat-cell *matCellDef="let e"> {{e.pms_cps_data_diff}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pms_cps_diff">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 交易/上傳金額差異 </mat-header-cell>
+            <mat-cell *matCellDef="let e"> {{e.pms_cps_diff}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="settlement_diff">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 清分筆數差異 </mat-header-cell>
+            <mat-cell *matCellDef="let e"> {{e.settlement_diff===null ? 0:e.settlement_diff}} </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="modifed_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 修改日期 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.modifed_date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="create_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 創建日期 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.create_date}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+</div>

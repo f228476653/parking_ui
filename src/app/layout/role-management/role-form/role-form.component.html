@@ -1,0 +1,57 @@
+<h2 mat-dialog-title><!-- <span i18n="@@edit">Edit</span>--></h2> 
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+    <div class="row">
+        <div class="col col-3">
+            <mat-form-field>
+                <input [(ngModel)]="role.name" matInput i18n-placeholder placeholder="角色名稱" required  (focusout)="checkRoleName()">
+            </mat-form-field>
+            <div *ngIf="sameRoleName" class="alert alert-danger">
+                <div *ngIf='sameRoleName'>已有相同角色 請換一個</div>
+            </div>
+            <mat-form-field>
+                <input [(ngModel)]="role.description" matInput i18n-placeholder="@@description" placeholder="說明" required #description="ngModel">
+            </mat-form-field>
+            <br />
+            <!-- <label i18n="@@role_type">Role Type: </label>
+            <br />
+            <mat-radio-group class="radio-group-vertical" [(ngModel)]="data.role_type">
+                <mat-radio-button value="1" i18n="@@am">Management</mat-radio-button>
+                <mat-radio-button value="2" i18n="@@pm">Supervisor</mat-radio-button>
+                <mat-radio-button value="3" i18n="@@pm">User</mat-radio-button>
+            </mat-radio-group> -->
+
+        </div>
+        <div class="col col-9">
+            <div class="rounded rounded-border" style='min-width:300px;padding:5px;min-height:300px;max-height:300px;;overflow-y: scroll;'>
+                <ul>
+                    <ng-template #recursiveList let-list>
+                        <li *ngFor="let item of list;">
+                            <mat-checkbox [(ngModel)]="item.checked" [disabled]="disable">{{item.name}}</mat-checkbox>
+                            <ul *ngIf="item.children.length > 0">
+                                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.children }"></ng-container>
+                            </ul>
+                        </li>
+                    </ng-template>
+
+                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: permissionTreeView }"></ng-container>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col col-sm-10">
+            <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+                {{savedResponse.message}}
+            </div>
+            <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+                {{savedResponse.message}}
+            </div>
+        </div>
+        <div class="col col-sm-2">
+            <button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>完成</button>
+        </div>
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,28 @@
+.row{
+  margin: 0 auto;
+}
+
+.datebox, .pricebox{
+  width: 100px;
+}
+
+.timebox{
+  width: 100px;
+}
+
+.mat-cell{
+  font-size: 11px;
+}
+w-time-dialog {
+  max-height: 90vh !important;
+}
+
+.a {
+  position: relative;
+  left: -54px;
+  top: 17px;
+}
+
+.interval {
+  padding: 0px 10px
+}

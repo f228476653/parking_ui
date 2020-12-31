@@ -1,0 +1,95 @@
+table {
+    width: 100%;
+}
+
+tr.mat-footer-row {
+font-weight: bold;
+}
+
+.mat-header-cell.mat-column-date {
+    width: 110px;
+}
+
+.mat-header-cell.mat-column-icash_cnt_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-icash_total_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-icash_cnt_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-icash_total_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-icash_total {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-ipass_cnt_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-ipass_total_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-ipass_cnt_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-ipass_total_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-ipass_total {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-yhdp_cnt_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-yhdp_total_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-yhdp_cnt_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-yhdp_total_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-yhdp_total {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-cash_cnt_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-cash_total_c {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-cash_cnt_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-cash_total_m {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-cash_total {
+    width: 50px;
+}
+
+.mat-header-cell.mat-column-total {
+    width: 50px;
+}

@@ -1,0 +1,144 @@
+<app-report-query (onSearch)="onserch($event)" [hiddenCardType]="false"></app-report-query>
+<hr>
+<div class="container" *ngIf="display">
+    <div class="col col-md-8"></div>
+    <div class="row">
+        <h2 class="col col-sm-8">PMS營運統計報表系統 【{{query.company_name}} {{query.garage_name}}】</h2>
+        <div class="col col-sm-4">
+            <div class="button-row">
+                <button mat-raised-button color="primary" (click)="csvExport()">匯出 Excel</button>
+                <!-- <button mat-raised-button color="primary" (click)="pdfExport()" style="padding-left: 15px;">匯出 PDF</button> -->
+            </div>
+        </div>
+        <h2 class="col col-sm-12" style="margin-left: 251px;">營運收入日報表</h2>
+        <h5 class="col col-sm-9"></h5><h5 class="col col-sm-3">報表編號： PMS-001</h5>
+        <h5 class="col col-sm-3">資料日期: {{query_format_date}}</h5>
+        <h5 class="col col-sm-6"></h5><h5 class="col col-sm-3">製作人: [{{query.company_name}}]</h5>
+        <h5 class="col col-sm-9"></h5><h5 class="col col-sm-3">製表日期: {{dateNow}} </h5>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <table mat-table [dataSource]="a1" class="mat-elevation-z8">
+            <ng-container matColumnDef="unitPrice1">
+                <th mat-header-cell *matHeaderCellDef> 單價 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[i].unitPrice }}</div>
+                </td>
+                <td mat-footer-cell *matFooterCellDef colspan="4"> 營收總計 </td>
+            </ng-container>
+            <ng-container matColumnDef="cnt1">
+                <th mat-header-cell *matHeaderCellDef> 筆數 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[i].cnt }}</div>
+                </td>
+                <td mat-footer-cell *matFooterCellDef> 筆數:  </td>
+            </ng-container>
+            <ng-container matColumnDef="subtotal1">
+                <th mat-header-cell *matHeaderCellDef> 金額 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[i].subtotal }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="unitPrice2">
+                <th mat-header-cell *matHeaderCellDef> 單價 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[23 + i].unitPrice }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="cnt2">
+                <th mat-header-cell *matHeaderCellDef> 筆數 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[23 + i].cnt }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="subtotal2">
+                <th mat-header-cell *matHeaderCellDef> 金額 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[23 + i].subtotal }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="unitPrice3">
+                <th mat-header-cell *matHeaderCellDef> 單價 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[46 + i].unitPrice }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="cnt3">
+                <th mat-header-cell *matHeaderCellDef> 筆數 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[46 + i].cnt }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="subtotal3">
+                <th mat-header-cell *matHeaderCellDef> 金額 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[46 + i].subtotal }}</div>
+                </td>
+            </ng-container> 
+            <ng-container matColumnDef="unitPrice4">
+                <th mat-header-cell *matHeaderCellDef> 單價 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div *ngIf="i != 22"> {{ s1[69 + i].unitPrice }}</div>
+                    <div *ngIf="i == 22"> >{{ s1[69 + i].unitPrice }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="cnt4">
+                <th mat-header-cell *matHeaderCellDef> 筆數 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[69 + i].cnt }}</div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="subtotal4">
+                <th mat-header-cell *matHeaderCellDef> 金額 </th>
+                <td mat-cell *matCellDef="let i"> 
+                    <div>{{ s1[69 + i].subtotal }}</div>
+                </td>
+                <td mat-footer-cell *matFooterCellDef colspan="8" class="justify-content-end"> {{total}} </td>
+            </ng-container> 
+
+            <!-- <ng-container matColumnDef="type">
+                <td mat-footer-cell *matFooterCellDef colspan="2">
+                    汽車合計 
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="count">
+                <td mat-footer-cell *matFooterCellDef colspan="2">
+                    筆數: {{data.day_revenue_sum_c[0].total_cnt || 0}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <td mat-footer-cell *matFooterCellDef colspan="8">
+                    汽車總計: {{data.day_revenue_sum_c[0].total || 0}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type2">
+                <td mat-footer-cell *matFooterCellDef colspan="2">
+                    機車合計
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="count2">
+                <td mat-footer-cell *matFooterCellDef colspan="2">
+                    筆數: {{0 || data.day_revenue_sum_m[0].total_cnt}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total2">
+                <td mat-footer-cell *matFooterCellDef colspan="8">
+                    機車總計  {{0 || data.day_revenue_sum_m[0].total}}
+                </td>
+            </ng-container> -->
+
+            <!-- <td mat-footer-cell *matFooterCellDef> 汽車和計 </td> -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- <tr mat-footer-row *matFooterRowDef="['type', 'count', 'total']" class="example-first-footer-row"></tr>
+            <tr mat-footer-row *matFooterRowDef="['type2', 'count2', 'total2']" class="example-first-footer-row"></tr>-->
+            <tr mat-footer-row *matFooterRowDef="displayedColumns5" class="example-first-footer-row"></tr> 
+
+        </table> 
+    </div>
+    <h2 style="margin-top: 20px;">場長:</h2>
+</div>

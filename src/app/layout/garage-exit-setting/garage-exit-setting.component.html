@@ -1,0 +1,87 @@
+<h4>出場設定</h4>
+<div>
+    <div class="row">
+        <div class="col col-md-8">
+            <mat-form-field>
+                <mat-select placeholder="場站群組" (selectionChange)=getGarageGroup($event)>
+                    <mat-option>None</mat-option>
+                    <mat-option value="all">全部</mat-option>
+                    <mat-option [value]="name" *ngFor="let name of groupname">
+                        {{ name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [(ngModel)]="garage_info" placeholder="場站">
+                    <mat-option [value]="garage" *ngFor="let garage of garageList.data">
+                        {{ garage.garage_name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+                <button mat-icon-button (click)="add()"><mat-icon class="btn-add">add</mat-icon></button>
+        </div>
+        <div class="col col-md-4 pull-right">
+            <mat-form-field>
+                <input matInput placeholder="輸入">
+            </mat-form-field>
+            <button mat-icon-button><mat-icon class="btn-clear">clear</mat-icon></button>
+            <button mat-icon-button><mat-icon class="btn-refresh">refresh</mat-icon></button>
+
+        </div>
+    </div>
+    <mat-table #table [dataSource]="dataSource.data" matSort>
+
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+                <button mat-icon-button (click)=delete(element.exit_config_id)><mat-icon class="btn-delete">delete</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="exit_config_id">
+            <mat-header-cell *matHeaderCellDef> 序號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.exit_config_id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_code">
+            <mat-header-cell *matHeaderCellDef> 場站編號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_code}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="garage_name">
+            <mat-header-cell *matHeaderCellDef> 場站名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.garage_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef> 設定敘述 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="exit_type">
+            <mat-header-cell *matHeaderCellDef> 出場設定 </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <div *ngFor="let e of element.exit_type">
+                    {{e.exit_type}}
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="onoroff">
+            <mat-header-cell *matHeaderCellDef>出場設定啟用狀態</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <mat-slide-toggle [checked]="element.disabled === 1 ? true : false" (change)="isDisabled(element.exit_config_id,$event)">
+                    Off/On
+                </mat-slide-toggle>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+</div>

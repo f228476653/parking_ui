@@ -1,0 +1,92 @@
+<div class="mat-container" [@routerTransition]>
+
+    <div class="row">
+        <div class="col col-md-1">
+            <button mat-icon-button (click)="add()"><mat-icon class="btn-add">add</mat-icon></button>
+        </div>
+        <div class="col col-md-7"></div>
+        <div class="col col-md-4 pull-right">
+            <mat-form-field>
+                <input matInput [(ngModel)]="txtTableFilter" (keyup)="applyFilter($event.target.value)" placeholder="輸入">
+            </mat-form-field>
+            <button mat-icon-button (click)="clearTableFilter()"><mat-icon class="btn-clear">clear</mat-icon></button>
+            <button mat-icon-button (click)="refreshTable()"><mat-icon class="btn-refresh">refresh</mat-icon></button>
+        </div>
+    </div>
+    <div *ngIf="!isEmptyData">
+        <mat-table #table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef style="min-width:150px"></mat-header-cell>
+                <mat-cell *matCellDef="let element" style="min-width:150px">
+                    <button mat-icon-button (click)="view(element)"><mat-icon class="btn-view">remove_red_eye</mat-icon></button>
+                    <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+                    <button mat-icon-button (click)=delete(element.keystore_id)><mat-icon class="btn-delete">delete</mat-icon></button>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="keystore_id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 序號 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.keystore_id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="company_name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 公司名稱 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="key_type">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 金鑰型態 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.key_type}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fixed_account_total">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 固定帳號數量 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.fixed_account_total}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dyanmic_account_total">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 動態帳號數量</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.dyanmic_account_total}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="service_type">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 服務類型 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.service_type}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="key_status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 金鑰狀態 </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <mat-icon *ngIf="element.key_status=='active'" style='color:green'>check</mat-icon>
+                    <mat-icon *ngIf="element.key_status!='active'">sync_disabled</mat-icon>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="start_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 起始日期 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.start_date}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="end_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 結束日期 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.end_date}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="modifed_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 修改日期 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.modifed_date}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="create_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> 創建日期 </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.create_date}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+
+        <mat-paginator #paginator [pageSize]="30" [pageSizeOptions]="[30, 50, 100]">
+        </mat-paginator>
+
+    </div>
+    <div *ngIf="isEmptyData" class="alert alert-info">No Data</div>
+</div>

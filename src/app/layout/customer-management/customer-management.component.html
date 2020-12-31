@@ -1,0 +1,75 @@
+<div class="mat-container" [@routerTransition]>
+    <div class="row">
+        <div class="col col-md-1">
+            <button mat-icon-button (click)="add()"><mat-icon class="btn-add">add</mat-icon></button>
+        </div>
+        <div class="col col-md-7"></div>
+        <div class="col col-md-4 pull-right">
+            <mat-form-field>
+                <input matInput [(ngModel)]="txtTableFilter" (keyup)="applyFilter($event.target.value)" placeholder="輸入">
+            </mat-form-field>
+            <button mat-icon-button (click)="clearTableFilter()"><mat-icon class="btn-clear">clear</mat-icon></button>
+            <button mat-icon-button (click)="refreshTable()"><mat-icon class="btn-refresh">refresh</mat-icon></button>
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef style="min-width:200px"></mat-header-cell>
+            <mat-cell *matCellDef="let element" style="min-width:200px">
+                <button mat-icon-button (click)=device(element.customer_id)><mat-icon class="btn-build">build</mat-icon></button>
+                <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+
+                <app-confirm-button (deleteEvent)="delete(element.customer_id)"></app-confirm-button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="customer_code">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 業者代碼 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.customer_code}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="company_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 公司名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 郵箱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="contact_username">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 聯絡人姓名 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.contact_username}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="mobile">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 手機號碼 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.mobile}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="customer_status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 業者狀態 </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <mat-icon *ngIf="element.customer_status=='1'" style='color:green'>check</mat-icon>
+                <mat-icon *ngIf="element.customer_status!='1'">sync_disabled</mat-icon>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="modifed_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 修改日期 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.modifed_date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="create_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 創建日期 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.create_date}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="30" [pageSizeOptions]="[30, 50, 100]">
+    </mat-paginator>
+</div>

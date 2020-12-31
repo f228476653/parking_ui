@@ -1,0 +1,448 @@
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+    <!-- <div class="row">
+        <div class="col col-sm-4">
+            <mat-form-field *ngIf="isSuperUser">
+                <mat-select placeholder="Customer" [(ngModel)]="data.customer_id" name="customer">
+                    <mat-option *ngFor="let customer of customerResponse.data" [value]="customer.customer_id">
+                        {{customer.company_name}}({{customer.customer_code}})
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <form [formGroup]='garageForm'>
+                <mat-form-field>
+                    <input matInput i18n-placeholder="@@garage_serial_number" required placeholder="場站編號"
+                    [(ngModel)]="data.garage_code" formControlName="garage_code">
+                </mat-form-field>
+                <div *ngIf="garage_code.invalid && garage_code.dirty && this.checkGarageCode !== this.garageForm.get('garage_code').value" class="alert alert-danger">
+                    <div *ngIf='garage_code.errors.required' >請輸入場站編號</div>
+                    <div *ngIf='garage_code.errors.garageCodeExists'>已有相同場站編號 請從換一個</div>
+                </div>
+            </form>
+            <br/>
+            <mat-form-field>
+                <input [(ngModel)]="data.garage_name" matInput i18n-placeholder="@@garage_name" required placeholder="場站名稱">
+            </mat-form-field>
+            <br/>
+            <mat-form-field> -->
+                <!-- 2
+                <mat-select i18n-placeholder="@@city" placeholder="Select City">
+                (change)=getCity($event)
+                    <mat-option *ngFor="let city in citiesResponse.data" [value]="city">
+                    </mat-option>
+
+                    </mat-select>
+                    2 -->
+                    <!-- <mat-select i18n-placeholder="@@city" placeholder="請選擇縣市" required [(ngModel)]="data.city_name"> -->
+                        <!-- 2 <mat-option  [(ngModel)]="data.city_name" [value]="garage" *ngFor="let garage of citiesResponse.data">
+                            {{ garage }}{{citiesResponse.data}}{{citiesResponse}}
+                        </mat-option> 2 -->
+                        <!-- <mat-option *ngFor="let city of cities" [value]="city.value">
+                            {{ city.viewValue }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br/>
+                <mat-form-field> -->
+                    <!--2 <mat-select i18n-placeholder="@@district" required placeholder="請選擇行政區">
+                    <mat-option>None</mat-option>
+                        <mat-option *ngFor="let district of districts" [value]="range">{{range}}</mat-option>
+                    </mat-select> 2 -->
+                    <!-- <input [(ngModel)]="data.district" matInput i18n-placeholder="@@district" required placeholder="行政區">
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.address1" matInput i18n-placeholder="@@address" required placeholder="地址1">
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.address2" matInput i18n-placeholder="@@address" placeholder="地址2">
+                </mat-form-field>
+                <br/>
+                <label i18n="@@business_hours">營業時間: &nbsp;</label>
+                <mat-form-field class="timebox">
+                    <input matInput [matTimepicker]="time_start" placeholder="起" required [(ngModel)]="data.business_hour_begin">
+                    <mat-timepicker-toggle matSuffix [for]="time_start" (userTimeChange)="updateTimeStart(time_start.userTime)"></mat-timepicker-toggle>
+                    <mat-timepicker [(userTime)]="start_config" #time_start color="primary"></mat-timepicker>
+                </mat-form-field>
+                ~
+                <mat-form-field class="timebox">
+                    <input matInput [matTimepicker]="time_end" placeholder="迄" required [(ngModel)]="data.business_hour_end">
+                    <mat-timepicker-toggle matSuffix [for]="time_end" (userTimeChange)="updateTimeEnd(time_end.userTime)"></mat-timepicker-toggle>
+                    <mat-timepicker [(userTime)]="end_config" #time_end color="primary"></mat-timepicker>
+                </mat-form-field>
+                <br/>
+                <label i18n="@@caculation_time_base_unit">計費單位:: &nbsp;</label>
+                <mat-radio-group [(ngModel)]="data.caculation_time_base_unit" required>
+                    <mat-radio-button value="0" i18n="@@min">分</mat-radio-button>
+                    <mat-radio-button value="1" i18n="@@sec">秒</mat-radio-button>
+                </mat-radio-group>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.garage_lat" matInput i18n-placeholder="@@garage_lat" placeholder="場站座標X">
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.garage_lng" matInput i18n-placeholder="@@garage_lng" placeholder="場站座標Y">
+                </mat-form-field>
+                <br/>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field>
+                    <input [(ngModel)]="data.on_site_liaison" matInput i18n-placeholder="@@on_site_liaison" required placeholder="現場聯絡人">
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.on_site_cell_phone" matInput i18n-placeholder="@@on_site_phone" required placeholder="現場聯絡人電話">
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.on_site_phone" matInput i18n-placeholder="@@on_site_phone" required placeholder="停車場電話">
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.on_site_email" matInput i18n-placeholder="@@on_site_email" required placeholder="場站Email">
+                </mat-form-field>
+                <br/>
+                <label i18n="@@establish_status">請選擇建置狀態: &nbsp;</label>
+                <mat-radio-group [(ngModel)]="data.establish_status" required>
+                    <mat-radio-button value="0" i18n="@@establish_status_finish">已完成</mat-radio-button>
+                    <mat-radio-button value="1" i18n="@@establish_status_processing">待建置</mat-radio-button>
+                </mat-radio-group>
+                <br/>
+                <label i18n="@@venue_type">請選擇場站型態: &nbsp;</label>
+                <mat-radio-group [(ngModel)]="data.lot_type" required>
+                    <mat-radio-button value="0" i18n="@@indoor">室內</mat-radio-button>
+                    <mat-radio-button value="1" i18n="@@outdoor">室外</mat-radio-button>
+                </mat-radio-group>
+                <br/>
+                <mat-form-field>
+                    <mat-select i18n="@@type_of_parking_lot" [(ngModel)]="data.garage_type" required placeholder="請選擇場站設計">
+                        <mat-option *ngFor="let t of garage_type" [value]="t.value">
+                            {{ t.viewValue }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input [(ngModel)]="data.max_clearance" matInput i18n-placeholder="@@garage_maximum_clearance" placeholder="車高限制">
+                </mat-form-field>
+                <br/>
+                <label i18n="@@management_type">管理員: &nbsp;</label>
+                <mat-radio-group [(ngModel)]="data.management_type" required>
+                    <mat-radio-button value="1" i18n="@@yes_guard">固定都有管理員</mat-radio-button>
+                    <mat-radio-button value="2" i18n="@@no_guard">不定時巡視管理員</mat-radio-button>
+                    <mat-radio-button value="3" i18n="@@no_guard">無管理員</mat-radio-button>
+                </mat-radio-group>
+                <br/>
+                <mat-form-field>
+                    <textarea [(ngModel)]="data.supplementary_details" matInput i18n-placeholder="@@supplementary_details" placeholder="備註"></textarea>
+                </mat-form-field>
+            </div>
+    </div> -->
+    <div class="row">
+        <div class="col">
+            <div [formGroup]='garageForm'>
+                <div class="row title">
+                    <div class="col col-sm-4">
+                        <mat-form-field *ngIf="isSuperUser" class="row">
+                            <mat-select placeholder="Customer" [(ngModel)]="data.customer_id" name="customer" formControlName="customer_id">
+                                <mat-option *ngFor="let customer of customerResponse.data" [value]="customer.customer_id">
+                                    {{customer.company_name}}({{customer.customer_code}})
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col col-sm-4">
+                            <mat-form-field class="row">
+                                <input matInput i18n-placeholder="@@garage_serial_number" required placeholder="場站編號"
+                                [(ngModel)]="data.garage_code" formControlName="garage_code">
+                            </mat-form-field>
+                            <div *ngIf="garage_code.invalid && garage_code.dirty" class="alert alert-danger">
+                                <div *ngIf='garage_code.errors.required' >請輸入場站編號</div>
+                                <div *ngIf='garage_code.errors.garageCodeExists'>已有相同場站編號 請從換一個</div>
+                            </div>
+                    </div>
+                    <div class="col col-sm-4">
+                        <mat-form-field class="row">
+                            <input [(ngModel)]="data.garage_name" matInput i18n-placeholder="@@garage_name" required placeholder="場站名稱" formControlName="garage_name">
+                        </mat-form-field>
+                        <div *ngIf="garage_name.invalid && garage_name.dirty" class="alert alert-danger">
+                            <div *ngIf='garage_name.errors.required' >請輸入場站編號</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row title">
+                    <div class="col col-sm-4">
+                        <mat-form-field class="row">
+                            <mat-select i18n-placeholder="@@city" placeholder="請選擇縣市" required [(ngModel)]="data.city_name" formControlName="city_name">
+                                <mat-option *ngFor="let city of cities" [value]="city.value">
+                                        {{ city.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                            <div *ngIf="city_name.invalid && city_name.dirty" class="alert alert-danger">
+                                <div *ngIf='city_name.errors.required' >請輸入場站編號</div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="col col-sm-4">
+                        <mat-form-field class="row"> 
+                            <input [(ngModel)]="data.district" matInput i18n-placeholder="@@district" required placeholder="行政區" formControlName="district">
+                        </mat-form-field>
+                        <div *ngIf="district.invalid && district.dirty" class="alert alert-danger">
+                            <div *ngIf='district.errors.required' >請輸入場站編號</div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-4">
+                        <mat-form-field class="row">
+                            <input [(ngModel)]="data.address1" matInput i18n-placeholder="@@address" required placeholder="地址1" formControlName="address1">
+                        </mat-form-field>
+                        <div *ngIf="address1.invalid && address1.dirty" class="alert alert-danger">
+                            <div *ngIf='address1.errors.required' >請輸入場站編號</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row title">
+                    <div class="col col-sm-4">
+                        <mat-form-field class="row">
+                            <input [(ngModel)]="data.address2" matInput i18n-placeholder="@@address" placeholder="地址2" formControlName="address2">
+                        </mat-form-field>
+                        <div *ngIf="address2.invalid && address2.dirty" class="alert alert-danger">
+                            <div *ngIf='address2.errors.required' >請輸入場站編號</div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-4">
+                        <label i18n="@@business_hours">營業時間: &nbsp;</label>
+                        <mat-form-field class="timebox row">
+                            <input matInput [matTimepicker]="time_start" placeholder="起" required [(ngModel)]="data.business_hour_begin" formControlName="business_hour_begin">
+                            <mat-timepicker-toggle matSuffix [for]="time_start" (userTimeChange)="updateTimeStart(time_start.userTime)"></mat-timepicker-toggle>
+                            <mat-timepicker [(userTime)]="start_config" #time_start color="primary"></mat-timepicker>
+                        </mat-form-field>
+                        <div *ngIf="business_hour_begin.invalid && business_hour_begin.dirty" class="alert alert-danger">
+                            <div *ngIf='business_hour_begin.errors.required' >請輸入場站編號</div>
+                        </div>
+                        <div style="position: relative;left: 230px;top: -40px">~</div>
+                    </div>
+                    <div class="col col-sm-4">
+                        <mat-form-field class="timebox row">
+                            <input matInput [matTimepicker]="time_end" placeholder="迄" required [(ngModel)]="data.business_hour_end" formControlName="business_hour_end">
+                            <mat-timepicker-toggle matSuffix [for]="time_end" (userTimeChange)="updateTimeEnd(time_end.userTime)"></mat-timepicker-toggle>
+                            <mat-timepicker [(userTime)]="end_config" #time_end color="primary"></mat-timepicker>
+                        </mat-form-field>
+                        <div *ngIf="business_hour_end.invalid && business_hour_end.dirty" class="alert alert-danger">
+                            <div *ngIf='business_hour_end.errors.required' >請輸入場站編號</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4" style="padding:15px;">
+                    <label i18n="@@caculation_time_base_unit">計費單位:: &nbsp;</label>
+                    <mat-radio-group [(ngModel)]="data.caculation_time_base_unit" required>
+                        <mat-radio-button value="0" i18n="@@min">分</mat-radio-button>
+                        <mat-radio-button value="1" i18n="@@sec">秒</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.garage_lat" matInput i18n-placeholder="@@garage_lat" placeholder="場站座標X">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.garage_lng" matInput i18n-placeholder="@@garage_lng" placeholder="場站座標Y">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.on_site_liaison" matInput i18n-placeholder="@@on_site_liaison" required placeholder="現場聯絡人">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.on_site_cell_phone" matInput i18n-placeholder="@@on_site_phone" required placeholder="現場聯絡人電話">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.on_site_phone" matInput i18n-placeholder="@@on_site_phone" required placeholder="停車場電話">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.on_site_email" matInput i18n-placeholder="@@on_site_email" required placeholder="場站Email">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <mat-select i18n="@@type_of_parking_lot" [(ngModel)]="data.garage_type" required placeholder="請選擇場站設計">
+                            <mat-option *ngFor="let t of garage_type" [value]="t.value">
+                                {{ t.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.max_clearance" matInput i18n-placeholder="@@garage_maximum_clearance" placeholder="車高限制">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4">
+                    <label class="row" i18n="@@establish_status">請選擇建置狀態: &nbsp;</label>
+                    <div class="row" style="padding-top:10px">
+                        <mat-radio-group [(ngModel)]="data.establish_status" required>
+                            <mat-radio-button value="0" i18n="@@establish_status_finish">已完成</mat-radio-button>
+                            <mat-radio-button value="1" i18n="@@establish_status_processing">待建置</mat-radio-button>
+                        </mat-radio-group>    
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <label class="row" i18n="@@venue_type">請選擇場站型態: &nbsp;</label>
+                    <div class="row" style="padding-top:10px">
+                        <mat-radio-group [(ngModel)]="data.lot_type" required>
+                            <mat-radio-button value="0" i18n="@@indoor">室內</mat-radio-button>
+                            <mat-radio-button value="1" i18n="@@outdoor">室外</mat-radio-button>
+                        </mat-radio-group>    
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <label class="row" i18n="@@management_type">管理員: &nbsp;</label>
+                    <div class="row" style="padding-top:10px">
+                        <mat-radio-group [(ngModel)]="data.management_type" required>
+                            <mat-radio-button value="1" i18n="@@yes_guard">固定都有管理員</mat-radio-button>
+                            <mat-radio-button value="2" i18n="@@no_guard">不定時巡視管理員</mat-radio-button>
+                            <mat-radio-button value="3" i18n="@@no_guard">無管理員</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <textarea [(ngModel)]="data.supplementary_details" matInput i18n-placeholder="@@supplementary_details" placeholder="備註"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.total_capacity" matInput i18n-placeholder="@@total_capacity" required placeholder="總車位數">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.sedan_capacity" matInput i18n-placeholder="@@sedan_capacity" required placeholder="汽車總車位數">
+                    </mat-form-field>   
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.motocycle_capacity" matInput i18n-placeholder="@@motocycle_capacity" required placeholder="機車總車位數">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.sedan_priority_pragnant_capacity" matInput i18n-placeholder="@@sedan_priority_pragnant_capacity" placeholder="孕婦優先汽車車位數">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.motocycle_priority_pragnant_capacity" matInput i18n-placeholder="@@motocycle_priority_pragnant_capacity" placeholder="孕婦優先機車車位數">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.sedan_priority_disability_capacity" matInput i18n-placeholder="@@sedan_priority_disability_capacity" placeholder="身障優先汽車車位數">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.motocycle_priority_disability_capacity" matInput i18n-placeholder="@@motocycle_priority_disability_capacity" placeholder="身障優先機車車位數">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.number_of_entrance" matInput i18n-placeholder="@@number_of_entrance" required placeholder="入口總數">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.number_of_exit" matInput i18n-placeholder="@@number_of_exit" required placeholder="出口總數">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.number_of_driveway_in" matInput i18n-placeholder="@@number_of_driveway_in" placeholder="進場車道數">
+                    </mat-form-field>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.number_of_driveway_out" matInput i18n-placeholder="@@number_of_driveway_out" placeholder="出場車道數">
+                    </mat-form-field> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                            <input [(ngModel)]="data.customer_garage_id" matInput i18n-placeholder="@@customer_garage_id" placeholder="業者場站ID">
+                    </mat-form-field> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <app-garage-device-form (passGarageDevice)="getChildValue($event)" [display]="display" [customer_garage_id]="data.customer_garage_id" [garageDevice]='garage_device' style="width:100%;"></app-garage-device-form>
+    </div>
+    <hr>
+    
+    <div class="panel panel-default">
+        <div class="col col-sm-12">
+                <h5 class="row" i18n="@@card_type">票證交易檔設定 &nbsp;</h5>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col col-sm-12">
+            <section class="checkbox-section">
+                    <mat-checkbox class="checkbox-margin" [(ngModel)]="cardType.iCash">愛金卡</mat-checkbox>
+                    <mat-checkbox class="checkbox-margin" [(ngModel)]="cardType.iPass">一卡通</mat-checkbox>
+                    <mat-checkbox class="checkbox-margin" [(ngModel)]="cardType.YHDP">有錢卡</mat-checkbox>
+            </section>
+        </div>
+    </div>
+    <hr>
+
+    <div *ngIf="cardType.iCash">
+        <app-garage-ticket-transaction-icash-form (passGarageTicketTransactionICash)="getChildValueICash($event)" [garageTicketTransactionICash]='garage_ticket_transaction_icash' style="width:100%;"></app-garage-ticket-transaction-icash-form>
+    </div>
+    <div *ngIf="cardType.iPass">
+        <app-garage-ticket-transaction-ipass-form (passGarageTicketTransactionIPass)="getChildValueIPass($event)" [garageTicketTransactionIPass]='garage_ticket_transaction_ipass' style="width:100%;"></app-garage-ticket-transaction-ipass-form>
+    </div>
+    <div *ngIf="cardType.YHDP">
+        <app-garage-ticket-transaction-happycash-form (passGarageTicketTransactionHappyCash)="getChildValueHappyCash($event)" [garageTicketTransactionHappyCash]='garage_ticket_transaction_happycash' style="width:100%;"></app-garage-ticket-transaction-happycash-form>
+    </div>
+
+    <div class="row">
+        <div class="col col-sm-8">
+            <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+                {{savedResponse.message}}
+            </div>
+            <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+                {{savedResponse.message}}
+            </div>
+        </div>
+        <div class="col col-sm-2" style="padding-left:80px;"><button mat-raised-button color="warn" (click)="cancel()">取消</button></div>
+        <div class="col col-sm-2"><button mat-raised-button color="primary" (click)="save()"><mat-icon class="btn_save">save</mat-icon>儲存</button></div>
+        <!-- <div class="col col-sm-2">
+            <button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>save</button>
+        </div> -->
+    </div>
+</mat-dialog-content>

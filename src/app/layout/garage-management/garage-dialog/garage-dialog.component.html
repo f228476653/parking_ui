@@ -1,0 +1,4 @@
+<h2 mat-dialog-title><span>場站基本設定</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+    <app-garage-form [(data)]="data" [(savedResponse)]="savedResponse" (onSave)="save()" (onClose)="onCloseDailog()" (getGarageDevice)="getChildValue($event)" (getGarageTicketTransactionICash)="getChildValueICash($event)" (getGarageTicketTransactionIPass)="getChildValueIPass($event)" (getGarageTicketTransactionHappyCash)="getChildValueHappyCash($event)"></app-garage-form>
+</mat-dialog-content>

@@ -1,0 +1,295 @@
+
+<div class="row">
+    <div class="col" [formGroup]="customerDeviceForm">
+        <h4 class="row title">啟用票種</h4>
+        <div class="row context">
+            <div class="col col-sm-6">
+                <section>
+                    <mat-checkbox [disabled]="readOnly" [(ngModel)]="cardType.iCash" [ngModelOptions]="{standalone: true}">愛金卡</mat-checkbox>
+                    <mat-checkbox [disabled]="readOnly" [(ngModel)]="cardType.iPass" [ngModelOptions]="{standalone: true}">一卡通</mat-checkbox>
+                    <mat-checkbox [disabled]="readOnly" [(ngModel)]="cardType.YHDP" [ngModelOptions]="{standalone: true}">有錢卡</mat-checkbox>
+                </section>
+            </div>
+        </div>
+        <!-- <div formGroupName="shareGroup">
+        <h4 class="row title">系統參數</h4>
+        <div class="row context">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="data.host_ip" matInput i18n-placeholder="@@host_ip"
+                    formControlName="host_ip" placeholder="FTP IP" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row" >
+                    <div *ngIf="shareGroupValid.get('host_ip').invalid && shareGroupValid.get('host_ip').dirty" class="alert alert-danger fill"> 
+                        <div *ngIf="shareGroupValid.get('host_ip').errors.required">必填欄位</div>
+                        <div *ngIf="shareGroupValid.get('host_ip').errors.pattern">IP格式錯誤</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="data.host_port" matInput i18n-placeholder="@@host_port"
+                    formControlName="host_port" placeholder="FTP port" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="shareGroupValid.get('host_port').invalid && shareGroupValid.get('host_port').dirty" class="alert alert-danger fill">
+                        <div *ngIf="shareGroupValid.get('host_port').errors.required" >必填欄位</div>
+                        <div *ngIf="shareGroupValid.get('host_port').errors.pattern" >請輸入正確port</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="data.host_user" matInput i18n-placeholder="@@host_user"
+                    formControlName="host_user" placeholder="FTP 帳號" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="shareGroupValid.get('host_user').invalid && shareGroupValid.get('host_user').dirty" class="alert alert-danger fill">
+                        <div *ngIf="shareGroupValid.get('host_user').errors.required" >必填欄位</div>
+                        <div *ngIf="shareGroupValid.get('host_user').errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row context">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="data.host_pwd" matInput i18n-placeholder="@@host_pwd"
+                    formControlName="host_pwd" type="password" placeholder="FTP 密碼" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row" >
+                    <div *ngIf="shareGroupValid.get('host_pwd').invalid && shareGroupValid.get('host_pwd').dirty" class="alert alert-danger fill"> 
+                        <div *ngIf="shareGroupValid.get('host_pwd').errors.required">必填欄位</div>
+                        <div *ngIf="shareGroupValid.get('host_pwd').errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div> -->
+        <h4 class="row title" *ngIf="cardType.iCash">愛金卡</h4>
+        <div class="row context" *ngIf="cardType.iCash" formGroupName="iCashGroup">
+            <div class="col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="data.market_code" matInput i18n-placeholder="@@market_code" placeholder="特約機構簡碼"
+                    [readonly]="readOnly"  formControlName="market_code" required>
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="iCashGroupValid.get('market_code').invalid && (iCashGroupValid.get('market_code').dirty)" class="alert alert-danger">
+                        <div *ngIf="iCashGroupValid.get('market_code').errors.required" >必填欄位</div>
+                        <div *ngIf="iCashGroupValid.get('market_code').errors.maxlength">超過最大長度</div>
+                        <div *ngIf="iCashGroupValid.get('market_code').errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="data.cashier_no" matInput i18n-placeholder="@@cashier_no" placeholder="收銀員編碼"
+                    [readonly]="readOnly"  formControlName="cashier_no" required>
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="iCashGroupValid.get('cashier_no').invalid && (iCashGroupValid.get('cashier_no').dirty)" class="alert alert-danger">
+                        <div *ngIf="iCashGroupValid.get('cashier_no').errors.required" >必填欄位</div>
+                        <div *ngIf="iCashGroupValid.get('cashier_no').errors.maxlength">超過最大長度</div>
+                        <div *ngIf="iCashGroupValid.get('cashier_no').errors.pattern" >請勿輸入特殊字元</div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <h4 class="row title"  *ngIf="cardType.iPass">一卡通</h4>
+        <div class="col context" *ngIf="cardType.iPass"  formGroupName="iPassGroup">
+            <div class="row">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.system_id" matInput i18n-placeholder="@@system_id" placeholder="交易系統編號"
+                        [readonly]="readOnly" formControlName="system_id" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="iPassGroupValid.get('system_id').invalid && (iPassGroupValid.get('system_id').dirty)" class="alert alert-danger">
+                            <div *ngIf="iPassGroupValid.get('system_id').errors.required" >必填欄位</div>
+                            <div *ngIf="iPassGroupValid.get('system_id').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="iPassGroupValid.get('system_id').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>   
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.comp_id" matInput i18n-placeholder="@@comp_id" placeholder="停車場地點代碼/業者代碼"
+                        [readonly]="readOnly" formControlName="comp_id" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="iPassGroupValid.get('comp_id').invalid && (iPassGroupValid.get('comp_id').dirty)" class="alert alert-danger">
+                            <div *ngIf="iPassGroupValid.get('comp_id').errors.required" >必填欄位</div>
+                            <div *ngIf="iPassGroupValid.get('comp_id').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="iPassGroupValid.get('comp_id').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.machine" matInput i18n-placeholder="@@machine" placeholder="交易機器編號"
+                        [readonly]="readOnly" formControlName="machine" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="iPassGroupValid.get('machine').invalid && (iPassGroupValid.get('machine').dirty)" class="alert alert-danger">
+                            <div *ngIf="iPassGroupValid.get('machine').errors.required" >必填欄位</div>
+                            <div *ngIf="iPassGroupValid.get('machine').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="iPassGroupValid.get('machine').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.ipass_water_lv_host" matInput i18n-placeholder="@@ipass_water_lv_host"
+                        placeholder="一卡通Host" [readonly]="readOnly" formControlName="ipass_water_lv_host" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="iPassGroupValid.get('ipass_water_lv_host').invalid && (iPassGroupValid.get('ipass_water_lv_host').dirty)" class="alert alert-danger">
+                            <div *ngIf="iPassGroupValid.get('ipass_water_lv_host').errors.required" >必填欄位</div>
+                            <div *ngIf="iPassGroupValid.get('ipass_water_lv_host').errors.pattern">請輸入正確IP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.ipass_water_lv_port" matInput i18n-placeholder="@@ipass_water_lv_port"
+                        placeholder="一卡通Port" [readonly]="readOnly" formControlName="ipass_water_lv_port" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="iPassGroupValid.get('ipass_water_lv_port').invalid && (iPassGroupValid.get('ipass_water_lv_port').dirty)" class="alert alert-danger">
+                            <div *ngIf="iPassGroupValid.get('ipass_water_lv_port').errors.required" >必填欄位</div>
+                            <div *ngIf="iPassGroupValid.get('ipass_water_lv_port').errors.pattern">請輸入正確Port</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                        <label>SocketIP: </label>
+                        <br/>
+                        <mat-radio-group [(ngModel)]="data.socket_ip" class="row" formControlName="socket_ip" required="true">
+                                <mat-radio-button [value]="'172.21.1.101'">正式環境(172.21.1.101)</mat-radio-button>
+                                <mat-radio-button [value]="'10.20.1.74'">測試環境(10.20.1.74)</mat-radio-button>
+                        </mat-radio-group>
+                    </div>  
+            </div>
+        </div>
+        <h4 class="row title" *ngIf="cardType.YHDP">有錢卡</h4>
+        <div class="col context" *ngIf="cardType.YHDP" formGroupName="YHDPGroup">
+            <div class="row">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.transaction_system_id" matInput i18n-placeholder="@@transaction_system_id"
+                        placeholder="交易系統編號" [readonly]="readOnly" formControlName="transaction_system_id" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div class="alert alert-danger" *ngIf="YHDPGroupValid.get('transaction_system_id').invalid && (YHDPGroupValid.get('transaction_system_id').dirty)" >
+                            <div *ngIf="YHDPGroupValid.get('transaction_system_id').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('transaction_system_id').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="YHDPGroupValid.get('transaction_system_id').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.loc_id" matInput i18n-placeholder="@@loc_id" placeholder="公司代碼"
+                        [readonly]="readOnly" formControlName="loc_id" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="YHDPGroupValid.get('loc_id').invalid && (YHDPGroupValid.get('loc_id').dirty)" class="alert alert-danger">
+                            <div *ngIf="YHDPGroupValid.get('loc_id').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('loc_id').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="YHDPGroupValid.get('loc_id').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.transaction_terminal_no" matInput i18n-placeholder="@@transaction_terminal_no"
+                        placeholder="Terminal NO" [readonly]="readOnly" formControlName="transaction_terminal_no" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="YHDPGroupValid.get('transaction_terminal_no').invalid && (YHDPGroupValid.get('transaction_terminal_no').dirty)" class="alert alert-danger">
+                            <div *ngIf="YHDPGroupValid.get('transaction_terminal_no').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('transaction_terminal_no').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="YHDPGroupValid.get('transaction_terminal_no').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.tid" matInput i18n-placeholder="@@tid" placeholder="Terminal ID(BCD)"
+                        [readonly]="readOnly" formControlName="tid" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="YHDPGroupValid.get('tid').invalid && (YHDPGroupValid.get('tid').dirty)" class="alert alert-danger">
+                            <div *ngIf="YHDPGroupValid.get('tid').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('tid').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="YHDPGroupValid.get('tid').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.mid" matInput i18n-placeholder="@@mid" placeholder="交易系統代碼"
+                        [readonly]="readOnly" formControlName="mid" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="YHDPGroupValid.get('mid').invalid && (YHDPGroupValid.get('mid').dirty)" class="alert alert-danger">
+                            <div *ngIf="YHDPGroupValid.get('mid').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('mid').errors.maxlength">超過最大長度</div>
+                            <div *ngIf="YHDPGroupValid.get('mid').errors.pattern" >請勿輸入特殊字元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.YHDP_water_lv" matInput i18n-placeholder="@@YHDP_water_lv" placeholder="水位參數"
+                        [readonly]="readOnly" formControlName="YHDP_water_lv" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="YHDPGroupValid.get('YHDP_water_lv').invalid && (YHDPGroupValid.get('YHDP_water_lv').dirty)" class="alert alert-danger">
+                            <div *ngIf="YHDPGroupValid.get('YHDP_water_lv').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('YHDP_water_lv').errors.pattern">只能輸入數字</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.YHDP_water_lv_host" matInput i18n-placeholder="@@YHDP_water_lv_host"
+                        placeholder="遠鑫水位Host" [readonly]="readOnly" formControlName="YHDP_water_lv_host" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="YHDPGroupValid.get('YHDP_water_lv_host').invalid && (YHDPGroupValid.get('YHDP_water_lv_host').dirty)" class="alert alert-danger">
+                            <div *ngIf="YHDPGroupValid.get('YHDP_water_lv_host').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('YHDP_water_lv_host').errors.pattern">請輸入正確IP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <mat-form-field class="row">
+                        <input [(ngModel)]="data.YHDP_water_lv_port" matInput i18n-placeholder="@@YHDP_water_lv_port"
+                        placeholder="遠鑫水位Port" [readonly]="readOnly" formControlName="YHDP_water_lv_port" required>
+                    </mat-form-field>
+                    <div class="row">
+                        <div *ngIf="YHDPGroupValid.get('YHDP_water_lv_port').invalid && (YHDPGroupValid.get('YHDP_water_lv_port').dirty)" class="alert alert-danger">
+                            <div *ngIf="YHDPGroupValid.get('YHDP_water_lv_port').errors.required" >必填欄位</div>
+                            <div *ngIf="YHDPGroupValid.get('YHDP_water_lv_port').errors.pattern">請輸入正確Port</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <label>參數設定</label>
+                    <mat-radio-group [(ngModel)]="data.nii" class="row" formControlName="nii" required="true">
+                        <mat-radio-button [value]="'0688'">正式環境</mat-radio-button>
+                        <mat-radio-button [value]="'0667'">測試環境</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

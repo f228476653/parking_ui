@@ -1,0 +1,452 @@
+
+ 
+ <h5>發票廠商設定</h5>
+      <div class="row">
+          <div class="col col-sm-12">
+              <section class="checkbox-section">
+                  <mat-checkbox class="checkbox-margin" (change)="clearData_dingten($event)" [(ngModel)]="einvoiceProvider.dingten">鼎天</mat-checkbox>
+                  <mat-checkbox class="checkbox-margin" (change)="clearData_smartpay($event)" [(ngModel)]="einvoiceProvider.smartpay">致富寶</mat-checkbox>
+                  <mat-checkbox class="checkbox-margin" (change)="clearData_taiwanparking($event)" [(ngModel)]="einvoiceProvider.taiwanparking">台灣聯通</mat-checkbox>
+                  <mat-checkbox class="checkbox-margin" (change)="clearData_shiuanyang($event)" [(ngModel)]="einvoiceProvider.shiuanyang">宣揚</mat-checkbox>
+                </section>
+          </div>
+      </div>
+  <hr>
+  <h6 *ngIf="einvoiceProvider.dingten">鼎天</h6>
+    <div class="row" *ngIf="einvoiceProvider.dingten" >
+        <div class="col col-sm-4">
+            <label>是否產生/更新交易檔案: </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigDingTen.txn_file_generate_flag">
+                <mat-radio-button value="1">是</mat-radio-button>
+                <mat-radio-button value="0">否</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.txn_file_upload_interval" placeholder="產生/更新交易檔案時間間隔">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.txn_file_upload_folder" placeholder="產生/更新交易檔案預設路徑">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.txn_file_backup_folder" placeholder="產生/更新交易檔案備份路徑">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.eidc_merchant_code" placeholder="EIDC用場站編號">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.qrcode_encrypt_key" placeholder="產生QRcode的AES KEY">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.tax_id" placeholder="賣方統編">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.web_url" placeholder="平板用發票url">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.web_api_key" placeholder="平板用發票key">
+            </mat-form-field>  
+        </div>
+        <div class="col col-sm-4">
+            <label>交易檔案上傳方式： </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigDingTen.txn_file_upload_setting" >
+                <mat-radio-button value="0">由發票廠商程式上傳</mat-radio-button>
+                <mat-radio-button value="1">由場站上傳發票廠商</mat-radio-button>
+                <mat-radio-button value="2">由場站上傳PMS+,PMS+上傳發票廠商</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <label >如何交易檔案上傳： </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigDingTen.txn_file_upload_via">
+                <mat-radio-button value="0">API</mat-radio-button>
+                <mat-radio-button value="1">FTP</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_upload_address" placeholder="上傳交易檔FTP主機位置">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_upload_port" placeholder="上傳交易檔FTP PORT">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_upload_login_account" placeholder="上傳交易檔FTP帳號">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_upload_login_pwd" placeholder="上傳交易檔FTP密碼">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_upload_path" placeholder="上傳發票交易交易檔FTP位置">
+                </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.api_txn_upload_url" placeholder="上傳交易檔案API網址">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.api_txn_upload_key" placeholder="上傳交易檔案API KEY">
+            </mat-form-field>
+
+        </div>
+        <div class="col col-sm-4">
+            <label>取號方式： </label>
+            <br>
+            <mat-radio-group [(ngModel)]="einvoiceConfigDingTen.get_number_setting" >
+                <mat-radio-button value="0">由發票廠商程式配號</mat-radio-button>
+                <mat-radio-button value="1">由場站下載配號檔</mat-radio-button>
+                <mat-radio-button value="2">由PMS+下載配號檔傳至場站</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <label >如何取號： </label>
+            <mat-radio-group  [(ngModel)]="einvoiceConfigDingTen.get_number_via" >
+                <mat-radio-button value="0">API</mat-radio-button>
+                <mat-radio-button value="1">FTP</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.api_get_number_url" placeholder="取號API網址">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.api_get_number_key" placeholder="取號API KEY">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_get_number_address" placeholder="取號FTP主機位置">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_get_number_port" placeholder="取號FTP PORT">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_get_number_login_account" placeholder="取號FTP帳號">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_get_number_login_pwd" placeholder="取號FTP密碼">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.ftp_get_number_down_path" placeholder="下載發票取號檔FTP位置">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigDingTen.txn_file_import_folder" placeholder="取號檔路徑">
+            </mat-form-field>   
+        </div>
+    </div>
+
+    <br>
+    <h6 *ngIf="einvoiceProvider.taiwanparking">台灣聯通</h6>
+    <div class="row" *ngIf="einvoiceProvider.taiwanparking" >
+        <div class="col col-sm-4">
+            <label>是否產生/更新交易檔案: </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigTwParking.txn_file_generate_flag">
+                <mat-radio-button value="1">是</mat-radio-button>
+                <mat-radio-button value="0">否</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.txn_file_upload_interval" placeholder="產生/更新交易檔案時間間隔">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.txn_file_upload_folder" placeholder="產生/更新交易檔案預設路徑">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.txn_file_backup_folder" placeholder="產生/更新交易檔案備份路徑">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.eidc_merchant_code" placeholder="EIDC用場站編號">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.qrcode_encrypt_key" placeholder="產生QRcode的AES KEY">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.tax_id" placeholder="賣方統編">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.web_url" placeholder="平板用發票url">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.web_api_key" placeholder="平板用發票key">
+            </mat-form-field>  
+        </div>
+        <div class="col col-sm-4">
+            <label>交易檔案上傳方式： </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigTwParking.txn_file_upload_setting" >
+                <mat-radio-button value="0">由發票廠商程式上傳</mat-radio-button>
+                <mat-radio-button value="1">由場站上傳發票廠商</mat-radio-button>
+                <mat-radio-button value="2">由場站上傳PMS+,PMS+上傳發票廠商</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <label >如何交易檔案上傳： </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigTwParking.txn_file_upload_via">
+                <mat-radio-button value="0">API</mat-radio-button>
+                <mat-radio-button value="1">FTP</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_upload_address" placeholder="上傳交易檔FTP主機位置">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_upload_port" placeholder="上傳交易檔FTP PORT">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_upload_login_account" placeholder="上傳交易檔FTP帳號">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_upload_login_pwd" placeholder="上傳交易檔FTP密碼">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_upload_path" placeholder="上傳發票交易交易檔FTP位置">
+                </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.api_txn_upload_url" placeholder="上傳交易檔案API網址">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.api_txn_upload_key" placeholder="上傳交易檔案API KEY">
+            </mat-form-field>
+        </div>
+        <div class="col col-sm-4">
+            <label>取號方式： </label>
+            <br>
+            <mat-radio-group [(ngModel)]="einvoiceConfigTwParking.get_number_setting" >
+                <mat-radio-button value="0">由發票廠商程式配號</mat-radio-button>
+                <mat-radio-button value="1">由場站下載配號檔</mat-radio-button>
+                <mat-radio-button value="2">由PMS+下載配號檔傳至場站</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <label >如何取號： </label>
+            <mat-radio-group  [(ngModel)]="einvoiceConfigTwParking.get_number_via" >
+                <mat-radio-button value="0">API</mat-radio-button>
+                <mat-radio-button value="1">FTP</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.api_get_number_url" placeholder="取號API網址">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.api_get_number_key" placeholder="取號API KEY">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_get_number_address" placeholder="取號FTP主機位置">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_get_number_port" placeholder="取號FTP PORT">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_get_number_login_account" placeholder="取號FTP帳號">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_get_number_login_pwd" placeholder="取號FTP密碼">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.ftp_get_number_down_path" placeholder="下載發票取號檔FTP位置">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigTwParking.txn_file_import_folder" placeholder="取號檔路徑">
+            </mat-form-field>   
+        </div>
+    </div>
+    <br>
+    <h6 *ngIf="einvoiceProvider.smartpay">智付寶</h6>
+    <div class="row" *ngIf="einvoiceProvider.smartpay" >
+        <div class="col col-sm-4">
+            <label>是否產生/更新交易檔案: </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigSmartPay.txn_file_generate_flag">
+                <mat-radio-button value="1">是</mat-radio-button>
+                <mat-radio-button value="0">否</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.txn_file_upload_interval" placeholder="產生/更新交易檔案時間間隔">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.txn_file_upload_folder" placeholder="產生/更新交易檔案預設路徑">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.txn_file_backup_folder" placeholder="產生/更新交易檔案備份路徑">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.eidc_merchant_code" placeholder="EIDC用場站編號">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.qrcode_encrypt_key" placeholder="產生QRcode的AES KEY">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.tax_id" placeholder="賣方統編">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.web_url" placeholder="平板用發票url">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.web_api_key" placeholder="平板用發票key">
+            </mat-form-field>  
+        </div>
+        <div class="col col-sm-4">
+            <label>交易檔案上傳方式： </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigSmartPay.txn_file_upload_setting" >
+                <mat-radio-button value="0">由發票廠商程式上傳</mat-radio-button>
+                <mat-radio-button value="1">由場站上傳發票廠商</mat-radio-button>
+                <mat-radio-button value="2">由場站上傳PMS+,PMS+上傳發票廠商</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <label >如何交易檔案上傳： </label>
+            <mat-radio-group [(ngModel)]="einvoiceConfigSmartPay.txn_file_upload_via">
+                <mat-radio-button value="0">API</mat-radio-button>
+                <mat-radio-button value="1">FTP</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_upload_address" placeholder="上傳交易檔FTP主機位置">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_upload_port" placeholder="上傳交易檔FTP PORT">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_upload_login_account" placeholder="上傳交易檔FTP帳號">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_upload_login_pwd" placeholder="上傳交易檔FTP密碼">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_upload_path" placeholder="上傳發票交易交易檔FTP位置">
+                </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.api_txn_upload_url" placeholder="上傳交易檔案API網址">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.api_txn_upload_key" placeholder="上傳交易檔案API KEY">
+            </mat-form-field>
+
+        </div>
+        <div class="col col-sm-4">
+            <label>取號方式： </label>
+            <br>
+            <mat-radio-group [(ngModel)]="einvoiceConfigSmartPay.get_number_setting" >
+                <mat-radio-button value="0">由發票廠商程式配號</mat-radio-button>
+                <mat-radio-button value="1">由場站下載配號檔</mat-radio-button>
+                <mat-radio-button value="2">由PMS+下載配號檔傳至場站</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <label >如何取號： </label>
+            <mat-radio-group  [(ngModel)]="einvoiceConfigSmartPay.get_number_via" >
+                <mat-radio-button value="0">API</mat-radio-button>
+                <mat-radio-button value="1">FTP</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.api_get_number_url" placeholder="取號API網址">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.api_get_number_key" placeholder="取號API KEY">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_get_number_address" placeholder="取號FTP主機位置">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_get_number_port" placeholder="取號FTP PORT">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_get_number_login_account" placeholder="取號FTP帳號">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_get_number_login_pwd" placeholder="取號FTP密碼">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.ftp_get_number_down_path" placeholder="下載發票取號檔FTP位置">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput [(ngModel)]="einvoiceConfigSmartPay.txn_file_import_folder" placeholder="取號檔路徑">
+            </mat-form-field>   
+        </div>
+        </div>
+        <h6 *ngIf="einvoiceProvider.shiuanyang">宣揚</h6>
+        <div class="row" *ngIf="einvoiceProvider.shiuanyang" >
+            <div class="col col-sm-4">
+                <label>是否產生/更新交易檔案: </label>
+                <mat-radio-group [(ngModel)]="einvoiceConfigShiuanYang.txn_file_generate_flag">
+                    <mat-radio-button value="1">是</mat-radio-button>
+                    <mat-radio-button value="0">否</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.txn_file_upload_interval" placeholder="產生/更新交易檔案時間間隔">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.txn_file_upload_folder" placeholder="產生/更新交易檔案預設路徑">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.txn_file_backup_folder" placeholder="產生/更新交易檔案備份路徑">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.eidc_merchant_code" placeholder="EIDC用場站編號">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.qrcode_encrypt_key" placeholder="產生QRcode的AES KEY">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.tax_id" placeholder="賣方統編">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.web_url" placeholder="平板用發票url">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.web_api_key" placeholder="平板用發票key">
+                </mat-form-field>  
+            </div>
+            <div class="col col-sm-4">
+                <label>交易檔案上傳方式： </label>
+                <mat-radio-group [(ngModel)]="einvoiceConfigShiuanYang.txn_file_upload_setting" >
+                    <mat-radio-button value="0">由發票廠商程式上傳</mat-radio-button>
+                    <mat-radio-button value="1">由場站上傳發票廠商</mat-radio-button>
+                    <mat-radio-button value="2">由場站上傳PMS+,PMS+上傳發票廠商</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <label >如何交易檔案上傳： </label>
+                <mat-radio-group [(ngModel)]="einvoiceConfigShiuanYang.txn_file_upload_via">
+                    <mat-radio-button value="0">API</mat-radio-button>
+                    <mat-radio-button value="1">FTP</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field >
+                        <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_upload_address" placeholder="上傳交易檔FTP主機位置">
+                    </mat-form-field>
+                    <mat-form-field >
+                        <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_upload_port" placeholder="上傳交易檔FTP PORT">
+                    </mat-form-field>
+                    <mat-form-field >
+                        <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_upload_login_account" placeholder="上傳交易檔FTP帳號">
+                    </mat-form-field>
+                    <mat-form-field >
+                        <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_upload_login_pwd" placeholder="上傳交易檔FTP密碼">
+                    </mat-form-field>
+                    <mat-form-field >
+                        <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_upload_path" placeholder="上傳發票交易交易檔FTP位置">
+                    </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.api_txn_upload_url" placeholder="上傳交易檔案API網址">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.api_txn_upload_key" placeholder="上傳交易檔案API KEY">
+                </mat-form-field>
+    
+            </div>
+            <div class="col col-sm-4">
+                <label>取號方式： </label>
+                <br>
+                <mat-radio-group [(ngModel)]="einvoiceConfigShiuanYang.get_number_setting" >
+                    <mat-radio-button value="0">由發票廠商程式配號</mat-radio-button>
+                    <mat-radio-button value="1">由場站下載配號檔</mat-radio-button>
+                    <mat-radio-button value="2">由PMS+下載配號檔傳至場站</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <label >如何取號： </label>
+                <mat-radio-group  [(ngModel)]="einvoiceConfigShiuanYang.get_number_via" >
+                    <mat-radio-button value="0">API</mat-radio-button>
+                    <mat-radio-button value="1">FTP</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.api_get_number_url" placeholder="取號API網址">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.api_get_number_key" placeholder="取號API KEY">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_get_number_address" placeholder="取號FTP主機位置">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_get_number_port" placeholder="取號FTP PORT">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_get_number_login_account" placeholder="取號FTP帳號">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_get_number_login_pwd" placeholder="取號FTP密碼">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.ftp_get_number_down_path" placeholder="下載發票取號檔FTP位置">
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput [(ngModel)]="einvoiceConfigShiuanYang.txn_file_import_folder" placeholder="取號檔路徑">
+                </mat-form-field>   
+            </div>
+    </div>

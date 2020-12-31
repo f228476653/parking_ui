@@ -1,0 +1,92 @@
+
+<div class ='row mar'>
+    <div class="col col-md-12">
+      <h5>結班報表明細</h5>
+        <h6>場地名稱 ： {{shiftJson.tableName}}</h6>
+        <div class = 'firstList'>
+          <mat-list>
+              <mat-list-item class='text'>
+                <p mat-line>1.結帳序號： {{shiftJson.tableNum}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                <p mat-line>2.結帳人員： {{shiftJson.accountName}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                <p mat-line>3.接班時間： {{shiftJson.workInTime}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                <p mat-line>4.結帳時間： {{shiftJson.workOutTime}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>5.發票序號起迄： {{shiftJson.invoiceStartEnd}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>6.實收金額： {{shiftJson.received}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>7.應收金額： {{shiftJson.receivables}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>8.折扣金額： {{shiftJson.discount}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>9.退費金額： {{shiftJson.payRefund}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>10.手開發票金額： {{shiftJson.payIssueInvoiceOnly}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>11.進場車輛數： {{shiftJson.numCarIn}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>12.出場車輛數： {{shiftJson.numCarOut}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>13.未出場車輛： {{shiftJson.numCarNotOut}}</p>
+              </mat-list-item>
+              <mat-list-item class='text'>
+                  <p mat-line>14.收費明細：</p>
+              </mat-list-item>
+          </mat-list>
+            <div class = 'secondList'>
+              <mat-list>
+                <mat-list-item class='text'>
+                  <p>(1)一般費率：</p>
+                </mat-list-item>
+                <mat-list-item class='text'>
+                  <p >筆數： {{shiftJson.numPayNormal}}筆 ，金額： {{shiftJson.payNormal}}元</p>
+                </mat-list-item>
+                <mat-list-item class='text'>
+                  <p >(2)手開金額：</p>
+                </mat-list-item>
+                <mat-list-item class='text'>
+                  <p >筆數： {{shiftJson.numPayModified}}筆 ，金額： {{shiftJson.payModified}}元</p>
+                </mat-list-item>
+                <mat-list-item class='text'>
+                  <p >(3)免費：</p>
+                </mat-list-item>
+                <mat-list-item class='text'> 
+                  <p >筆數： {{shiftJson.numPayFree}}筆 ，金額： {{shiftJson.payFree}}元</p>
+                </mat-list-item>
+                <mat-list-item class='text'>
+                  <p >(4)月租：</p>
+                </mat-list-item>
+                <mat-list-item class='text'> 
+                  <p >筆數： {{shiftJson.numPayRent}}筆 ，金額： {{shiftJson.payRent}}元</p>
+                </mat-list-item>
+                <mat-list-item class='text'>
+                  <p >(5)退費：</p>
+                </mat-list-item>
+                <mat-list-item class='text'> 
+                  <p >筆數： {{shiftJson.payRefund}}筆 ，金額： {{shiftJson.payRefund}}元</p>
+                </mat-list-item>
+                <mat-list-item class='text'>
+                  <p >(6)手開發票：</p>
+                </mat-list-item>
+                <mat-list-item class='text'> 
+                  <p >筆數： {{shiftJson.numIssueInvoiceOnly}}筆 ，金額： {{shiftJson.payIssueInvoiceOnly}}元</p>
+                </mat-list-item>
+              </mat-list>
+          </div>
+    </div>
+</div>

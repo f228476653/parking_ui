@@ -1,0 +1,107 @@
+<h2 mat-dialog-title><span i18n="@@edit">Create</span>
+    <span i18n="@@garage_group"> {{deviceName}}設定</span>
+</h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pv" matInput i18n-placeholder placeholder="PV名稱" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.type" matInput i18n-placeholder placeholder="車種類型" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pricing_scheme" matInput i18n-placeholder placeholder="計費規則" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pv_ip" matInput i18n-placeholder placeholder="PV ip" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pv_netmask" matInput i18n-placeholder placeholder="PV netmask" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pv_gateway" matInput i18n-placeholder placeholder="PV gateway" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pms_ip" matInput i18n-placeholder placeholder="pms_ip" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pms_port" matInput i18n-placeholder placeholder="pms_port" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.ecc_ip" matInput i18n-placeholder placeholder="ecc_ip" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.ecc_port" matInput i18n-placeholder placeholder="ecc_port" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.in_out" matInput i18n-placeholder placeholder="in_out" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.aisle" matInput i18n-placeholder placeholder="aisle" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.auto_print_invoice" matInput i18n-placeholder placeholder="auto_print_invoice" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pv_cutoff" matInput i18n-placeholder placeholder="pv_cutoff" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.MEntryB" matInput i18n-placeholder placeholder="MEntryB" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.MExitD" matInput i18n-placeholder placeholder="MExitD" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pv_version" matInput i18n-placeholder placeholder="pv_version" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.last_response_time" matInput i18n-placeholder placeholder="last_response_time" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.response_type" matInput i18n-placeholder placeholder="response_type" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.invoice_printer_status" matInput i18n-placeholder placeholder="invoice_printer_status" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pricing_scheme_disability" matInput i18n-placeholder placeholder="pricing_scheme_disability" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.pv_response_confirm" matInput i18n-placeholder placeholder="pv_response_confirm" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.etag_flag" matInput i18n-placeholder placeholder="etag_flag" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.costrule_using_para" matInput i18n-placeholder placeholder="costrule_using_para" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.lane_costrule_mode" matInput i18n-placeholder placeholder="lane_costrule_mode" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.gate_control_mode" matInput i18n-placeholder placeholder="gate_control_mode" required>
+        </mat-form-field>
+        <mat-form-field class="col col-3">
+            <input [(ngModel)]="device_bean.lpr_lane" matInput i18n-placeholder placeholder="lpr_lane" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <div class="pull-right"><button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>Save</button></div>
+    </div>
+</mat-dialog-content>

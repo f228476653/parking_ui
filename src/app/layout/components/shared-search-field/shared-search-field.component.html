@@ -1,0 +1,18 @@
+<mat-form-field class="stationbox">
+    <mat-select placeholder="場站群組" [(ngModel)]="query.garage_group_id" (selectionChange)=onGarageGroupChanged($event)>
+        <mat-option value="all">全部</mat-option>
+        <mat-option [value]="gp.garage_group_id" *ngFor="let gp of garageGroupResponse.data">
+            {{ gp.garage_group_name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+    <div class = "stationbox">
+        <ng-select [items]="garageResponse.data" placeholder="場站" bindLabel="garage_name" bindValue="garage_id" [(ngModel)]="query.garage_id"></ng-select>
+    </div>
+<mat-form-field class="stationbox">
+    <mat-select [(ngModel)]="query.device_type" placeholder="設備類型" [disabled]="true">
+        <mat-option [value]="d.value" *ngFor="let d of deviceType">
+            {{ d.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

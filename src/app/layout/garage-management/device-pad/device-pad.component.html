@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col col-sm-12">
+        <br />
+        <mat-form-field>
+            <input [(ngModel)]="data.device_model_numer" matInput i18n-placeholder="@@device_pad_name" placeholder="設備名稱" required #pad_name="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="data.device_model_numer" matInput i18n-placeholder="@@device_model_numer" placeholder="設備型號" required #pad_model_number="ngModel">
+        </mat-form-field>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-sm-10">
+        <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+            {{savedResponse.message}}
+        </div>
+        <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+            {{savedResponse.message}}
+        </div>
+    </div>
+    <div class="col col-sm-2">
+        <button mat-icon-button (click)="save()"><mat-icon class='btn_save'>save</mat-icon>存檔</button>
+    </div>
+</div>

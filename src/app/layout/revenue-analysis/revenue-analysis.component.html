@@ -1,0 +1,148 @@
+<div>
+    <h4>營收分析</h4>
+    <mat-form-field>
+        <mat-select placeholder="場站">
+            <mat-option>-- None --</mat-option>
+            <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name" [disabled]="group.disabled">
+                <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
+                    {{ pokemon.viewValue }}
+                </mat-option>
+            </mat-optgroup>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="範圍">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let revenue_data of revenueanalysis_data" [value]="revenue_data">{{revenue_data}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <div class="row" style="margin-top:4px;">
+        <div class="col col-sm-12">
+            <mat-card class="example-card" (click)=view_totalamount()>
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title><h5>累積總金額</h5></mat-card-title>
+                    <mat-card-subtitle>0.5%</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <h2><p>
+                        $675,389,683
+                    </p></h2>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <br>
+    <div class="row" style="margin-top:4px;">
+        <div class="col col-sm-5">
+            <mat-card class="mid-card" (click)=view_sitedistribution()>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h4>
+                            <p>場站分析</p>
+                        </h4>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-table #table [dataSource]="dataSource">
+
+                    <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+                    <!-- name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+
+                    <!-- total-amount Column -->
+                    <ng-container matColumnDef="total_amount">
+                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.total_amount}} </mat-cell>
+                    </ng-container>
+
+                    <!--percent Column -->
+                    <ng-container matColumnDef="percent">
+                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.percent}} <i class="fa fa-arrow-up"></i></mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+
+
+            </mat-card>
+        </div>
+        <div class="col col-sm-7">
+            <!-- <mat-card class="mid-card" (click)=view_revenuetrends()> -->
+            <mat-card class="mid-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h4>
+                            <p>營收趨勢</p>
+                        </h4>
+                    </mat-card-title>
+                </mat-card-header>
+                <ngx-charts-bar-vertical [view]="bar_view" [scheme]="colorScheme_2" [results]="single" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel">
+                </ngx-charts-bar-vertical>
+            </mat-card>
+        </div>
+    </div>
+    <div class="row" style="margin-top:4px;">
+        <div class="col col-sm-6">
+            <mat-card class="mid-card" (click)=view_transactiontype()>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h4>
+                            <p>交易類型</p>
+                        </h4>
+                    </mat-card-title>
+                </mat-card-header>
+                <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="multi2" [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
+                </ngx-charts-pie-chart>
+            </mat-card>
+        </div>
+        <div class="col col-sm-6">
+            <mat-card class="mid-card" (click)=view_paymentmethod()>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h4>
+                            <p>支付方式</p>
+                        </h4>
+                    </mat-card-title>
+                </mat-card-header>
+                <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="multi3" [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
+                </ngx-charts-pie-chart>
+            </mat-card>
+        </div>
+    </div>
+    <div class="row" style="margin-top:4px;">
+        <div class="col col-sm-6">
+            <mat-card class="mid-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h4>
+                            <p>金額分析</p>
+                        </h4>
+                    </mat-card-title>
+                </mat-card-header>
+                <img src="../../../assets/images/money.jpg" width="200" height="150" (click)=view_amountanalysis()>
+            </mat-card>
+        </div>
+        <div class="col col-sm-6">
+            <mat-card class="mid-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h4>
+                            <p>時數分析</p>
+                        </h4>
+                    </mat-card-title>
+                </mat-card-header>
+                <img src="../../../assets/images/time1.png" width="150" height="150" (click)=view_timeanalysis()>
+            </mat-card>
+        </div>
+    </div>
+
+</div>

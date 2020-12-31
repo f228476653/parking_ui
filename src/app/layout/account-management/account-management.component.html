@@ -1,0 +1,66 @@
+<div [@routerTransition]>
+    <div class="row">
+        <div class="col col-md-1">
+            <button mat-icon-button (click)="add()"><mat-icon class="btn-add">add</mat-icon></button>
+        </div>
+        <div class="col col-md-7"></div>
+        <div class="col col-md-4 pull-right">
+            <mat-form-field>
+                <input matInput [(ngModel)]="txtTableFilter" (keyup)="applyFilter($event.target.value)" placeholder="輸入">
+            </mat-form-field>
+            <button mat-icon-button (click)="clearTableFilter()"><mat-icon class="btn-clear">clear</mat-icon></button>
+            <button mat-icon-button (click)="refreshTable()"><mat-icon class="btn-refresh">refresh</mat-icon></button>
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+                <app-confirm-button *ngIf="!element.is_superuser" (deleteEvent)="delete(element.account_id)"></app-confirm-button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="account_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 序號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.account_id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="company_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 業者名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="account">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@Account"> 帳號 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.account}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="user_first_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@FirstName"> 名字 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.user_first_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="user_last_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@LastName"> 姓氏 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.user_last_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@Email"> 郵箱 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="mobile">
+            <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@Mobile"> 手機號碼 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.mobile}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+</div>

@@ -1,0 +1,178 @@
+<div class="panel panel-default">
+    <h6>愛金卡</h6>
+    <div class="col" [formGroup]="garageForm">
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_code" matInput i18n-placeholder="@@icash_garage_code"
+                    formControlName="icash_garage_code" placeholder="愛金卡場站代碼(門市對照碼)" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="icash_garage_code.invalid && icash_garage_code.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_code.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_garage_code.errors.pattern" >只能輸入大寫英文或數字</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_name" matInput i18n-placeholder="@@icash_garage_name"
+                    formControlName="icash_garage_name" placeholder="愛金卡門市全名" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="icash_garage_name.invalid && icash_garage_name.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_name.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_garage_name.errors.characterLength">最多為30個字元長度，</div>
+                        <div *ngIf="icash_garage_name.errors.characterLength">字元長度 中文字：2，英數字：1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_abbreviated_name" matInput i18n-placeholder="@@icash_garage_abbreviated_name"
+                    formControlName="icash_garage_abbreviated_name" placeholder="愛金卡門市簡稱" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row">
+                    <div *ngIf="icash_garage_abbreviated_name.invalid && icash_garage_abbreviated_name.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_abbreviated_name.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_garage_abbreviated_name.errors.characterLength">最多為10個字元長度，</div>
+                        <div *ngIf="icash_garage_abbreviated_name.errors.characterLength">字元長度 中文字：2，英數字：1</div>
+                    </div>
+                </div>
+            </div>
+        </div>          
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_effective_begin_date" matInput i18n-placeholder="@@icash_garage_effective_begin_date"
+                    formControlName="icash_garage_effective_begin_date" placeholder="愛金卡生效起日" [readonly]="readOnly" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="icash_garage_effective_begin_date">
+                    <mat-datepicker-toggle matSuffix [for]="icash_garage_effective_begin_date"></mat-datepicker-toggle>
+                    <mat-datepicker #icash_garage_effective_begin_date></mat-datepicker>
+                </mat-form-field>
+                <div class="row" >
+                    <div *ngIf="icash_garage_effective_begin_date.invalid && icash_garage_effective_begin_date.dirty" class="alert alert-danger fill"> 
+                        <div *ngIf="icash_garage_effective_begin_date.errors.required">必填欄位</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_effective_end_date" matInput i18n-placeholder="@@icash_garage_effective_end_date"
+                    formControlName="icash_garage_effective_end_date" placeholder="愛金卡生效迄日" [readonly]="true" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="icash_garage_effective_end_date">
+                    <mat-datepicker-toggle matSuffix [for]="icash_garage_effective_end_date"></mat-datepicker-toggle>
+                    <mat-datepicker #icash_garage_effective_end_date></mat-datepicker>
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="icash_garage_effective_end_date.invalid && icash_garage_effective_end_date.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_effective_end_date.errors.required" >必填欄位</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_opening_day" matInput i18n-placeholder="@@icash_garage_opening_day"
+                    formControlName="icash_garage_opening_day" placeholder="愛金卡開幕日" [readonly]="true" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="icash_garage_opening_day">
+                    <mat-datepicker-toggle matSuffix [for]="icash_garage_opening_day"></mat-datepicker-toggle>
+                    <mat-datepicker #icash_garage_opening_day></mat-datepicker>
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="icash_garage_opening_day.invalid && icash_garage_opening_day.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_opening_day.errors.required" >必填欄位</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_saleable_day" matInput i18n-placeholder="@@icash_garage_saleable_day"
+                    formControlName="icash_garage_saleable_day" placeholder="愛金卡可販售日" [readonly]="true" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="icash_garage_saleable_day">
+                    <mat-datepicker-toggle matSuffix [for]="icash_garage_saleable_day"></mat-datepicker-toggle>
+                    <mat-datepicker #icash_garage_saleable_day></mat-datepicker>
+                </mat-form-field>
+                <div class="row" >
+                    <div *ngIf="icash_garage_saleable_day.invalid && icash_garage_saleable_day.dirty" class="alert alert-danger fill"> 
+                        <div *ngIf="icash_garage_saleable_day.errors.required">必填欄位</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_closing_day" matInput i18n-placeholder="@@icash_garage_closing_day"
+                    formControlName="icash_garage_closing_day" placeholder="愛金卡關店日" [readonly]="true" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="icash_garage_closing_day">
+                    <mat-datepicker-toggle matSuffix [for]="icash_garage_closing_day"></mat-datepicker-toggle>
+                    <mat-datepicker #icash_garage_closing_day></mat-datepicker>
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="icash_garage_closing_day.invalid && icash_garage_closing_day.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_closing_day.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_garage_closing_day.errors.pattern" >只能輸入數字，且最多為8個字元長度</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_postal_code" matInput i18n-placeholder="@@icash_garage_postal_code"
+                    formControlName="icash_garage_postal_code" placeholder="愛金卡郵遞區號" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="icash_garage_postal_code.invalid && icash_garage_postal_code.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_postal_code.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_garage_postal_code.errors.pattern" >只能輸入大寫英文或數字</div>
+                        <div *ngIf="icash_garage_postal_code.errors.pattern" >以及 - 符號，且最多為8個字元長度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row title">
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_address" matInput i18n-placeholder="@@icash_garage_address"
+                    formControlName="icash_garage_address" placeholder="愛金卡地址" [readonly]="readOnly">
+                </mat-form-field>
+                <div class="row" >
+                    <div *ngIf="icash_garage_address.invalid && icash_garage_address.dirty" class="alert alert-danger fill"> 
+                        <div *ngIf="icash_garage_address.errors.required">必填欄位</div>
+                        <div *ngIf="icash_garage_address.errors.characterLength">最多為60個字元長度，</div>
+                        <div *ngIf="icash_garage_address.errors.characterLength">字元長度 中文字：2，英數字：1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_telephone_area_code" matInput i18n-placeholder="@@icash_garage_telephone_area_code"
+                    formControlName="icash_garage_telephone_area_code" placeholder="愛金卡電話區域碼" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="icash_garage_telephone_area_code.invalid && icash_garage_telephone_area_code.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_telephone_area_code.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_garage_telephone_area_code.errors.pattern" >只能輸入數字，且最多為3個字元長度</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-4">
+                <mat-form-field class="row">
+                    <input [(ngModel)]="garageTicketTransactionICash.icash_garage_telephone" matInput i18n-placeholder="@@icash_garage_telephone"
+                    formControlName="icash_garage_telephone" placeholder="愛金卡電話" [readonly]="readOnly">
+                </mat-form-field> 
+                <div class="row">
+                    <div *ngIf="icash_garage_telephone.invalid && icash_garage_telephone.dirty" class="alert alert-danger fill">
+                        <div *ngIf="icash_garage_telephone.errors.required" >必填欄位</div>
+                        <div *ngIf="icash_garage_telephone.errors.pattern" >只能輸入數字，且最多為12個字元長度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row title">
+            <div class="col col-sm-4">
+                <label i18n="@@status">愛金卡啟用狀態 &nbsp;</label>
+                <mat-radio-group [(ngModel)]="garageTicketTransactionICash.status" 
+                    formControlName="status" class="row">
+                    <mat-radio-button [value]="0">停用</mat-radio-button>
+                    <mat-radio-button [value]="1">啟用</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>     
+    </div>
+    <hr>
+</div>

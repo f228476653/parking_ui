@@ -1,0 +1,35 @@
+
+<div>
+  <h4>金額分析</h4>
+  <div>
+    <P>營收平均金額-12058831</P>
+    <P>最高金額-12765781</P>
+    <P>最低金額-11054681</P>
+  </div>
+  <mat-form-field>
+      <mat-select placeholder="營收金額">
+          <mat-option *ngFor="let range of amountanalysis_data" [value]="range">{{range}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="card card-height">
+        <div class="card-body">
+            <div class="row">
+                <ngx-charts-bar-horizontal
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="single"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              (select)="onSelect($event)">
+            </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+      </div>
+    
+</div>

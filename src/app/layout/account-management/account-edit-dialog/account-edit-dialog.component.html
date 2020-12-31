@@ -1,0 +1,7 @@
+<!-- <h2 mat-dialog-title><span i18n="@@edit">Edit</span> <span i18n="@@account">Account</span></h2> -->
+<h2 mat-dialog-title><span>編輯帳號</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+    <app-account-form [(garageResponse)]="garageResponse" [(garageGroupResponse)]="garageGroupResponse" [(password)]="password" [(data)]="data" [(savedResponse)]="savedResponse" [(accountEditable)]="accountDisabled" (onSave)="save()"></app-account-form>
+
+</mat-dialog-content>

@@ -1,0 +1,59 @@
+
+<div class="row" style="width:90%; margin: 10px 0px">
+  <div class="col col-sm-1">
+      <button mat-raised-button (click)="addPricingRule(1)">完整版費率</button>
+  </div>
+  <div class="col col-sm-1">
+      <button mat-raised-button (click)="addPricingRule(2)">簡易版費率</button>
+  </div>
+</div>
+<div>
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef> 工具列 </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <div *ngIf="element.customer_id !== 0">
+                  <button mat-icon-button (click)=info(element)><mat-icon class="btn-edit">info</mat-icon></button>
+                  <button mat-icon-button (click)=edit(element)><mat-icon class="btn-edit">edit</mat-icon></button>
+                  <app-confirm-button (deleteEvent)="delete(element.garage_id)"></app-confirm-button>
+              </div>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fee_id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@fee_id"> 流水號 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.fee_primary_table_id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fee_name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@fee_name"> 費率名稱 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.fee_name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="introduction">
+          <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@introduction"> 簡易描述(20字)) </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.introduction}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@status"> 使用狀態 </mat-header-cell>
+          <mat-cell *matCellDef="let element" style="color: red"> {{element.status}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="update_time">
+          <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@update_time"> 最後更新日期 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.update_time}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="update_user">
+          <mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@update_user"> 最後更新人員 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.update_user}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+  <mat-paginator #paginator [pageSize]="30" [pageSizeOptions]="[30, 50, 100]"></mat-paginator>
+</div>

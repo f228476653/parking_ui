@@ -1,0 +1,35 @@
+.row {
+    margin: 0 auto;
+}
+  
+.datebox, .pricebox {
+width: 100px;
+}
+
+.timebox {
+width: 100px;
+}
+
+.mat-cell {
+font-size: 11px;
+}
+w-time-dialog {
+max-height: 90vh !important;
+}
+
+.demo-chip-list {
+    width: 100%;
+  }
+
+.title {
+  margin: 20px 0px;
+}
+
+.context {
+  margin-left: 40px;
+}
+
+.fill {
+  width: 100%;
+}
+  

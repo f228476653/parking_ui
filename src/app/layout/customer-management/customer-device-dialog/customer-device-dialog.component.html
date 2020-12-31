@@ -1,0 +1,29 @@
+
+<h2 mat-dialog-title><span i18n="@@edit">設定</span> <span i18n="@@customer">設備參數</span></h2>
+    <mat-tab-group [(selectedIndex)]="index" (selectedIndexChange)="changeIndex()" >
+        <mat-tab label="iBox" style="width:100%;">
+            <mat-dialog-content class="dailog-form-margintop form-textsize" style="max-height: 600px;height:600px;padding: 0px 45px;">
+                <app-customer-device-ibox-form [readOnly]="false" [data]="data" [cardType]="cardType"
+                    (customerDeviceFormValidator)="checkYHDP($event)">
+                </app-customer-device-ibox-form>
+            </mat-dialog-content>
+        </mat-tab>
+        <!-- <mat-tab label="PV3" style="width:100%;">
+            <mat-dialog-content class="dailog-form-margintop form-textsize" style="max-height: 600px;height:600px;padding: 0px 45px;">
+                <app-customer-device-pv3-form [readOnly]="false" [data]="data" [cardType]="cardType"></app-customer-device-pv3-form>
+            </mat-dialog-content>
+        </mat-tab>
+        <mat-tab label="Pad">Pad</mat-tab> -->
+    </mat-tab-group>
+    <div class="row">
+        <div class="col col-sm-8">
+            <div *ngIf="savedResponse && savedResponse.has_error" class="alert alert-danger" role="alert">
+                {{savedResponse.message}}
+            </div>
+            <div *ngIf="savedResponse && savedResponse.message && !savedResponse.has_error" class="alert alert-info" role="alert">
+                {{savedResponse.message}}
+            </div>
+        </div>
+        <div class="col col-sm-2" style="padding-left:80px;"><button mat-raised-button color="warn" (click)="onCloseDailog()">取消</button></div>
+        <div class="col col-sm-2"><button mat-raised-button color="primary" (click)="save()"><mat-icon class="btn_save">save</mat-icon>儲存</button></div>
+    </div>

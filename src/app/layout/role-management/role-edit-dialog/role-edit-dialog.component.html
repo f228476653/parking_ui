@@ -1,0 +1,5 @@
+<h2 mat-dialog-title>
+    <span>角色設定</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+    <app-role-form (onSave)="save($event)" [(role)]="role" [(savedResponse)]="savedResponse" [(permissionResponse)]="permissionResponse" [(mode)]="mode"></app-role-form>
+</mat-dialog-content>

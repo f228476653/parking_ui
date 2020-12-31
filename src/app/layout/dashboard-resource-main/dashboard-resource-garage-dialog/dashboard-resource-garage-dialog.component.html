@@ -1,0 +1,7 @@
+<!-- <h2 mat-dialog-title><span i18n="@@garage">Garage</span> <span i18n="@@analystics">Analystics</span></h2> -->
+<h2 mat-dialog-title><span>場站資訊</span></h2>
+<mat-dialog-content class="dailog-form-margintop form-textsize">
+
+    <app-dashboard-resource-garage [(data)]="data" (onSave)="save()"></app-dashboard-resource-garage>
+
+</mat-dialog-content>
